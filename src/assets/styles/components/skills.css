@@ -1,8 +1,9 @@
 .skills-section {
-    background-color: #f8f9fa;
+    background-color: #f9f9f9;
     padding: 80px 0;
 }
 
+/* Existing container styling */
 .container {
     width: 85%;
     max-width: 1200px;
@@ -19,17 +20,17 @@
 .skill-category {
     background-color: white;
     border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     padding: 25px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    height: auto; /* Changed from 100% to auto */
+    height: auto;
     display: flex;
     flex-direction: column;
 }
 
 .skill-category:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0, 119, 204, 0.1);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
 }
 
 .skill-header {
@@ -61,25 +62,27 @@
 .skills-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px; /* Reduced gap from 10px to 8px */
+    gap: 8px;
     flex-grow: 1;
 }
 
+/* Modified skill-item to have consistent height and sizing */
 .skill-item {
     background-color: #f8f9fa;
-    padding: 2px 8px; /* Further reduced padding */
-    border-radius: 16px; /* Slightly reduced radius */
-    font-size: 13px; /* Slightly reduced font size */
+    padding: 4px 10px;
+    border-radius: 16px;
+    font-size: 13px;
     font-weight: 500;
     color: #333;
     border: 1px solid #e9ecef;
     transition: all 0.3s;
-    max-height: 28px; /* Set maximum height */
-    display: inline-flex; /* Changed to inline-flex */
+    height: 26px; /* Fixed height instead of min-height */
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    line-height: 1.2; /* Tighter line height */
-    margin: 0; /* Remove any margin */
+    line-height: 1;
+    margin: 2px;
+    box-sizing: border-box; /* Ensure padding is included in the height */
 }
 
 .skill-item:hover {
@@ -87,7 +90,7 @@
     color: white;
     border-color: #0077cc;
     transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 119, 204, 0.2);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 }
 
 /* Languages section */
@@ -96,7 +99,7 @@
     background-color: white;
     border-radius: 12px;
     padding: 30px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .languages-section h3 {
@@ -116,7 +119,7 @@
     transform: translateX(-50%);
     width: 60px;
     height: 3px;
-    background-image: linear-gradient(to right, #0077cc, #00aaff);
+    background-image: linear-gradient(to right, #0077cc, #61dafb);
     border-radius: 3px;
 }
 
@@ -147,14 +150,14 @@
 .level-bar {
     flex-grow: 1;
     height: 8px;
-    background-color: #e9ecef;
+    background-color: #f8f9fa;
     border-radius: 4px;
     overflow: hidden;
 }
 
 .level-fill {
     height: 100%;
-    background-image: linear-gradient(to right, #0077cc, #00aaff);
+    background-image: linear-gradient(to right, #0077cc, #61dafb);
     border-radius: 4px;
 }
 
@@ -167,12 +170,25 @@
     border-radius: 4px;
 }
 
-/* Target specific categories for even more compact styling */
-.skill-category:nth-child(3) .skill-item, /* Development Tools */
-.skill-category:nth-child(5) .skill-item { /* Databases */
-    padding: 1px 7px;
-    max-height: 24px;
+/* UPDATED: Consistent sizing for all skills across all categories */
+.skill-category:nth-child(1) .skill-item,  /* Programming Languages */
+.skill-category:nth-child(2) .skill-item,  /* Frameworks & Libraries */
+.skill-category:nth-child(3) .skill-item,  /* Development Tools */
+.skill-category:nth-child(4) .skill-item,  /* IDEs & Environments */
+.skill-category:nth-child(5) .skill-item,  /* Databases */
+.skill-category:nth-child(6) .skill-item,  /* DevOps */
+.skill-category:nth-child(7) .skill-item   /* AWS Services */
+{
+    padding: 3px 10px;
+    height: 26px;
+    font-size: 13px;
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+/* For AWS services (typically longer names), make them a bit more compact */
+.skill-category:nth-child(7) .skill-item {
     font-size: 12px;
+    padding: 3px 8px;
 }
 
 @media (max-width: 768px) {

@@ -5,6 +5,13 @@ import '../assets/styles/components/hero.css';
 import backgroundImage from '../assets/images/Background.jpg';
 
 const Hero = () => {
+    const scrollToAbout = () => {
+        const aboutSection = document.getElementById('about');
+        if (aboutSection) {
+            aboutSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
     return (
         <section 
             className="hero" 
@@ -22,6 +29,13 @@ const Hero = () => {
                     <a href="#contact" className="btn secondary">Contact Me</a>
                 </div>
             </div>
+            
+            <div className="scroll-indicator" onClick={scrollToAbout}>
+                <span>Explore More</span>
+                <div className="chevron"></div>
+            </div>
+            
+            <div className="page-transition"></div>
         </section>
     );
 };

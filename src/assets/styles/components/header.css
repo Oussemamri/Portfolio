@@ -1,5 +1,5 @@
 .header {
-    background-color: #1c1c1c;
+    background-color: rgba(28, 28, 28, 0.95);
     padding: 0;
     color: white;
     position: fixed;
@@ -9,7 +9,9 @@
     z-index: 1000; /* Increased z-index */
     box-sizing: border-box;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     pointer-events: none; /* This makes the header transparent to clicks */
 }
 
@@ -19,13 +21,13 @@
     align-items: center;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 15px 40px;
+    padding: 18px 40px;
     pointer-events: auto; /* Re-enable pointer events for the container */
 }
 
 .header.scrolled {
-    background-color: #1c1c1c;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    background-color: rgba(28, 28, 28, 0.98);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
     padding: 0;
 }
 
@@ -39,10 +41,29 @@
     text-decoration: none;
     display: block; /* Make the link a block element */
     pointer-events: auto; /* Ensure the link is clickable */
+    position: relative;
+    padding: 5px 0;
+}
+
+.logo a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-image: linear-gradient(to right, #61dafb, #ff69b4);
+    transition: width 0.4s ease;
+    opacity: 0;
+}
+
+.logo:hover a::after {
+    width: 100%;
+    opacity: 1;
 }
 
 .logo h1 {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: 600;
     margin: 0;
     transition: transform 0.3s;
@@ -54,10 +75,17 @@
 
 .logo-first {
     color: white;
+    background: linear-gradient(to right, #fff, #f0f0f0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .logo-last {
     color: #61dafb;
+    background: linear-gradient(to right, #61dafb, #ff69b4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     margin-left: 5px;
 }
 
@@ -65,12 +93,16 @@
     display: flex;
     align-items: center;
     pointer-events: auto; /* Make navigation clickable */
+    margin: 0 auto;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .nav-links {
     list-style: none;
     display: flex;
-    gap: 30px;
+    gap: 40px;
     margin: 0;
     padding: 0;
     align-items: center;
@@ -119,12 +151,15 @@
 .contact-btn {
     background-color: #61dafb;
     color: #282c34 !important;
-    padding: 8px 16px;
+    padding: 10px 20px;
     border-radius: 50px;
     transition: all 0.3s;
     display: inline-block;
     cursor: pointer;
     pointer-events: auto; /* Ensure clickable */
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 10px rgba(97, 218, 251, 0.25);
 }
 
 .contact-btn::after {
@@ -135,7 +170,7 @@
     background-color: white;
     color: #282c34 !important;
     transform: translateY(-3px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 6px 12px rgba(255, 255, 255, 0.3);
 }
 
 .theme-toggle {
@@ -170,6 +205,7 @@
     transition: transform 0.3s;
     padding: 5px;
     pointer-events: auto; /* Ensure clickable */
+    z-index: 1002;
 }
 
 .mobile-menu-btn:hover {
@@ -177,9 +213,25 @@
     color: #ff69b4;
 }
 
+@media (max-width: 1024px) {
+    .main-nav {
+        position: static;
+        transform: none;
+        margin: 0;
+    }
+    
+    .nav-links {
+        gap: 20px;
+    }
+}
+
 @media (max-width: 768px) {
     .header-container {
-        padding: 12px 20px;
+        padding: 15px 20px;
+    }
+    
+    .main-nav {
+        margin-left: 0;
     }
     
     .nav-links {
@@ -188,14 +240,16 @@
         top: 60px;
         left: 0;
         right: 0;
-        background-color: #1c1c1c;
+        background-color: rgba(28, 28, 28, 0.97);
         flex-direction: column;
-        padding: 20px;
-        gap: 15px;
+        padding: 25px;
+        gap: 18px;
         text-align: center;
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         border-top: 1px solid rgba(255, 255, 255, 0.1);
         pointer-events: auto; /* Ensure clickable */
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
     }
     
     .nav-links.active {
@@ -210,11 +264,13 @@
     .nav-link {
         width: 100%;
         padding: 12px 0;
+        font-size: 18px;
     }
     
     .contact-btn {
         width: 80%;
         margin: 10px auto;
+        padding: 12px 20px;
     }
     
     @keyframes slideDown {
@@ -226,11 +282,5 @@
             opacity: 1;
             transform: translateY(0);
         }
-    }
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-    .nav-links {
-        gap: 20px;
     }
 }

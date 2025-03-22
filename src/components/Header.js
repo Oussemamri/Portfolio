@@ -42,10 +42,6 @@ const Header = () => {
                     </a>
                 </div>
                 
-                <button className="mobile-menu-btn" onClick={toggleMenu} aria-label="Toggle menu">
-                    <i className={`fas ${menuOpen ? 'fa-times' : 'fa-bars'}`}></i>
-                </button>
-                
                 <nav className="main-nav">
                     <ul className={`nav-links ${menuOpen ? 'active' : ''}`}>
                         <li><a href="#home" onClick={scrollToTop} className="nav-link">Home</a></li>
@@ -55,13 +51,9 @@ const Header = () => {
                     </ul>
                 </nav>
                 
-                <div className="theme-toggle">
-                    <input type="checkbox" id="theme-toggle" className="theme-toggle-checkbox" />
-                    <label htmlFor="theme-toggle" className="theme-toggle-label">
-                        <i className="fas fa-sun"></i>
-                        <i className="fas fa-moon"></i>
-                    </label>
-                </div>
+                <button className="mobile-menu-btn" onClick={toggleMenu} aria-label="Toggle menu">
+                    <i className={`fas ${menuOpen ? 'fa-times' : 'fa-bars'}`}></i>
+                </button>
             </div>
         </header>
     );

@@ -1,14 +1,63 @@
 .about-section {
     background-color: white;
-    padding: 5rem 2rem;
+    padding: 7rem 2rem 5rem;
+    position: relative;
+    z-index: 10;
+    margin-top: 0;
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s ease-out;
+    min-height: 100vh; /* Full viewport height for page-like feeling */
+    animation: slideInFromBottom 1s ease-out;
 }
 
+@keyframes slideInFromBottom {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Add a subtle animation for About section content */
 .about-content {
     display: grid;
     grid-template-columns: 3fr 2fr;
     gap: 40px;
     max-width: 1200px;
     margin: 0 auto;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s forwards;
+    animation-delay: 0.3s;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Create a decorative element at the top of the section */
+.about-section:before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70px;
+    height: 5px;
+    background-color: #0077cc;
+    border-radius: 5px;
+    animation: expandWidth 1s ease-out;
+}
+
+@keyframes expandWidth {
+    from { width: 0; }
+    to { width: 70px; }
 }
 
 .about-text p {
@@ -16,6 +65,17 @@
     font-size: 1.1rem;
     line-height: 1.6;
     color: #555;
+    transition: all 0.3s ease;
+}
+
+.about-text p:first-child {
+    animation: highlightText 2s ease-out;
+}
+
+@keyframes highlightText {
+    0% { color: #555; }
+    30% { color: #0077cc; }
+    100% { color: #555; }
 }
 
 .education h3 {
@@ -24,6 +84,11 @@
     color: #333;
     border-left: 4px solid #0077cc;
     padding-left: 15px;
+    transition: transform 0.3s ease;
+}
+
+.education h3:hover {
+    transform: translateX(5px);
 }
 
 .education-item {
@@ -32,6 +97,47 @@
     background-color: #f8f9fa;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    transform: translateX(-30px);
+    opacity: 0;
+    animation: slideInFromLeft 0.5s forwards;
+}
+
+.education-item:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.education-item:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes slideInFromLeft {
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.education-item:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transform: translateY(-3px);
+}
+
+.education-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 0;
+    background-color: #0077cc;
+    transition: height 0.3s ease;
+}
+
+.education-item:hover::before {
+    height: 100%;
 }
 
 .education-item h4 {
@@ -46,5 +152,9 @@
 @media (max-width: 768px) {
     .about-content {
         grid-template-columns: 1fr;
+    }
+    
+    .about-section {
+        padding: 5rem 1.5rem 3rem;
     }
 }

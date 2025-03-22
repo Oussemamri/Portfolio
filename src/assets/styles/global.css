@@ -1,15 +1,48 @@
+:root {
+    --bg-color: #f9f9f9;
+    --text-color: #333;
+    --card-bg: white;
+    --primary-color: #0077cc;
+    --secondary-color: #61dafb;
+    --accent-color: #ff69b4;
+    --border-color: #e9ecef;
+    --header-bg: rgba(40, 44, 52, 0.95);
+    --header-text: white;
+    --footer-bg: #282c34;
+    --footer-text: white;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --highlight-color: #f8f9fa;
+}
+
+body.dark {
+    --bg-color: #1a1a1a;
+    --text-color: #f0f0f0;
+    --card-bg: #282c34;
+    --primary-color: #61dafb;
+    --secondary-color: #0077cc;
+    --border-color: #444;
+    --header-bg: rgba(20, 22, 26, 0.95);
+    --header-text: #f0f0f0;
+    --footer-bg: #111;
+    --footer-text: #f0f0f0;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --highlight-color: #2d3748;
+}
+
 html, body {
     margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
-    background-color: #f9f9f9;
-    color: #333;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     scroll-behavior: smooth;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 h1, h2, h3, h4, h5, h6 {
     margin: 0;
     font-weight: 600;
+    color: var(--text-color);
 }
 
 h2 {
@@ -27,11 +60,12 @@ h2:after {
     transform: translateX(-50%);
     width: 70px;
     height: 3px;
-    background: #0077cc;
+    background: var(--primary-color);
 }
 
 section {
     padding: 5rem 2rem;
+    background-color: var(--bg-color);
 }
 
 a {
@@ -41,7 +75,7 @@ a {
 }
 
 a:hover {
-    color: #0077cc;
+    color: var(--primary-color);
 }
 
 .container {
@@ -74,27 +108,27 @@ button {
 }
 
 .btn.primary {
-    background-color: #0077cc;
+    background-color: var(--primary-color);
     color: white;
 }
 
 .btn.primary:hover {
-    background-color: #005fa3;
+    background-color: var(--secondary-color);
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px var(--shadow-color);
 }
 
 .btn.secondary {
     background-color: transparent;
-    color: #0077cc;
-    border: 2px solid #0077cc;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
 }
 
 .btn.secondary:hover {
-    background-color: #0077cc;
+    background-color: var(--primary-color);
     color: white;
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px var(--shadow-color);
 }
 
 img {
