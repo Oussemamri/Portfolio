@@ -46,6 +46,7 @@ const Header = () => {
                     <ul className={`nav-links ${menuOpen ? 'active' : ''}`}>
                         <li><a href="#home" onClick={scrollToTop} className="nav-link">Home</a></li>
                         <li><a href="#about" onClick={handleLinkClick} className="nav-link">About</a></li>
+                        <li><a href="#experience" onClick={handleLinkClick} className="nav-link">Experience</a></li>
                         <li><a href="#projects" onClick={handleLinkClick} className="nav-link">Work</a></li>
                         <li><a href="#contact" onClick={handleLinkClick} className="nav-link contact-btn">Contact</a></li>
                     </ul>
