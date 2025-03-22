@@ -1,0 +1,236 @@
+.header {
+    background-color: #1c1c1c;
+    padding: 0;
+    color: white;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Increased z-index */
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    pointer-events: none; /* This makes the header transparent to clicks */
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px 40px;
+    pointer-events: auto; /* Re-enable pointer events for the container */
+}
+
+.header.scrolled {
+    background-color: #1c1c1c;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    padding: 0;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    pointer-events: auto; /* Make sure logo is clickable */
+}
+
+.logo a {
+    text-decoration: none;
+    display: block; /* Make the link a block element */
+    pointer-events: auto; /* Ensure the link is clickable */
+}
+
+.logo h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+    transition: transform 0.3s;
+}
+
+.logo:hover h1 {
+    transform: translateY(-2px);
+}
+
+.logo-first {
+    color: white;
+}
+
+.logo-last {
+    color: #61dafb;
+    margin-left: 5px;
+}
+
+.main-nav {
+    display: flex;
+    align-items: center;
+    pointer-events: auto; /* Make navigation clickable */
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    pointer-events: auto; /* Make sure links are clickable */
+}
+
+.nav-links li {
+    pointer-events: auto; /* Ensure clickable */
+}
+
+.nav-link {
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    font-size: 16px;
+    padding: 8px 0;
+    position: relative;
+    transition: all 0.3s;
+    display: inline-block;
+    pointer-events: auto; /* Ensure clickable */
+    cursor: pointer;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ff69b4;
+    transition: width 0.3s ease;
+    pointer-events: none; /* Make sure this doesn't block clicks */
+}
+
+.nav-link:hover {
+    color: #ff69b4;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* Fix Contact button styling */
+.contact-btn {
+    background-color: #61dafb;
+    color: #282c34 !important;
+    padding: 8px 16px;
+    border-radius: 50px;
+    transition: all 0.3s;
+    display: inline-block;
+    cursor: pointer;
+    pointer-events: auto; /* Ensure clickable */
+}
+
+.contact-btn::after {
+    display: none;
+}
+
+.contact-btn:hover {
+    background-color: white;
+    color: #282c34 !important;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    pointer-events: auto; /* Make theme toggle clickable */
+}
+
+.theme-toggle-checkbox {
+    display: none;
+}
+
+.theme-toggle-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    pointer-events: auto; /* Ensure clickable */
+}
+
+.theme-toggle-label i {
+    font-size: 1.2rem;
+    margin: 0 5px;
+}
+
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.3s;
+    padding: 5px;
+    pointer-events: auto; /* Ensure clickable */
+}
+
+.mobile-menu-btn:hover {
+    transform: rotate(90deg);
+    color: #ff69b4;
+}
+
+@media (max-width: 768px) {
+    .header-container {
+        padding: 12px 20px;
+    }
+    
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background-color: #1c1c1c;
+        flex-direction: column;
+        padding: 20px;
+        gap: 15px;
+        text-align: center;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        pointer-events: auto; /* Ensure clickable */
+    }
+    
+    .nav-links.active {
+        display: flex;
+        animation: slideDown 0.3s forwards;
+    }
+    
+    .mobile-menu-btn {
+        display: block;
+    }
+    
+    .nav-link {
+        width: 100%;
+        padding: 12px 0;
+    }
+    
+    .contact-btn {
+        width: 80%;
+        margin: 10px auto;
+    }
+    
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .nav-links {
+        gap: 20px;
+    }
+}

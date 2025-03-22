@@ -1,0 +1,50 @@
+.about-section {
+    background-color: white;
+    padding: 5rem 2rem;
+}
+
+.about-content {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.about-text p {
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #555;
+}
+
+.education h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #333;
+    border-left: 4px solid #0077cc;
+    padding-left: 15px;
+}
+
+.education-item {
+    margin-bottom: 25px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.education-item h4 {
+    color: #0077cc;
+    margin-bottom: 5px;
+}
+
+.education-item p {
+    color: #666;
+}
+
+@media (max-width: 768px) {
+    .about-content {
+        grid-template-columns: 1fr;
+    }
+}
