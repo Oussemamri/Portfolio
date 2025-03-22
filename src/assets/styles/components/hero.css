@@ -8,9 +8,11 @@
     color: white;
     background-size: cover;
     background-position: center;
+    background-attachment: fixed; /* Creates parallax effect */
     position: relative;
     margin-bottom: 0;
     overflow: hidden;
+    z-index: 1;
 }
 
 /* Dark overlay for better text visibility */
@@ -25,51 +27,44 @@
     z-index: 1;
 }
 
-.hero-content {
-    max-width: 800px;
-    padding: 0 20px;
-    position: relative;
-    z-index: 2;
-    color: white;
-    animation: fadeIn 1.5s ease-out;
-}
-
-/* Page transition element */
-.page-transition {
+/* Create a gradient transition at the bottom of the hero section */
+.hero:after {
+    content: '';
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 0;
-    background-color: white;
-    z-index: 5;
-    transition: height 0.5s cubic-bezier(0.86, 0, 0.07, 1);
+    height: 150px;
+    background: linear-gradient(to top, white, rgba(255, 255, 255, 0));
+    z-index: 2;
+    opacity: 0.85; /* Adjust for desired effect */
 }
 
-/* When scrolling down, animate the page transition */
-.hero.transitioning .page-transition {
-    height: 100%;
-}
-
-/* Update About section to work with the transition */
-.about-section {
-    background-color: white;
-    padding-top: 3rem; /* Less padding at top due to wave */
-    padding-bottom: 5rem;
-    margin-top: 0; /* Remove any margin */
+.hero-content {
+    max-width: 800px;
+    padding: 0 20px;
     position: relative;
-    z-index: 2; /* Ensure it's above any background elements */
+    z-index: 3; /* Above overlay and gradient */
+    color: white;
+    animation: fadeIn 1.5s ease-out;
+    will-change: transform, opacity; /* Optimization for animation */
 }
 
-/* Add a smooth scroll effect for the entire page */
+/* Remove the old page-transition element */
+.page-transition {
+    display: none;
+}
+
+/* Update smooth scrolling behavior */
 html {
     scroll-behavior: smooth;
-    scroll-snap-type: y mandatory;
+    scroll-snap-type: none; /* Removing scroll snap which can cause getting stuck */
+    overflow-y: auto; /* Ensure page is scrollable */
 }
 
-/* Add scroll snap for sections */
+/* Remove scroll snap for sections */
 .hero, .about-section {
-    scroll-snap-align: start;
+    scroll-snap-align: none; /* Remove scroll snap alignment */
 }
 
 .hero h1 {
@@ -131,10 +126,10 @@ html {
     to { opacity: 1; }
 }
 
-/* Enhanced scroll indicator with click interaction */
+/* Enhanced scroll indicator */
 .scroll-indicator {
     position: absolute;
-    bottom: 40px;
+    bottom: 80px; /* Positioned higher to be above the gradient */
     left: 50%;
     transform: translateX(-50%);
     display: flex;

@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from './common/Button';
 import '../assets/styles/components/hero.css';
 // Import background image
 import backgroundImage from '../assets/images/Background.jpg';
@@ -8,7 +7,11 @@ const Hero = () => {
     const scrollToAbout = () => {
         const aboutSection = document.getElementById('about');
         if (aboutSection) {
-            aboutSection.scrollIntoView({ behavior: 'smooth' });
+            // Using a smoother scroll approach
+            window.scrollTo({
+                top: aboutSection.offsetTop - 80, // Adjust for header height
+                behavior: 'smooth'
+            });
         }
     };
 
@@ -34,8 +37,6 @@ const Hero = () => {
                 <span>Explore More</span>
                 <div className="chevron"></div>
             </div>
-            
-            <div className="page-transition"></div>
         </section>
     );
 };
