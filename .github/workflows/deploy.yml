@@ -34,7 +34,7 @@ jobs:
 
     - name: Fix permissions on EC2
       run: |
-        ssh -i ~/.ssh/ec2.key ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} "sudo chown -R ec2-user:ec2-user ~/Portfolio/build/"
+        ssh -i ~/.ssh/ec2.key ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} "sudo chown -R deploy:deploy ~/Portfolio/build/"
 
     - name: Deploy to EC2
       run: |
@@ -42,4 +42,4 @@ jobs:
 
     - name: Set permissions and restart Docker
       run: |
-        ssh -i ~/.ssh/ec2.key ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} "sudo chown -R nginx:nginx ~/Portfolio/build/ && cd ~/Portfolio && docker build -t portfolio-website:ssl . && docker stop portfolio || true && docker rm portfolio || true && docker run -d --name portfolio -p 80:80 -p 443:443 -v /etc/letsencrypt:/etc/letsencrypt:ro --restart=always portfolio-website:ssl"
+        ssh -i ~/.ssh/ec2.key ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} "cd ~/Portfolio && sudo chown -R nginx:nginx ~/Portfolio/build/ && sudo docker build -t portfolio-website:ssl . && sudo docker stop portfolio || true && sudo docker rm portfolio || true && sudo docker run -d --name portfolio -p 80:80 -p 443:443 -v /etc/letsencrypt:/etc/letsencrypt:ro --restart=always portfolio-website:ssl"
