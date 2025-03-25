@@ -25,31 +25,21 @@ jobs:
       env:
         CI: false  # Prevents treating warnings as errors
 
-    - name: Debug SSH Key
+    - name: Setup SSH
       run: |
-        echo "Setting up SSH key for debugging"
         mkdir -p ~/.ssh/
         echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/ec2.key
         chmod 600 ~/.ssh/ec2.key
         ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
-        ls -la ~/.ssh/
-        
-    - name: Test SSH Connection
+
+    - name: Fix permissions on EC2
       run: |
-        ssh -i ~/.ssh/ec2.key -o StrictHostKeyChecking=no -v ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} "echo Connection successful"
-        
-    # Continue with deployment only if SSH test is successful
-    - name: Create build directory on EC2 if it doesn't exist
-      run: |
-        ssh -i ~/.ssh/ec2.key ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} "mkdir -p ~/Portfolio/build/"
-      
-    # Skip the problematic permission change step initially
-    # We'll add it back with proper error handling
-    
+        ssh -i ~/.ssh/ec2.key ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} "sudo chown -R ec2-user:ec2-user ~/Portfolio/build/"
+
     - name: Deploy to EC2
       run: |
         rsync -avz -e "ssh -i ~/.ssh/ec2.key" --delete ./build/ ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}:~/Portfolio/build/
 
     - name: Set permissions and restart Docker
       run: |
-        ssh -i ~/.ssh/ec2.key ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} "cd ~/Portfolio && sudo docker build -t portfolio-website:ssl . && sudo docker stop portfolio || true && sudo docker rm portfolio || true && sudo docker run -d --name portfolio -p 80:80 -p 443:443 -v /etc/letsencrypt:/etc/letsencrypt:ro --restart=always portfolio-website:ssl"
+        ssh -i ~/.ssh/ec2.key ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} "sudo chown -R nginx:nginx ~/Portfolio/build/ && cd ~/Portfolio && docker build -t portfolio-website:ssl . && docker stop portfolio || true && docker rm portfolio || true && docker run -d --name portfolio -p 80:80 -p 443:443 -v /etc/letsencrypt:/etc/letsencrypt:ro --restart=always portfolio-website:ssl"
