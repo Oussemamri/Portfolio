@@ -1,0 +1,45 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches: [ main ]  # or master, depending on your default branch name
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Build
+      run: npm run build
+      env:
+        CI: false  # Prevents treating warnings as errors
+
+    - name: Setup SSH
+      run: |
+        mkdir -p ~/.ssh/
+        echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/ec2.key
+        chmod 600 ~/.ssh/ec2.key
+        ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+
+    - name: Fix permissions on EC2
+      run: |
+        ssh -i ~/.ssh/ec2.key ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} "sudo chown -R ec2-user:ec2-user ~/Portfolio/build/"
+
+    - name: Deploy to EC2
+      run: |
+        rsync -avz -e "ssh -i ~/.ssh/ec2.key" --delete ./build/ ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}:~/Portfolio/build/
+
+    - name: Set permissions and restart Docker
+      run: |
+        ssh -i ~/.ssh/ec2.key ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} "sudo chown -R nginx:nginx ~/Portfolio/build/ && cd ~/Portfolio && docker build -t portfolio-website:ssl . && docker stop portfolio || true && docker rm portfolio || true && docker run -d --name portfolio -p 80:80 -p 443:443 -v /etc/letsencrypt:/etc/letsencrypt:ro --restart=always portfolio-website:ssl"
