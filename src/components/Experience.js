@@ -8,6 +8,23 @@ const Experience = () => {
                 <h2>Professional Experience</h2>
                 
                 <div className="experience-timeline">
+                    {/* New Happy Nation Internship */}
+                    <div className="experience-item">
+                        <div className="experience-content">
+                            <div className="experience-header">
+                                <h3>Happy Nation</h3>
+                                <span className="experience-date">October 2023 - January 2024</span>
+                            </div>
+                            <h4 className="experience-title">Full Stack Developer - Internship</h4>
+                            <ul className="experience-description">
+                                <li>Implemented user passport functionality, enabling users to collect digital stamps across the platform. Enhanced the authentication system with proactive JWT token refreshing for improved security.</li>
+                                <li>Deployed and managed the application using AWS services including <strong>EC2</strong>, <strong>S3</strong>, <strong>ECR</strong>, <strong>IAM</strong>, <strong>AMI</strong>, <strong>CodePipeline</strong>, <strong>CodeBuild</strong>, <strong>CloudWatch</strong>, and <strong>Lambda</strong>.</li>
+                                <li>Architected and implemented a dynamic frontend component system with 40% code reusability across the platform. Integrated the <strong>Brevo API</strong> into the Django backend, developing a scalable newsletter subscription service that increased customer engagement by 25%.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    {/* Existing Talan Experience */}
                     <div className="experience-item">
                         <div className="experience-content">
                             <div className="experience-header">

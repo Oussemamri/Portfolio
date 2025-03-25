@@ -16,3 +16,34 @@
         grid-template-columns: 1fr;
     }
 }
+
+.project-filters {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 8px 20px;
+    border-radius: 30px;
+    background-color: #f0f0f0;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    color: #555;
+    transition: all 0.3s;
+}
+
+.filter-btn.active {
+    background-color: #0077cc;
+    color: white;
+    box-shadow: 0 5px 15px rgba(0, 119, 204, 0.2);
+}
+
+.filter-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
