@@ -33,6 +33,10 @@ jobs:
         chmod 600 ~/.ssh/ec2.key
         ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
 
+    - name: Fix permissions on EC2 before rsync
+      run: |
+        ssh -i ~/.ssh/ec2.key ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} "sudo chown -R ${{ secrets.EC2_USERNAME }}:${{ secrets.EC2_USERNAME }} ~/Portfolio/build/"
+
     - name: Deploy to EC2
       run: |
         rsync -avz -e "ssh -i ~/.ssh/ec2.key" --delete ./build/ ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}:~/Portfolio/build/
@@ -40,10 +44,16 @@ jobs:
     - name: Deploy with Docker Compose
       run: |
         ssh -i ~/.ssh/ec2.key ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} "
-          # Update frontend files
+          # Update frontend files and fix permissions for nginx
           sudo chown -R nginx:nginx ~/Portfolio/build/
+          
+          # Ensure nginx configuration is in place
+          mkdir -p ~/nginx
+          
+          # Check if docker-compose is working
+          docker-compose --version || sudo curl -L 'https://github.com/docker/compose/releases/download/v2.20.3/docker-compose-linux-x86_64' -o /usr/local/bin/docker-compose && sudo chmod +x /usr/local/bin/docker-compose
           
           # Make sure Docker Compose is running latest version
           export MONGODB_URI=\$(grep MONGODB_URI ~/portfolio-backend/.env | cut -d '=' -f2-)
-          cd ~ && docker-compose down && docker-compose up -d
+          cd ~ && docker-compose down && docker-compose up -d --build
         "
