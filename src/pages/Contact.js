@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { toast } from 'react-toastify';
+import toast from 'react-hot-toast';
 import { submitContactForm } from '../services/api';
-import './Contact.css';
+import '../assets/styles/components/contact.css';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -27,35 +27,26 @@ const Contact = () => {
     
     setIsSubmitting(true);
     
-    try {
-      // Show a loading toast
-      const loadingToastId = toast.loading('Sending your message...');
-      
-      // Submit the form
-      const response = await submitContactForm(formData);
-      
-      // Update the loading toast to a success toast
-      toast.update(loadingToastId, {
-        render: 'Your message has been sent successfully!',
-        type: 'success',
-        isLoading: false,
-        autoClose: 5000,
-        closeButton: true
-      });
-      
-      // Reset the form
-      setFormData({
-        name: '',
-        email: '',
-        message: ''
-      });
-    } catch (error) {
-      // Show error toast
-      toast.error(error.message || 'Failed to send message. Please try again later.');
-      console.error('Form submission error:', error);
-    } finally {
+    // Using toast.promise for better handling
+    toast.promise(
+      submitContactForm(formData),
+      {
+        loading: 'Sending your message...',
+        success: () => {
+          // Reset form on success
+          setFormData({
+            name: '',
+            email: '',
+            message: ''
+          });
+          return 'Your message has been sent successfully!';
+        },
+        error: (err) => `${err.message || 'Failed to send message. Please try again later.'}`
+      }
+    )
+    .finally(() => {
       setIsSubmitting(false);
-    }
+    });
   };
 
   return (

@@ -1,14 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { Toaster, toast } from 'react-hot-toast';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
-import About from './pages/About';
-import Projects from './pages/Projects';
 import Contact from './pages/Contact';
-// Other imports...
 
 function App() {
   return (
@@ -18,24 +14,29 @@ function App() {
         <main>
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route path="/about" component={About} />
-            <Route path="/projects" component={Projects} />
             <Route path="/contact" component={Contact} />
-            {/* Other routes... */}
           </Switch>
         </main>
         <Footer />
-        <ToastContainer 
+        <Toaster 
           position="top-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="colored"
+          toastOptions={{
+            duration: 5000,
+            style: {
+              background: '#363636',
+              color: '#fff',
+            },
+            success: {
+              style: {
+                background: '#4caf50',
+              },
+            },
+            error: {
+              style: {
+                background: '#f44336',
+              },
+            },
+          }}
         />
       </div>
     </Router>

@@ -17,7 +17,13 @@ const Header = () => {
         setMenuOpen(!menuOpen);
     };
 
-    const handleLinkClick = () => {
+    const handleLinkClick = (e) => {
+        // If the link has an href attribute that starts with #
+        if (e.currentTarget.getAttribute('href')?.startsWith('#')) {
+            e.preventDefault();
+            const targetId = e.currentTarget.getAttribute('href');
+            scrollToElement(targetId);
+        }
         setMenuOpen(false);
     };
     
@@ -27,7 +33,7 @@ const Header = () => {
             top: 0,
             behavior: 'smooth'
         });
-        handleLinkClick();
+        handleLinkClick(e);
     };
 
     return (
