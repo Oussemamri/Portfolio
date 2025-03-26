@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { submitContactForm } from '../services/api';
 import Button from './common/Button';
 import '../assets/styles/components/contact.css';
 
@@ -8,7 +9,9 @@ const Contact = () => {
         email: '',
         message: ''
     });
-    
+    const [status, setStatus] = useState({ submitted: false, error: null });
+    const [loading, setLoading] = useState(false);
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prevState => ({
@@ -16,18 +19,24 @@ const Contact = () => {
             [name]: value
         }));
     };
-    
-    const handleSubmit = (e) => {
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Here you would typically handle form submission
-        console.log('Form submitted:', formData);
-        // Reset form
-        setFormData({
-            name: '',
-            email: '',
-            message: ''
-        });
-        alert('Thank you for your message! I will get back to you soon.');
+        setLoading(true);
+        
+        try {
+            await submitContactForm(formData);
+            setStatus({ submitted: true, error: null });
+            setFormData({
+                name: '',
+                email: '',
+                message: ''
+            });
+        } catch (error) {
+            setStatus({ submitted: false, error: error.message || 'Something went wrong' });
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -64,42 +73,51 @@ const Contact = () => {
                 </div>
                 
                 <div className="contact-form">
-                    <form onSubmit={handleSubmit}>
-                        <div className="form-group">
-                            <label htmlFor="name">Name</label>
-                            <input 
-                                type="text" 
-                                id="name" 
-                                name="name" 
-                                value={formData.name}
-                                onChange={handleChange}
-                                required 
-                            />
+                    {status.submitted ? (
+                        <div className="success-message">
+                            Thank you for your message! I'll get back to you soon.
                         </div>
-                        <div className="form-group">
-                            <label htmlFor="email">Email</label>
-                            <input 
-                                type="email" 
-                                id="email" 
-                                name="email" 
-                                value={formData.email}
-                                onChange={handleChange}
-                                required 
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="message">Message</label>
-                            <textarea 
-                                id="message" 
-                                name="message" 
-                                rows="5"
-                                value={formData.message}
-                                onChange={handleChange}
-                                required
-                            ></textarea>
-                        </div>
-                        <button type="submit" className="btn primary">Send Message</button>
-                    </form>
+                    ) : (
+                        <form onSubmit={handleSubmit}>
+                            <div className="form-group">
+                                <label htmlFor="name">Name</label>
+                                <input 
+                                    type="text" 
+                                    id="name" 
+                                    name="name" 
+                                    value={formData.name}
+                                    onChange={handleChange}
+                                    required 
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="email">Email</label>
+                                <input 
+                                    type="email" 
+                                    id="email" 
+                                    name="email" 
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                    required 
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="message">Message</label>
+                                <textarea 
+                                    id="message" 
+                                    name="message" 
+                                    rows="5"
+                                    value={formData.message}
+                                    onChange={handleChange}
+                                    required
+                                ></textarea>
+                            </div>
+                            <button type="submit" className="btn primary" disabled={loading}>
+                                {loading ? 'Sending...' : 'Send Message'}
+                            </button>
+                            {status.error && <div className="error-message">{status.error}</div>}
+                        </form>
+                    )}
                 </div>
             </div>
         </section>
