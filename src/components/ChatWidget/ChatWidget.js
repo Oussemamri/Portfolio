@@ -51,7 +51,7 @@ const ChatWidget = () => {
     
     try {
       // Call your backend API
-      const response = await axios.post('/api/chat', { message: inputValue });
+      const response = await axios.post('https://oussemaamri.com/api/chat', { message: inputValue });
       
       // Add bot response to chat
       setMessages(prev => [
