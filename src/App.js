@@ -1,10 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { Toaster, toast } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import Contact from './pages/Contact';
+import ChatWidget from './components/ChatWidget/ChatWidget'; // Import the ChatWidget
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           </Switch>
         </main>
         <Footer />
+        <ChatWidget /> {/* Add the ChatWidget here */}
         <Toaster 
           position="top-right"
           toastOptions={{
