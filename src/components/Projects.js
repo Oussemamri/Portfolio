@@ -1,17 +1,33 @@
 import React, { useState } from 'react';
 import Card from './common/Card';
 import '../assets/styles/components/projects.css';
+import { FaGithub } from 'react-icons/fa'; // Import GitHub icon
 
 const Projects = () => {
     const [activeFilter, setActiveFilter] = useState('all');
     
     const projectList = [
         {
+            title: 'Personal Portfolio Website',
+            description: 'Responsive portfolio website with React frontend and Express.js backend. Features include an AI-powered chat assistant, dynamic project filtering, and contact form with email integration.',
+            technologies: 'React, Express.js, Docker, AWS (EC2, S3, Lambda, CodePipeline)',
+            period: '2025/01 - 2025/03',
+            link: 'https://oussemaamri.com',
+            repos: [
+                { name: 'Frontend', url: 'https://github.com/Oussemamri/Portfolio' },
+                { name: 'Backend', url: 'https://github.com/Oussemamri/portfolio-backend' }
+            ],
+            category: ['web', 'devops', 'cloud']
+        },
+        {
             title: 'Quiz Application',
             description: 'AI-driven quiz management system with adaptive learning algorithms that personalize quizzes based on user performance.',
             technologies: 'Django, Bootstrap, PostgreSQL',
             period: '2024/09 - 2024/11',
             link: '#',
+            repos: [
+                { name: 'Repository', url: 'https://github.com/Oussemamri/MindTrack-django' }
+            ],
             category: 'web'
         },
         {
@@ -20,6 +36,10 @@ const Projects = () => {
             technologies: 'React, NestJS',
             period: '2024/01 - 2024/05',
             link: '#', 
+            repos: [
+                { name: 'Frontend', url: 'https://github.com/Oussemamri/CollaboraDocFront' },
+                { name: 'Backend', url: 'https://github.com/Oussemamri/CollaboraDocBack' }
+            ],
             category: 'web'
         },
         {
@@ -44,6 +64,10 @@ const Projects = () => {
             technologies: 'Angular, Spring Boot',
             period: '2023/09 - 2023/12',
             link: '#', 
+            repos: [
+                { name: 'Frontend', url: 'https://github.com/wadhahzoldyck/FoyerFront' },
+                { name: 'Backend', url: 'https://github.com/wadhahzoldyck/GestionFoyerBack' }
+            ],
             category: 'web'
         }
     ];
@@ -57,7 +81,12 @@ const Projects = () => {
     
     const filteredProjects = activeFilter === 'all' 
         ? projectList 
-        : projectList.filter(project => project.category === activeFilter);
+        : projectList.filter(project => {
+            if (Array.isArray(project.category)) {
+                return project.category.includes(activeFilter);
+            }
+            return project.category === activeFilter;
+        });
 
     return (
         <section id="projects" className="projects-section">
@@ -85,6 +114,24 @@ const Projects = () => {
                                 <p>{project.description}</p>
                                 <p className="technologies"><strong>Technologies:</strong> {project.technologies}</p>
                                 <p className="period"><strong>Period:</strong> {project.period}</p>
+                                {project.repos && (
+                                    <div className="repo-links">
+                                        <p><strong>GitHub:</strong></p>
+                                        <div className="github-buttons">
+                                            {project.repos.map((repo, repoIndex) => (
+                                                <a 
+                                                    key={repoIndex}
+                                                    href={repo.url}
+                                                    className="github-link"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                >
+                                                    <FaGithub /> {repo.name}
+                                                </a>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
                             </>
                         }
                         link={project.link}
