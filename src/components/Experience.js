@@ -17,7 +17,8 @@ const Experience = () => {
                             </div>
                             <h4 className="experience-title">Full Stack Developer - Internship</h4>
                             <ul className="experience-description">
-                                <li>Implemented user passport functionality, enabling users to collect digital stamps across the platform. Enhanced the authentication system with proactive JWT token refreshing for improved security.</li>
+                                <li>Implemented user passport functionality, enabling users to collect digital stamps across the platform.
+                                Enhanced the authentication framework with preemptive credential refreshing and interceptors for seamless error recovery, eliminating user session interruptions.</li>
                                 <li>Deployed and managed the application using AWS services including <strong>EC2</strong>, <strong>S3</strong>, <strong>ECR</strong>, <strong>IAM</strong>, <strong>AMI</strong>, <strong>CodePipeline</strong>, <strong>CodeBuild</strong>, <strong>CloudWatch</strong>, and <strong>Lambda</strong>.</li>
                                 <li>Architected and implemented a dynamic frontend component system with 40% code reusability across the platform. Integrated the <strong>Brevo API</strong> into the Django backend, developing a scalable newsletter subscription service that increased customer engagement by 25%.</li>
                             </ul>
