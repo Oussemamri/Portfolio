@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { submitContactForm } from '../services/api';
 import { showSuccessToast, showErrorToast, showLoadingToast, updateToast } from '../utils/toast';
-import Button from './common/Button';
 import '../assets/styles/components/contact.css';
-import { CgLayoutGrid } from 'react-icons/cg';
+import { FaPaperPlane } from 'react-icons/fa';
 
 const Contact = () => {
     const [formData, setFormData] = useState({
@@ -37,7 +36,7 @@ const Contact = () => {
         
         try {
             await submitContactForm(formData);
-            console.log('Form submitted successfullyy');
+            console.log('Form submitted successfully');
             // Update the toast to success
             updateToast(toastId, {
                 render: 'Message sent successfully!',
@@ -70,13 +69,13 @@ const Contact = () => {
             <div className="container">
                 <h2 className="section-title">Get In Touch</h2>
                 <p className="section-description">
-                    Feel free to reach out if you want to collaborate, have questions, or just want to say hello!
+                    I'm always open to new opportunities and collaborations. Feel free to reach out!
                 </p>
                 
                 <div className="contact-container">
                     <div className="contact-info">
-                        <h3>Contact Information</h3>
-                        <p>I'm currently looking for new opportunities. Send me a message and I'll get back to you as soon as possible.</p>
+                        <h3>Let's Talk</h3>
+                        <p>I'm currently available for freelance work and full-time positions. If you have a project that needs coding or a position to fill, contact me!</p>
                         
                         <div className="contact-details">
                             <div className="contact-item">
@@ -98,6 +97,9 @@ const Contact = () => {
                                 <a href="https://linkedin.com/in/oussema-amri" target="_blank" rel="noopener noreferrer">
                                     <i className="fab fa-linkedin"></i>
                                 </a>
+                                <a href="https://twitter.com/OussemaAmri" target="_blank" rel="noopener noreferrer">
+                                    <i className="fab fa-twitter"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -112,6 +114,7 @@ const Contact = () => {
                                     name="name" 
                                     value={formData.name}
                                     onChange={handleChange}
+                                    placeholder="Your name"
                                     required 
                                 />
                             </div>
@@ -123,6 +126,7 @@ const Contact = () => {
                                     name="email" 
                                     value={formData.email}
                                     onChange={handleChange}
+                                    placeholder="Your email address"
                                     required 
                                 />
                             </div>
@@ -134,11 +138,12 @@ const Contact = () => {
                                     rows="5"
                                     value={formData.message}
                                     onChange={handleChange}
+                                    placeholder="Your message"
                                     required
                                 ></textarea>
                             </div>
                             <button type="submit" className="btn primary" disabled={loading}>
-                                {loading ? 'Sending...' : 'Send Message'}
+                                {loading ? 'Sending...' : 'Send Message'} <FaPaperPlane style={{ marginLeft: '8px' }} />
                             </button>
                         </form>
                     </div>

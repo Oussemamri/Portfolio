@@ -20,7 +20,8 @@ const Hero = () => {
             className="hero" 
             id="home"
             style={{
-                backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${backgroundImage})`
+                backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5)), url(${backgroundImage})`
+                // Changed from 0.7 to 0.4/0.5 to make it lighter
             }}
         >
             <div className="hero-content">
