@@ -3,6 +3,7 @@ import { submitContactForm } from '../services/api';
 import { showSuccessToast, showErrorToast, showLoadingToast, updateToast } from '../utils/toast';
 import Button from './common/Button';
 import '../assets/styles/components/contact.css';
+import { CgLayoutGrid } from 'react-icons/cg';
 
 const Contact = () => {
     const [formData, setFormData] = useState({
@@ -36,7 +37,7 @@ const Contact = () => {
         
         try {
             await submitContactForm(formData);
-            
+            console.log('Form submitted successfully');
             // Update the toast to success
             updateToast(toastId, {
                 render: 'Message sent successfully!',
