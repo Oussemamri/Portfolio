@@ -37,7 +37,7 @@ const Contact = () => {
         
         try {
             await submitContactForm(formData);
-            console.log('Form submitted successfully');
+            console.log('Form submitted successfullyy');
             // Update the toast to success
             updateToast(toastId, {
                 render: 'Message sent successfully!',
