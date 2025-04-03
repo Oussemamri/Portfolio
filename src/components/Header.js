@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import useScrollPosition from '../hooks/useScrollPosition';
 import '../assets/styles/components/header.css';
 import { scrollToElement } from '../utils/helpers';
+import ChatWidget from '../components/ChatWidget/ChatWidget'; // Add this import
 
 const Header = () => {
     const scrollPosition = useScrollPosition();
@@ -37,32 +38,48 @@ const Header = () => {
     };
 
     return (
-        <header className={`header ${hasScrolled ? 'scrolled' : ''}`}>
-            <div className="header-container">
-                <div className="logo">
-                    <a href="#home" onClick={scrollToTop}>
-                        <h1>
-                            <span className="logo-first">Oussema</span>
-                            <span className="logo-last">Amri</span>
-                        </h1>
-                    </a>
+        <>
+            <header className={`header ${hasScrolled ? 'scrolled' : ''}`}>
+                <div className="header-container">
+                    <div className="logo">
+                        <a href="#home" onClick={scrollToTop}>
+                            <h1>
+                                <span className="logo-first">Oussema</span>
+                                <span className="logo-last">Amri</span>
+                            </h1>
+                        </a>
+                    </div>
+                    
+                    <nav className="main-nav">
+                        <ul className={`nav-links ${menuOpen ? 'active' : ''}`}>
+                            <li><a href="#home" onClick={scrollToTop} className="nav-link">Home</a></li>
+                            <li><a href="#about" onClick={handleLinkClick} className="nav-link">About</a></li>
+                            <li><a href="#experience" onClick={handleLinkClick} className="nav-link">Experience</a></li>
+                            <li><a href="#projects" onClick={handleLinkClick} className="nav-link">Work</a></li>
+                            <li><a href="#skills" onClick={handleLinkClick} className="nav-link">Skills</a></li>
+                            <li><a href="#contact" onClick={handleLinkClick} className="nav-link">Contact</a></li>
+                            <li>
+                                <button 
+                                    className="nav-link chat-button"
+                                    onClick={() => document.querySelector('.chat-toggle-button').click()}
+                                >
+                                    Chat with AI
+                                </button>
+                            </li>
+                        </ul>
+                        
+                        <div className="menu-icon" onClick={toggleMenu}>
+                            <div className={`menu-line ${menuOpen ? 'active' : ''}`}></div>
+                            <div className={`menu-line ${menuOpen ? 'active' : ''}`}></div>
+                            <div className={`menu-line ${menuOpen ? 'active' : ''}`}></div>
+                        </div>
+                    </nav>
                 </div>
-                
-                <nav className="main-nav">
-                    <ul className={`nav-links ${menuOpen ? 'active' : ''}`}>
-                        <li><a href="#home" onClick={scrollToTop} className="nav-link">Home</a></li>
-                        <li><a href="#about" onClick={handleLinkClick} className="nav-link">About</a></li>
-                        <li><a href="#experience" onClick={handleLinkClick} className="nav-link">Experience</a></li>
-                        <li><a href="#projects" onClick={handleLinkClick} className="nav-link">Work</a></li>
-                        <li><a href="#contact" onClick={handleLinkClick} className="nav-link contact-btn">Contact</a></li>
-                    </ul>
-                </nav>
-                
-                <button className="mobile-menu-btn" onClick={toggleMenu} aria-label="Toggle menu">
-                    <i className={`fas ${menuOpen ? 'fa-times' : 'fa-bars'}`}></i>
-                </button>
-            </div>
-        </header>
+            </header>
+            
+            {/* Add ChatWidget here */}
+            <ChatWidget />
+        </>
     );
 };
 
