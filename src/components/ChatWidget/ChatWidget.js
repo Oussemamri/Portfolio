@@ -70,13 +70,14 @@ const ChatWidget = () => {
       ]);
     } catch (error) {
       console.error('Error getting AI response:', error);
+      console.error('Error response:', error.response?.data);
       
       let errorMessage = "Sorry, I couldn't process your request. ";
       
       if (error.code === 'ERR_NETWORK' || error.message === 'Network Error') {
         errorMessage += "The backend server is not reachable. Please make sure the API server is running.";
       } else if (error.response) {
-        errorMessage += `Server error: ${error.response.status}`;
+        errorMessage += `Server error: ${error.response.status}. ${error.response.data?.details || ''}`;
       } else {
         errorMessage += "Please try again later.";
       }

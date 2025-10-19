@@ -53,6 +53,12 @@ app.post('/api/chat', async (req, res) => {
       }
     });
 
+    // Check if response has the expected structure
+    if (!response.data || !response.data.candidates || !response.data.candidates[0]) {
+      console.error('Unexpected API response structure:', JSON.stringify(response.data, null, 2));
+      throw new Error('Invalid response from Gemini API');
+    }
+
     const reply = response.data.candidates[0].content.parts[0].text;
     
     console.log('AI response:', reply);
@@ -61,6 +67,7 @@ app.post('/api/chat', async (req, res) => {
     
   } catch (error) {
     console.error('Error in chat endpoint:', error.response?.data || error.message);
+    console.error('Full error:', error);
     
     res.status(500).json({ 
       error: 'Failed to get response',
