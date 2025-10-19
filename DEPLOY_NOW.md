@@ -71,11 +71,11 @@ git push origin main
 
 4. **Environment Variables** (Very Important!):
    - Click "Environment Variables"
-   - Add variable:
-     - **Key**: `REACT_APP_API_URL`
-     - **Value**: `https://your-backend-url.onrender.com/api`
-     - Replace `your-backend-url` with the URL from Step 2
-     - Example: `https://portfolio-api-abc123.onrender.com/api`
+   - Add TWO variables:
+     1. **Key**: `NODE_OPTIONS` | **Value**: `--openssl-legacy-provider`
+     2. **Key**: `REACT_APP_API_URL` | **Value**: `https://your-backend-url.onrender.com/api`
+   - Replace `your-backend-url` with the URL from Step 2
+   - Example: `https://portfolio-api-abc123.onrender.com/api`
 
 5. **Deploy**: Click "Deploy"
 
