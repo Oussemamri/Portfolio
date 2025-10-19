@@ -1,2 +1,7 @@
 node_modules
 .git
+.env.local
+.env
+nul
+backend/.env
+backend/node_modules

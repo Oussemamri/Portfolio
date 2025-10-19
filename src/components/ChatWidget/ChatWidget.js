@@ -3,6 +3,9 @@ import { FaRobot, FaTimes, FaPaperPlane } from 'react-icons/fa';
 import axios from 'axios';
 import './ChatWidget.css';
 
+// Use environment variable for API URL
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+
 const ChatWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
@@ -51,24 +54,38 @@ const ChatWidget = () => {
     
     try {
       // Call your backend API
-      const response = await axios.post('https://oussemaamri.com/api/chat', { message: inputValue });
+      console.log('Sending message to API:', `${API_URL}/chat`);
+      const response = await axios.post(`${API_URL}/chat`, { 
+        message: inputValue 
+      });
       
       // Add bot response to chat
       setMessages(prev => [
         ...prev, 
         { 
           id: prev.length + 1, 
-          text: response.data.message, 
+          text: response.data.message || response.data.reply, 
           sender: 'bot' 
         }
       ]);
     } catch (error) {
       console.error('Error getting AI response:', error);
+      
+      let errorMessage = "Sorry, I couldn't process your request. ";
+      
+      if (error.code === 'ERR_NETWORK' || error.message === 'Network Error') {
+        errorMessage += "The backend server is not reachable. Please make sure the API server is running.";
+      } else if (error.response) {
+        errorMessage += `Server error: ${error.response.status}`;
+      } else {
+        errorMessage += "Please try again later.";
+      }
+      
       setMessages(prev => [
         ...prev, 
         { 
           id: prev.length + 1, 
-          text: "Sorry, I couldn't process your request. Please try again later.", 
+          text: errorMessage, 
           sender: 'bot',
           isError: true 
         }
