@@ -1,0 +1,34 @@
+{
+  "name": "portfolio-backend",
+  "version": "1.0.0",
+  "description": "Backend API for Oussema's portfolio website with AI chatbot",
+  "main": "server-gemini-rest.js",
+  "scripts": {
+    "start": "node server-gemini-rest.js",
+    "dev": "nodemon server-gemini-rest.js",
+    "start:sdk": "node server-gemini.js",
+    "dev:sdk": "nodemon server-gemini.js",
+    "start:openai": "node server.js",
+    "dev:openai": "nodemon server.js"
+  },
+  "keywords": [
+    "express",
+    "api",
+    "chatbot",
+    "gemini",
+    "openai"
+  ],
+  "author": "Oussema Amri",
+  "license": "MIT",
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "axios": "^1.12.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "openai": "^4.20.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
