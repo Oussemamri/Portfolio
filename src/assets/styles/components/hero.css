@@ -3,154 +3,172 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    background-color: #282c34;
+    background-color: #0a0a0a;
+    /* Dark base */
     color: white;
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed; /* Creates parallax effect */
     position: relative;
-    margin-bottom: 0;
     overflow: hidden;
     z-index: 1;
+    padding: 0;
 }
 
-/* Dark overlay for better text visibility */
-.hero:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
+.hero-container {
+    display: flex;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.3); /* Changed from 0.6 to 0.3 */
-    z-index: 1;
+    max-width: 1920px;
+    margin: 0 auto;
 }
 
-/* Create a gradient transition at the bottom of the hero section */
-.hero:after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 150px;
-    background: linear-gradient(to top, white, rgba(255, 255, 255, 0));
-    z-index: 2;
-    opacity: 0.85; /* Adjust for desired effect */
+/* Left side - Text Content */
+.hero-text {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 5% 0 8%;
+    z-index: 10;
+    background: linear-gradient(to right, #0a0a0a 80%, transparent);
 }
 
-.hero-content {
-    max-width: 800px;
-    padding: 30px 40px;
-    border-radius: 10px;
-    background-color: rgba(0, 0, 0, 0.2); /* Subtle background for content */
-    backdrop-filter: blur(5px); /* Slight blur effect */
-    -webkit-backdrop-filter: blur(5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+/* Right side - Visual/Image */
+.hero-visual {
+    width: 60%;
+    height: 100%;
     position: relative;
-    z-index: 3; /* Above overlay and gradient */
-    color: white;
-    animation: fadeIn 1.5s ease-out;
-    will-change: transform, opacity; /* Optimization for animation */
+    background-image: url('../../images/Background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: background-image 0.5s ease-in-out;
 }
 
-/* Remove the old page-transition element */
-.page-transition {
-    display: none;
-}
-
-/* Update smooth scrolling behavior */
-html {
-    scroll-behavior: smooth;
-    scroll-snap-type: none; /* Removing scroll snap which can cause getting stuck */
-    overflow-y: auto; /* Ensure page is scrollable */
-}
-
-/* Remove scroll snap for sections */
-.hero, .about-section {
-    scroll-snap-align: none; /* Remove scroll snap alignment */
+/* Hover effect on the visual part */
+.hero-visual:hover {
+    background-image: url('../../images/Background.jpg');
 }
 
 .hero h1 {
-    font-size: 3.5rem;
+    font-size: 4.5rem;
+    font-weight: 700;
     margin-bottom: 10px;
-    animation: fadeInDown 1s;
-    color: white; /* Explicitly set white color */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Stronger text shadow */
+    line-height: 1.1;
+    background: linear-gradient(to right, #fff, #ccc);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: fadeInDown 1s ease-out;
 }
 
 .hero h2 {
     font-size: 1.8rem;
-    margin-bottom: 20px;
     font-weight: 400;
-    animation: fadeInDown 1s 0.2s;
-    animation-fill-mode: both;
-    color: white; /* Explicitly set white color */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Stronger text shadow */
+    margin-bottom: 25px;
+    color: #a0a0a0;
+    letter-spacing: 1px;
+    animation: fadeInDown 1s 0.2s ease-out backwards;
 }
 
 .hero p {
-    font-size: 1.2rem;
-    margin-bottom: 30px;
+    font-size: 1.1rem;
+    margin-bottom: 40px;
     line-height: 1.6;
-    animation: fadeInDown 1s 0.4s;
-    animation-fill-mode: both;
-    color: white; /* Explicitly set white color */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Stronger text shadow */
+    color: #d0d0d0;
+    max-width: 500px;
+    animation: fadeInDown 1s 0.4s ease-out backwards;
 }
 
 .hero-buttons {
-    animation: fadeInUp 1s 0.6s;
-    animation-fill-mode: both;
+    display: flex;
+    gap: 20px;
+    animation: fadeInUp 1s 0.6s ease-out backwards;
 }
 
-/* Add or update these styles to be more specific and prevent conflicts */
-
 .hero-buttons .btn {
-    display: inline-block;
-    padding: 12px 24px;
-    border-radius: 30px;
+    padding: 14px 32px;
+    border-radius: 4px;
+    /* More modern, less rounded */
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 500;
     text-decoration: none;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin: 0 10px;
-    min-width: 150px;
-    max-width: 200px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
 }
 
 .hero-buttons .btn.primary {
-    background-color: #2196F3;
-    color: white;
-    border: none;
-    box-shadow: 0 4px 10px rgba(33, 150, 243, 0.3);
-}
-
-.hero-buttons .btn.secondary {
-    background-color: transparent;
-    color: white;
-    border: 2px solid white;
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
 }
 
 .hero-buttons .btn.primary:hover {
-    background-color: #1976D2;
-    transform: translateY(-3px);
-    box-shadow: 0 6px 15px rgba(33, 150, 243, 0.4);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 20px rgba(124, 58, 237, 0.3);
+    /* Purple glow match */
+    transform: translateY(-2px);
+}
+
+.hero-buttons .btn.secondary {
+    background: transparent;
+    color: #a0a0a0;
+    border: 1px solid transparent;
 }
 
 .hero-buttons .btn.secondary:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    transform: translateY(-3px);
+    color: #fff;
+    transform: translateY(-2px);
 }
 
+/* Scroll Indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 20%;
+    /* Align with text content roughly */
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+    animation: fadeIn 1s 1s backwards;
+    z-index: 20;
+}
+
+.scroll-indicator:hover {
+    opacity: 1;
+}
+
+.scroll-indicator span {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.scroll-indicator .chevron {
+    width: 12px;
+    height: 12px;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    transform: rotate(45deg);
+    animation: bounce 2s infinite;
+}
+
+/* Animations */
 @keyframes fadeInDown {
     from {
         opacity: 0;
-        transform: translateY(-30px);
+        transform: translateY(-20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -160,8 +178,9 @@ html {
 @keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -169,65 +188,65 @@ html {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
+    from {
+        opacity: 0;
+    }
 
-/* Better solution for scroll indicator centering */
-.scroll-indicator {
-    position: absolute;
-    bottom: 80px; /* Positioned higher to be above the gradient */
-    left: 0;
-    right: 0; /* Add right: 0 to ensure full width centering */
-    margin: 0 auto; /* Center horizontally */
-    width: 120px; /* Fixed width */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 3;
-    color: white;
-    opacity: 0;
-    animation: fadeIn 1s forwards 2s;
-    cursor: pointer;
-    transition: transform 0.3s;
-}
-
-.scroll-indicator:hover {
-    transform: translateY(-5px); /* Removed translateX since we're using left/right/margin auto */
-}
-
-.scroll-indicator span {
-    font-size: 0.9rem;
-    margin-bottom: 10px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    font-weight: 500;
-    white-space: nowrap; /* Prevent text from wrapping */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Stronger text shadow */
-}
-
-.scroll-indicator .chevron {
-    width: 20px;
-    height: 20px;
-    border-style: solid;
-    border-width: 0 3px 3px 0;
-    display: block; /* Changed from inline-block to block */
-    transform: rotate(45deg);
-    animation: bounce 2s infinite;
-    margin: 0 auto;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Add shadow to match text */
+    to {
+        opacity: 1;
+    }
 }
 
 @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
         transform: translateY(0) rotate(45deg);
     }
+
     40% {
-        transform: translateY(-15px) rotate(45deg);
+        transform: translateY(-10px) rotate(45deg);
     }
+
     60% {
-        transform: translateY(-7px) rotate(45deg);
+        transform: translateY(-5px) rotate(45deg);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .hero-container {
+        flex-direction: column-reverse;
+    }
+
+    .hero-text {
+        width: 100%;
+        height: 50%;
+        padding: 40px 20px;
+        align-items: center;
+        text-align: center;
+        background: linear-gradient(to top, #0a0a0a 90%, transparent);
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+
+    .hero-visual {
+        width: 100%;
+        height: 100%;
+        background-position: center top;
+    }
+
+    .hero h1 {
+        font-size: 3rem;
+    }
+
+    .scroll-indicator {
+        left: 50%;
+        bottom: 20px;
     }
 }
 
@@ -235,12 +254,13 @@ html {
     .hero h1 {
         font-size: 2.5rem;
     }
-    
+
     .hero h2 {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
     }
-    
-    .hero p {
-        font-size: 1rem;
+
+    .hero-buttons .btn {
+        padding: 12px 24px;
+        font-size: 0.9rem;
     }
 }
