@@ -1,0 +1,16 @@
+{
+  "name": "portfolio-api-lambda",
+  "version": "1.0.0",
+  "description": "AWS Lambda function for Oussema's portfolio chatbot API",
+  "main": "index.js",
+  "scripts": {
+    "zip": "zip -r function.zip index.js node_modules package.json",
+    "deploy": "aws lambda update-function-code --function-name portfolio-chatbot-api --zip-file fileb://function.zip"
+  },
+  "dependencies": {
+    "axios": "^1.6.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
