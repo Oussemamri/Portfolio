@@ -1,0 +1,252 @@
+    %-------------------------
+    % Resume in Latex
+    % Author
+    % License : MIT
+    %------------------------
+    
+    %---- Required Packages and Functions ----
+    
+    \documentclass[a4paper,10pt]{article}
+    \usepackage{latexsym}
+    \usepackage{xcolor}
+    \usepackage{float}
+    \usepackage{ragged2e}
+    \usepackage[empty]{fullpage}
+    \usepackage{wrapfig}
+    \usepackage{lipsum}
+    \usepackage{tabularx}
+    \usepackage{titlesec}
+    \usepackage{geometry}
+    \usepackage{marvosym}
+    \usepackage{verbatim}
+    \usepackage{enumitem}
+    \usepackage[hidelinks]{hyperref}
+    \usepackage{fancyhdr}
+    \usepackage{fontawesome5}
+    \usepackage{multicol}
+    \usepackage{graphicx}
+    \usepackage{cfr-lm}
+    \usepackage[T1]{fontenc}
+    \setlength{\multicolsep}{0pt} 
+    \pagestyle{fancy}
+    \fancyhf{} % clear all header and footer fields
+    \fancyfoot{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+    \geometry{left=1.4cm, top=0.5cm, right=1.2cm, bottom=0.5cm}
+    % Adjust margins
+    %\addtolength{\oddsidemargin}{-0.5in}
+    %\addtolength{\evensidemargin}{-0.5in}
+    %\addtolength{\textwidth}{1in}
+    \usepackage[most]{tcolorbox}
+    \tcbset{
+    	frame code={}
+    	center title,
+    	left=0pt,
+    	right=0pt,
+    	top=0pt,
+    	bottom=0pt,
+    	colback=gray!20,
+    	colframe=white,
+    	width=\dimexpr\textwidth\relax,
+    	enlarge left by=-2mm,
+    	boxsep=4pt,
+    	arc=0pt,outer arc=0pt,
+    }
+    
+    \urlstyle{same}
+    
+    \raggedright
+    \setlength{\tabcolsep}{0in}
+    
+    % Sections formatting
+    \titleformat{\section}{
+      \vspace{-6pt}\scshape\raggedright\large
+    }{}{0em}{}[\color{black}\titlerule \vspace{-6pt}]
+    
+    %-------------------------
+    % Custom commands
+    \newcommand{\resumeItem}[2]{
+      \item{
+        \textbf{#1}{\hspace{0.5mm}#2 \vspace{-0.5mm}}
+      }
+    }
+    
+    \newcommand{\resumePOR}[3]{
+    \vspace{0.5mm}\item
+        \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+            \textbf{#1}\hspace{0.3mm}#2 & \textit{\small{#3}} 
+        \end{tabular*}
+        \vspace{-2mm}
+    }
+    
+    \newcommand{\resumeSubheading}[4]{
+    \vspace{0.5mm}\item
+        \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
+            \textbf{#1} & \textit{\footnotesize{#4}} \\
+            \textit{\footnotesize{#3}} &  \footnotesize{#2}\\
+        \end{tabular*}
+        \vspace{-2.4mm}
+    }
+    
+    \newcommand{\resumeProject}[4]{
+    \vspace{0.5mm}\item
+        \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
+            \textbf{#1} & \textit{\footnotesize{#3}} \\
+            \footnotesize{\textit{#2}} & \footnotesize{#4}
+        \end{tabular*}
+        \vspace{-2.4mm}
+    }
+    
+    \newcommand{\resumeSubItem}[2]{\resumeItem{#1}{#2}\vspace{-4pt}}
+    % \renewcommand{\labelitemii}{$\circ$}
+    \renewcommand{\labelitemi}{$\vcenter{\hbox{\tiny$\bullet$}}$}
+    \newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*,labelsep=0mm]}
+    \newcommand{\resumeHeadingSkillStart}{\begin{itemize}[leftmargin=*,itemsep=1.7mm, rightmargin=2ex]}
+    \newcommand{\resumeItemListStart}{\begin{justify}\begin{itemize}[leftmargin=3ex, rightmargin=2ex, noitemsep,labelsep=1.2mm,itemsep=0mm]\small}
+    \newcommand{\resumeSubHeadingListEnd}{\end{itemize}\vspace{2mm}}
+    \newcommand{\resumeHeadingSkillEnd}{\end{itemize}\vspace{-2mm}}
+    \newcommand{\resumeItemListEnd}{\end{itemize}\end{justify}\vspace{-1mm}}
+    \newcommand{\cvsection}[1]{%
+    \vspace{2mm}
+    \begin{tcolorbox}
+        \textbf{\large #1}
+    \end{tcolorbox}
+        \vspace{-4mm}
+    }
+    \newcolumntype{L}{>{\raggedright\arraybackslash}X}%
+    \newcolumntype{R}{>{\raggedleft\arraybackslash}X}%
+    \newcolumntype{C}{>{\centering\arraybackslash}X}%
+    %---- End of Packages and Functions ------
+    
+    %-------------------------------------------
+    %%%%%%  CV STARTS HERE  %%%%%%%%%%%
+    %%%%%% DEFINE ELEMENTS HERE %%%%%%%
+    \newcommand{\name}{OUSSEMA AMRI}
+    \newcommand{\phone}{(+49) 15510 357723}
+    \newcommand{\emaila}{o.amri@stud.fh-sm.de}
+    \newcommand{\github}{github.com/Oussemamri}
+    \newcommand{\linkedin}{linkedin.com/in/oussema-amri}
+    \newcommand{\location}{Meiningen, Germany}
+    
+    \begin{document}
+    \fontfamily{cmr}\selectfont
+    
+\begin{center} \textbf{\Large OUSSEMA AMRI}\\ \vspace{1mm} Munich, Germany\\ Email: \href{mailto:o.amri@stud.fh-sm.de}{o.amri@stud.fh-sm.de} \,|\, Phone: (+49) 15510 357723\\ \href{https://github.com/Oussemamri}{\raisebox{-0.15\height}{\faGithub}\;GitHub} \hspace{10pt} \href{https://linkedin.com/in/oussema-amri}{\raisebox{-0.15\height}{\faLinkedin}\;LinkedIn} \hspace{10pt} \href{https://oussemaamri.vercel.app/}{\raisebox{-0.15\height}{\faGlobe}\;Portfolio} \end{center}
+    % Professional Summary
+    \section{\textbf{Professional Summary}}
+    \resumeItemListStart
+    \item{Software Engineer with 2+ years of experience building scalable full-stack applications in aerospace and fintech sectors. Specialized in Python, TypeScript/JavaScript, and modern cloud architectures (AWS). Track record of delivering high-performance systems with measurable impact: 20\% performance gains through optimization, 98.5\% uptime for production platforms, and 80\% reduction in database load through caching strategies. Proficient in CI/CD automation, microservices design, and Agile development methodologies.}
+    \resumeItemListEnd
+    % Education
+    \section{\textbf{Education}}
+\resumeSubHeadingListStart
+  \resumeSubheading
+    {ESPRIT School of Engineering}{Tunis, Tunisia}
+    {Engineering Degree in Computer Science (M.Eng. equivalent)}{09/2022 – 06/2025}
+  \resumeSubheading
+    {Hochschule Schmalkalden}{Schmalkalden, Germany}
+    {Exchange Semester – Master in Computer Science}{10/2024 – 03/2026}
+  \resumeSubheading
+    {Preparatory Institute for Engineering Studies}{Tunisia}
+    {Intensive Mathematics, Physics \& Computer Science}{09/2020 – 06/2022}
+\resumeSubHeadingListEnd
+
+
+    
+% Technical Skills
+\section{\textbf{Technical Skills}}
+\resumeItemListStart
+\item{\textbf{Languages}: Python, TypeScript, JavaScript, Java, SQL, HTML/CSS}
+\vspace{2mm}
+\item{\textbf{Frameworks \& Libraries}: React, Node.js, NestJS, Django, FastAPI, Spring Boot, PyQt5, Express.js}
+\vspace{2mm}
+\item{\textbf{DevOps \& Cloud}: AWS (EC2, S3, Lambda, CodePipeline, CloudWatch), Docker, Jenkins, GitLab CI/CD, Git}
+\vspace{2mm}
+\item{\textbf{Databases}: PostgreSQL, MySQL, MongoDB, Redis}
+\vspace{2mm}
+\item{\textbf{AI/ML Tools}: OpenAI API, Gemini API, Hugging Face Transformers, GitHub Copilot, Prompt Engineering}
+\vspace{2mm}
+\item{\textbf{Tools \& Practices}: Jira, Postman, Swagger, Agile/Scrum, REST API Design, TDD, Code Review}
+\vspace{2mm}
+\item{\textbf{Architecture}: Microservices, Event-Driven Systems, MVC, Client-Server}
+\resumeItemListEnd
+    
+% Experience
+\section{\textbf{Professional Experience}}
+\resumeSubHeadingListStart
+\resumeSubheading
+  {Rocket Factory Augsburg (RFA)}{Augsburg, Germany}
+  {Software Engineer – Avionics Systems}{06/2025 – Present}
+  \resumeItemListStart
+    \item{Architected vehicle parameter management platform using \textbf{FastAPI} and \textbf{PyQt5}, serving cross-functional engineering teams with real-time data validation and version control integration.}
+    \item{Engineered validation system for P\&ID diagrams, cross-referencing electrical schematics with KiCad designs to ensure consistency across 500+ system components, eliminating manual verification errors.}
+    \item{Optimized parameter loading performance by 20\% through intelligent prefetch mechanism that preloads data during idle CPU cycles, improving engineer productivity.}
+    \item{Automated GitLab CI/CD pipeline to generate build artifacts for avionics teams, reducing deployment cycles from hours to minutes and eliminating manual packaging errors.}
+    \item{Implemented usage analytics dashboard providing visibility into parameter access patterns, enabling data-driven optimization of system architecture.}
+    \item{Established code quality standards through pre-commit hooks, automated testing (unit + integration), and systematic PR review process, achieving 85\%+ test coverage.}
+  \resumeItemListEnd
+
+\resumeSubheading
+  {Happy Nation GmbH}{Munich, Germany}
+  {Full Stack Developer}{10/2024 – 01/2025}
+  \resumeItemListStart
+    \item{Developed Canvas-based digital artwork composition system generating 3,333 unique NFT passports with real-time drag-and-drop interface and automated thumbnail rendering pipeline.}
+    \item{Architected and deployed production platform on \textbf{AWS} (EC2, S3, CloudWatch, CodePipeline) with automated CI/CD, achieving 98.5\% uptime SLA and sub-200ms API response times.}
+    \item{Built reusable React component library and integrated Brevo API for newsletter management with \textbf{Redis caching} layer, reducing database load by 80\%.}
+    \item{Achieved 88\% test coverage using pytest/Jest with PR-based code review workflow, ensuring WCAG 2.1 accessibility compliance for all user-facing components.}
+  \resumeItemListEnd
+
+\resumeSubheading
+  {Talan Tunisia}{Tunis, Tunisia}
+  {Software Engineering Intern – Full Stack Development}{07/2024 – 08/2024}
+  \resumeItemListStart
+    \item{Developed core HR platform features (profile management, document workflows, leave tracking) using \textbf{NestJS} and \textbf{React}, improving data accessibility through real-time analytics dashboard.}
+    \item{Implemented CI/CD pipeline with \textbf{Jenkins} and \textbf{Docker}, reducing deployment time by 30\% and enabling daily releases.}
+    \item{Collaborated in Scrum team to deliver sprint commitments, participating in daily standups, retrospectives, and sprint planning sessions.}
+  \resumeItemListEnd
+
+\resumeSubheading
+  {Talan Tunisia}{Tunis, Tunisia}
+  {Software Engineering Intern – Full Stack Development}{07/2023 – 08/2023}
+  \resumeItemListStart
+    \item{Built task and meeting management platform using \textbf{Symfony} and \textbf{Vue.js}, implementing role-based access control and real-time collaboration features.}
+    \item{Designed permission management system with granular update controls, enhancing security and team collaboration workflows.}
+  \resumeItemListEnd
+\resumeSubHeadingListEnd
+    
+% Projects
+\section{\textbf{Selected Projects}}
+\resumeSubHeadingListStart
+        \resumeSubheading
+          {Portfolio }{\href{https://oussemaamri.vercel.app/}{oussemaamri.vercel.app}}{01/2025 – 04/2025}{}
+        \resumeItemListStart
+          \resumeItem{Tech Stack:}{React, Express.js, Docker, AWS (EC2, S3, Lambda, CodePipeline)}
+          \vspace{1mm}
+          \resumeItem{Impact:}{Built responsive portfolio with AI chat assistant for interactive visitor engagement. Implemented Docker containerization and automated AWS deployment pipeline for zero-downtime updates.}
+        \resumeItemListEnd
+        
+        \resumeSubheading
+          {MindTrack – Adaptive Learning Platform}{\href{https://github.com/Oussemamri/MindTrack-django}{GitHub}}{09/2024 – 11/2024}{}
+        \resumeItemListStart
+          \resumeItem{Tech Stack:}{Django, PostgreSQL, Bootstrap, ML algorithms}
+          \vspace{1mm}
+          \resumeItem{Impact:}{Created AI-driven quiz system with adaptive difficulty based on performance analytics, personalizing learning paths for individual users.}
+        \resumeItemListEnd
+        
+        \resumeSubheading
+          {CollaboraDoc – Real-Time Document Collaboration}{\href{https://github.com/Oussemamri/CollaboraDocFront}{GitHub}}{01/2024 – 05/2024}{}
+        \resumeItemListStart
+          \resumeItem{Tech Stack:}{React, NestJS, WebSockets, MongoDB}
+          \vspace{1mm}
+          \resumeItem{Impact:}{Engineered document management platform with version control, real-time commenting, and AI-powered content suggestions for team collaboration.}
+        \resumeItemListEnd
+\resumeSubHeadingListEnd
+    
+    % Languages
+    \section{\textbf{Languages}}
+    \resumeItemListStart
+    \item{\textbf{English}: C1 \hfill \textbf{German}: A2 \hfill \textbf{French}: C1 \hfill \textbf{Arabic}: C2 }
+    \resumeItemListEnd
+    
+    \end{document}

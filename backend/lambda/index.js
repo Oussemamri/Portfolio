@@ -41,11 +41,11 @@ exports.handler = async (event) => {
     if (path === '/api/health' && method === 'GET') {
       return handleHealth();
     }
-    
+
     if (path === '/api/chat' && method === 'POST') {
       return await handleChat(event);
     }
-    
+
     if (path === '/api/contact' && method === 'POST') {
       return handleContact(event);
     }
@@ -62,9 +62,9 @@ exports.handler = async (event) => {
     return {
       statusCode: 500,
       headers: corsHeaders,
-      body: JSON.stringify({ 
+      body: JSON.stringify({
         error: 'Internal Server Error',
-        message: error.message 
+        message: error.message
       })
     };
   }
@@ -75,8 +75,8 @@ function handleHealth() {
   return {
     statusCode: 200,
     headers: corsHeaders,
-    body: JSON.stringify({ 
-      status: 'OK', 
+    body: JSON.stringify({
+      status: 'OK',
       timestamp: new Date().toISOString(),
       service: 'portfolio-api-lambda'
     })
@@ -146,12 +146,39 @@ async function handleChat(event) {
       }
     }, postData);
 
+    // Handle rate limit errors (429)
+    if (response.statusCode === 429) {
+      console.error('Rate limit exceeded:', response.data);
+      return {
+        statusCode: 200, // Return 200 to frontend but with friendly message
+        headers: corsHeaders,
+        body: JSON.stringify({
+          message: "I'm currently experiencing high demand. Please try again in a few moments, or feel free to contact Oussema directly via the contact form below!"
+        })
+      };
+    }
+
+    // Handle other API errors
     if (response.statusCode !== 200) {
-      throw new Error(`Gemini API error: ${JSON.stringify(response.data)}`);
+      console.error('Gemini API error:', response.statusCode, response.data);
+      return {
+        statusCode: 200, // Return 200 to frontend but with friendly message
+        headers: corsHeaders,
+        body: JSON.stringify({
+          message: "I'm having a bit of trouble right now. You can reach Oussema directly through the contact form, or try asking me again in a moment!"
+        })
+      };
     }
 
     if (!response.data?.candidates?.[0]?.content?.parts?.[0]?.text) {
-      throw new Error('Invalid response from Gemini API');
+      console.error('Invalid response structure:', response.data);
+      return {
+        statusCode: 200,
+        headers: corsHeaders,
+        body: JSON.stringify({
+          message: "I couldn't generate a response. Please try rephrasing your question, or contact Oussema directly!"
+        })
+      };
     }
 
     const reply = response.data.candidates[0].content.parts[0].text;
@@ -165,14 +192,13 @@ async function handleChat(event) {
 
   } catch (error) {
     console.error('Gemini API error:', error.message);
-    
+
+    // User-friendly error message
     return {
-      statusCode: 500,
+      statusCode: 200, // Return 200 so frontend doesn't show error
       headers: corsHeaders,
-      body: JSON.stringify({ 
-        error: 'Failed to get response',
-        message: 'Sorry, I encountered an error. Please try again.',
-        details: error.message
+      body: JSON.stringify({
+        message: "I'm temporarily unavailable. Please try again later, or use the contact form to reach Oussema directly!"
       })
     };
   }
@@ -188,9 +214,9 @@ function handleContact(event) {
   return {
     statusCode: 200,
     headers: corsHeaders,
-    body: JSON.stringify({ 
+    body: JSON.stringify({
       success: true,
-      message: 'Thank you for your message! I will get back to you soon.' 
+      message: 'Thank you for your message! I will get back to you soon.'
     })
   };
 }

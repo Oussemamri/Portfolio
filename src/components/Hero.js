@@ -17,8 +17,8 @@ const Hero = () => {
             <div className="hero-container">
                 <div className="hero-text">
                     <h1>Oussema Amri</h1>
-                    <h2>Full-Stack Developer | DevOps Engineer</h2>
-                    <p>Highly motivated Computer Science student specializing in web development, DevOps, and AWS</p>
+                    <h2>Software Engineer | Full-Stack Developer</h2>
+                    <p>Based in Augsburg, Bavaria, Germany | Specializing in scalable applications, cloud architecture, and DevOps automation</p>
                     <div className="hero-buttons">
                         <a href="#projects" className="btn primary">View My Work</a>
                         <a href="#contact" className="btn secondary">Contact Me</a>
