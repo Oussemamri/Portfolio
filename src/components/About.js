@@ -9,26 +9,31 @@ const About = () => {
                 <div className="about-content">
                     <div className="about-text">
                         <p>
-                            I'm a Computer Science student currently pursuing my Master's degree at Hochschule Schmalkalden in Germany.
-                            I specialize in software development with a focus on web development, DevOps, and AWS cloud technologies.
+                            Software Engineer with 2+ years of experience building scalable full-stack applications in aerospace and fintech sectors. 
+                            Currently working at Rocket Factory Augsburg (RFA) on mission-critical avionics systems.
                         </p>
                         <p>
-                            With practical experience in developing scalable applications using React, Spring Boot, and Django,
-                            I enjoy working in Agile environments and automating CI/CD pipelines to streamline development processes.
+                            Specialized in Python, TypeScript/JavaScript, and modern cloud architectures (AWS). Track record of delivering high-performance 
+                            systems with measurable impact: 20% performance gains through optimization, 98.5% uptime for production platforms, and 80% 
+                            reduction in database load through caching strategies.
                         </p>
                         <p>
-                            I'm currently enhancing my cloud expertise by preparing for the AWS Certified Cloud Practitioner certification.
+                            Proficient in CI/CD automation, microservices design, and Agile development methodologies. Currently based in Augsburg, Bavaria, Germany.
                         </p>
                     </div>
                     <div className="education">
                         <h3>Education</h3>
                         <div className="education-item">
-                            <h4>Master's in Computer Science</h4>
-                            <p>Hochschule Schmalkalden, Germany (2024-2025)</p>
+                            <h4>Engineering Degree in Computer Science (M.Eng. equivalent)</h4>
+                            <p>ESPRIT School of Engineering, Tunisia (2022-2025)</p>
                         </div>
                         <div className="education-item">
-                            <h4>Master's in Computer Science</h4>
-                            <p>Esprit School of Engineering, Tunisia (2020-2025)</p>
+                            <h4>Exchange Semester – Master in Computer Science</h4>
+                            <p>Hochschule Schmalkalden, Germany (2024-2026)</p>
+                        </div>
+                        <div className="education-item">
+                            <h4>Preparatory Institute for Engineering Studies</h4>
+                            <p>Intensive Mathematics, Physics & Computer Science (2020-2022)</p>
                         </div>
                     </div>
                 </div>

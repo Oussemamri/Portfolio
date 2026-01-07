@@ -5,43 +5,38 @@ const Skills = () => {
     const skillCategories = [
         {
             category: 'Programming Languages',
-            skills: ['Java', 'Python', 'JavaScript', 'HTML', 'CSS', 'C'],
+            skills: ['Python', 'TypeScript', 'JavaScript', 'Java', 'SQL', 'HTML/CSS'],
             icon: 'fa-code'
         },
         {
             category: 'Frameworks & Libraries',
-            skills: ['React', 'Vue.js', 'Angular', 'NodeJS', 'NestJS', 'ExpressJS', 'Spring Boot', 'Django', '.NET'],
+            skills: ['React', 'Node.js', 'NestJS', 'Django', 'FastAPI', 'Spring Boot', 'PyQt5', 'Express.js'],
             icon: 'fa-layer-group'
         },
         {
-            category: 'Development Tools',
-            skills: ['Git', 'Jira', 'Docker', 'Vagrant', 'Postman', 'Swagger'],
-            icon: 'fa-tools'
-        },
-        {
-            category: 'IDEs & Environments',
-            skills: ['PhpStorm', 'Visual Studio Code', 'Visual Studio', 'IntelliJ IDEA'],
-            icon: 'fa-laptop-code'
-        },
-        {
-            category: 'Databases',
-            skills: ['MySQL', 'MongoDB', 'PostgreSQL'],
-            icon: 'fa-database'
-        },
-        {
-            category: 'DevOps',
-            skills: ['Jenkins', 'Prometheus', 'Grafana', 'Nexus', 'JUnit', 'Jest'],
+            category: 'DevOps & Cloud',
+            skills: ['Docker', 'Jenkins', 'GitLab CI/CD', 'Git', 'AWS (EC2, S3, Lambda, CodePipeline, CloudWatch)'],
             icon: 'fa-infinity'
         },
         {
-            category: 'AWS Services',
-            skills: [
-                'EC2', 'ECR', 'ECS', 'IAM', 'S3', 
-                'Lambda', 'CloudFormation', 'CodePipeline', 
-                'CodeBuild', 'CodeDeploy', 'AMI', 'CloudWatch',
-                'Route 53', 'RDS', 'Elastic Beanstalk'
-            ],
-            icon: 'fa-aws'
+            category: 'Databases',
+            skills: ['PostgreSQL', 'MySQL', 'MongoDB', 'Redis'],
+            icon: 'fa-database'
+        },
+        {
+            category: 'AI/ML Tools',
+            skills: ['OpenAI API', 'Gemini API', 'Hugging Face Transformers', 'GitHub Copilot', 'Prompt Engineering'],
+            icon: 'fa-robot'
+        },
+        {
+            category: 'Tools & Practices',
+            skills: ['Jira', 'Postman', 'Swagger', 'Agile/Scrum', 'REST API Design', 'TDD', 'Code Review'],
+            icon: 'fa-tools'
+        },
+        {
+            category: 'Architecture',
+            skills: ['Microservices', 'Event-Driven Systems', 'MVC', 'Client-Server'],
+            icon: 'fa-sitemap'
         }
     ];
 
