@@ -4,7 +4,7 @@ import axios from 'axios';
 import './ChatWidget.css';
 
 // Use environment variable for API URL
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+const API_URL = process.env.REACT_APP_API_URL || 'https://api.oussemaamri.com/api';
 
 const ChatWidget = () => {
   const [isOpen, setIsOpen] = useState(false);

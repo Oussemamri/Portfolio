@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import useScrollPosition from '../hooks/useScrollPosition';
 import '../assets/styles/components/header.css';
 import { scrollToElement } from '../utils/helpers';
-import ChatWidget from '../components/ChatWidget/ChatWidget'; // Add this import
+import ChatWidget from '../components/ChatWidget/ChatWidget';
+import logoImg from '../assets/images/logo_app.png';
 
 const Header = () => {
     const scrollPosition = useScrollPosition();
@@ -34,7 +34,7 @@ const Header = () => {
             top: 0,
             behavior: 'smooth'
         });
-        handleLinkClick(e);
+        setMenuOpen(false);
     };
 
     return (
@@ -43,20 +43,17 @@ const Header = () => {
                 <div className="header-container">
                     <div className="logo">
                         <a href="#home" onClick={scrollToTop}>
-                            <h1>
-                                <span className="logo-first">Oussema</span>
-                                <span className="logo-last">Amri</span>
-                            </h1>
+                            <img src={logoImg} alt="OA" className="logo-img" />
                         </a>
                     </div>
                     
                     <nav className="main-nav">
                         <ul className={`nav-links ${menuOpen ? 'active' : ''}`}>
                             <li><a href="#home" onClick={scrollToTop} className="nav-link">Home</a></li>
-                            <li><a href="#about" onClick={handleLinkClick} className="nav-link">About</a></li>
+                            <li><a href="#skills" onClick={handleLinkClick} className="nav-link">Skills</a></li>
                             <li><a href="#experience" onClick={handleLinkClick} className="nav-link">Experience</a></li>
                             <li><a href="#projects" onClick={handleLinkClick} className="nav-link">Work</a></li>
-                            <li><a href="#skills" onClick={handleLinkClick} className="nav-link">Skills</a></li>
+                            <li><a href="#about" onClick={handleLinkClick} className="nav-link">About</a></li>
                             <li><a href="#contact" onClick={handleLinkClick} className="nav-link">Contact</a></li>
                             <li>
                                 <button 

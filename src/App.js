@@ -5,21 +5,17 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import Contact from './pages/Contact';
-import ChatWidget from './components/ChatWidget/ChatWidget'; // Import the ChatWidget
 
 function App() {
   return (
     <Router>
       <div className="App">
         <Header />
-        <main>
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/contact" component={Contact} />
-          </Switch>
-        </main>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/contact" component={Contact} />
+        </Switch>
         <Footer />
-        <ChatWidget /> {/* Add the ChatWidget here */}
         <Toaster 
           position="top-right"
           toastOptions={{

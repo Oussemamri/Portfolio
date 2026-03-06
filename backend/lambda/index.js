@@ -1,13 +1,17 @@
 const https = require('https');
 
 // System prompt for the chatbot
-const SYSTEM_PROMPT = `You are an AI assistant for Oussema Amri's portfolio website. You help visitors learn about Oussema's:
+const SYSTEM_PROMPT = `You are an AI assistant for Oussema Amri's portfolio website. You help visitors learn about Oussema's background and skills.
 
-Skills: JavaScript, React, Node.js, MongoDB, Express, Docker, AWS, DevOps, Full-Stack Development
-Experience: Full-stack developer with expertise in building scalable web applications
-Projects: Portfolio websites, e-commerce platforms, AI-powered applications
-Education: Computer Science background
-Interests: Web development, cloud infrastructure, automation, AI/ML
+About Oussema:
+- Current Role: Full Stack Software Intern at Rocket Factory Augsburg (RFA), Munich, Germany
+- Languages: Python, TypeScript, JavaScript, SQL
+- Frameworks: React, FastAPI, Django, NestJS, Spring Boot, Node.js
+- Cloud & DevOps: AWS, Docker, Jenkins, GitLab CI/CD
+- Databases: PostgreSQL, MongoDB, Redis
+- AI/ML: OpenAI/Gemini APIs, Hugging Face
+- Education: ESPRIT School of Engineering (Tunisia) + exchange semester at Hochschule Schmalkalden (Germany)
+- Based in: Munich, Germany
 
 Be helpful, professional, and concise (max 2-3 sentences). Encourage visitors to check out different sections of the portfolio or contact Oussema for opportunities.`;
 
@@ -104,7 +108,7 @@ function httpsRequest(url, options, postData) {
   });
 }
 
-// Chat handler - Gemini API integration
+// Chat handler - Groq API integration
 async function handleChat(event) {
   const body = JSON.parse(event.body || '{}');
   const { message } = body;
@@ -119,28 +123,23 @@ async function handleChat(event) {
 
   console.log('Received message:', message);
 
-  // Create the full prompt
-  const fullPrompt = `${SYSTEM_PROMPT}\n\nUser: ${message}\nAssistant:`;
-
-  const apiKey = process.env.GEMINI_API_KEY;
-  const apiUrl = `https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+  const apiKey = process.env.GROQ_API_KEY;
 
   const postData = JSON.stringify({
-    contents: [{
-      parts: [{
-        text: fullPrompt
-      }]
-    }],
-    generationConfig: {
-      temperature: 0.7,
-      maxOutputTokens: 200,
-    }
+    model: 'llama-3.3-70b-versatile',
+    messages: [
+      { role: 'system', content: SYSTEM_PROMPT },
+      { role: 'user', content: message }
+    ],
+    temperature: 0.7,
+    max_tokens: 200
   });
 
   try {
-    const response = await httpsRequest(apiUrl, {
+    const response = await httpsRequest('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: {
+        'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
         'Content-Length': Buffer.byteLength(postData)
       }
@@ -150,7 +149,7 @@ async function handleChat(event) {
     if (response.statusCode === 429) {
       console.error('Rate limit exceeded:', response.data);
       return {
-        statusCode: 200, // Return 200 to frontend but with friendly message
+        statusCode: 200,
         headers: corsHeaders,
         body: JSON.stringify({
           message: "I'm currently experiencing high demand. Please try again in a few moments, or feel free to contact Oussema directly via the contact form below!"
@@ -160,9 +159,9 @@ async function handleChat(event) {
 
     // Handle other API errors
     if (response.statusCode !== 200) {
-      console.error('Gemini API error:', response.statusCode, response.data);
+      console.error('Groq API error:', response.statusCode, response.data);
       return {
-        statusCode: 200, // Return 200 to frontend but with friendly message
+        statusCode: 200,
         headers: corsHeaders,
         body: JSON.stringify({
           message: "I'm having a bit of trouble right now. You can reach Oussema directly through the contact form, or try asking me again in a moment!"
@@ -170,7 +169,7 @@ async function handleChat(event) {
       };
     }
 
-    if (!response.data?.candidates?.[0]?.content?.parts?.[0]?.text) {
+    if (!response.data?.choices?.[0]?.message?.content) {
       console.error('Invalid response structure:', response.data);
       return {
         statusCode: 200,
@@ -181,7 +180,7 @@ async function handleChat(event) {
       };
     }
 
-    const reply = response.data.candidates[0].content.parts[0].text;
+    const reply = response.data.choices[0].message.content;
     console.log('AI response:', reply);
 
     return {
@@ -191,11 +190,10 @@ async function handleChat(event) {
     };
 
   } catch (error) {
-    console.error('Gemini API error:', error.message);
+    console.error('Groq API error:', error.message);
 
-    // User-friendly error message
     return {
-      statusCode: 200, // Return 200 so frontend doesn't show error
+      statusCode: 200,
       headers: corsHeaders,
       body: JSON.stringify({
         message: "I'm temporarily unavailable. Please try again later, or use the contact form to reach Oussema directly!"

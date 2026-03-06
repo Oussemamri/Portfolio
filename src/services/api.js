@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Use environment variable for API URL or default to localhost in development
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+const API_URL = process.env.REACT_APP_API_URL || 'https://api.oussemaamri.com/api';
 
 // Contact form submission
 export const submitContactForm = async (formData) => {

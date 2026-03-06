@@ -134,7 +134,6 @@ const Projects = () => {
                                 )}
                             </>
                         }
-                        link={project.link}
                     />
                 ))}
             </div>
