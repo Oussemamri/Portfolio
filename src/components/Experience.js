@@ -13,16 +13,16 @@ const Experience = () => {
                         <div className="experience-content">
                             <div className="experience-header">
                                 <h3>Rocket Factory Augsburg (RFA)</h3>
-                                <span className="experience-date">June 2025 - Present</span>
+                                <span className="experience-date">February 2025 - Present</span>
                             </div>
-                            <h4 className="experience-title">Software Engineer – Avionics Systems</h4>
+                            <h4 className="experience-title">Full Stack Software Intern – Software Development</h4>
                             <ul className="experience-description">
-                                <li>Architected vehicle parameter management platform using <strong>FastAPI</strong> and <strong>PyQt5</strong>, serving cross-functional engineering teams with real-time data validation and version control integration.</li>
-                                <li>Engineered validation system for P&ID diagrams, cross-referencing electrical schematics with KiCad designs to ensure consistency across 500+ system components, eliminating manual verification errors.</li>
-                                <li>Optimized parameter loading performance by <strong>20%</strong> through intelligent prefetch mechanism that preloads data during idle CPU cycles, improving engineer productivity.</li>
-                                <li>Automated GitLab CI/CD pipeline to generate build artifacts for avionics teams, reducing deployment cycles from hours to minutes and eliminating manual packaging errors.</li>
-                                <li>Implemented usage analytics dashboard providing visibility into parameter access patterns, enabling data-driven optimization of system architecture.</li>
-                                <li>Established code quality standards through pre-commit hooks, automated testing (unit + integration), and systematic PR review process, achieving <strong>85%+ test coverage</strong>.</li>
+                                <li>Built a Vehicle Parameter Management Platform (<strong>React/FastAPI/PostgreSQL</strong>) enabling 15+ engineering teams to configure, review, and collaborate on rocket vehicle parameters with real-time feedback loops.</li>
+                                <li>Developed an interactive P&ID Visualization Dashboard for avionics diagrams, enabling engineers to navigate complex schematics, create revisions autonomously, and track KiCAD file changes with automated diff detection.</li>
+                                <li>Designed a Python-based validation engine reconciling 500+ electrical schema components with business logic rules, eliminating manual verification errors.</li>
+                                <li>Reduced dashboard load time by <strong>20%</strong> through React code-splitting with React.lazy(), component memoization with useMemo/useCallback, and TanStack Query for server-state caching.</li>
+                                <li>Configured GitLab CI pipelines with <strong>Docker</strong> containerization for automated testing and deployment, integrated pytest unit tests and pre-commit hooks for code quality enforcement.</li>
+                                <li>Achieved <strong>85%+ code coverage</strong> using pytest (backend) and Playwright (E2E frontend tests), implementing comprehensive test suites for parameter validation logic and UI workflows.</li>
                             </ul>
                         </div>
                     </div>
@@ -31,45 +31,45 @@ const Experience = () => {
                     <div className="experience-item">
                         <div className="experience-content">
                             <div className="experience-header">
-                                <h3>Happy Nation</h3>
-                                <span className="experience-date">October 2024 - January 2025</span>
+                                <h3>Happy Nation GmbH</h3>
+                                <span className="experience-date">June 2024 - December 2024</span>
                             </div>
-                            <h4 className="experience-title">Full Stack Developer</h4>
+                            <h4 className="experience-title">Full Stack Developer (Intern)</h4>
                             <ul className="experience-description">
-                                <li>Developed Canvas-based digital artwork composition system generating 3,333 unique NFT passports with real-time drag-and-drop interface and automated thumbnail rendering pipeline.</li>
-                                <li>Architected and deployed production platform on <strong>AWS</strong> (EC2, S3, CloudWatch, CodePipeline) with automated CI/CD, achieving <strong>98.5% uptime SLA</strong> and sub-200ms API response times.</li>
-                                <li>Built reusable React component library and integrated Brevo API for newsletter management with <strong>Redis caching</strong> layer, reducing database load by <strong>80%</strong>.</li>
-                                <li>Achieved <strong>88% test coverage</strong> using pytest/Jest with PR-based code review workflow, ensuring WCAG 2.1 accessibility compliance for all user-facing components.</li>
+                                <li>Built a digital identity platform (<strong>React/Django/PostgreSQL</strong>) unifying community members through personalized NFT passports, featuring responsive interface with dynamic stamp collection, event ticketing, and purchasable art marketplace.</li>
+                                <li>Architected and deployed production infrastructure on <strong>AWS</strong> (EC2, S3, CloudWatch, CodePipeline) with automated CI/CD workflows, achieving <strong>98.5% uptime</strong> and API response times under 200ms.</li>
+                                <li>Built reusable React component library and integrated Brevo API for newsletter management with <strong>Redis</strong> caching layer, reducing PostgreSQL database queries by <strong>80%</strong>.</li>
+                                <li>Achieved <strong>88% test coverage</strong> using pytest (backend) and Jest (frontend) with PR-based code reviews, implementing accessibility features following WCAG 2.1 guidelines.</li>
                             </ul>
                         </div>
                     </div>
 
-                    {/* Existing Talan Experience */}
+                    {/* Talan - NestJS internship */}
                     <div className="experience-item">
                         <div className="experience-content">
                             <div className="experience-header">
-                                <h3>Talan Tunisie</h3>
-                                <span className="experience-date">July 2024 - August 2024</span>
+                                <h3>Talan Tunisia</h3>
+                                <span className="experience-date">July 2023 - September 2023</span>
                             </div>
                             <h4 className="experience-title">Software Engineering Intern – Full Stack Development</h4>
                             <ul className="experience-description">
-                                <li>Developed core HR platform features (profile management, document workflows, leave tracking) using <strong>NestJS</strong> and <strong>React</strong>, improving data accessibility through real-time analytics dashboard.</li>
-                                <li>Implemented CI/CD pipeline with <strong>Jenkins</strong> and <strong>Docker</strong>, reducing deployment time by <strong>30%</strong> and enabling daily releases.</li>
-                                <li>Collaborated in Scrum team to deliver sprint commitments, participating in daily standups, retrospectives, and sprint planning sessions.</li>
+                                <li>Developed HR platform features (profile management, document workflows, leave tracking) using <strong>NestJS/React/PostgreSQL</strong>, delivering a real-time analytics dashboard for workforce data visualization.</li>
+                                <li>Configured <strong>Jenkins</strong> CI/CD pipeline with <strong>Docker</strong> containerization, reducing deployment time by <strong>30%</strong> and enabling automated daily production releases.</li>
                             </ul>
                         </div>
                     </div>
                     
+                    {/* Talan - Symfony internship */}
                     <div className="experience-item">
                         <div className="experience-content">
                             <div className="experience-header">
-                                <h3>Talan Tunisie</h3>
-                                <span className="experience-date">July 2023 - August 2023</span>
+                                <h3>Talan Tunisia</h3>
+                                <span className="experience-date">February 2023 - May 2023</span>
                             </div>
                             <h4 className="experience-title">Software Engineering Intern – Full Stack Development</h4>
                             <ul className="experience-description">
-                                <li>Built task and meeting management platform using <strong>Symfony</strong> and <strong>Vue.js</strong>, implementing role-based access control and real-time collaboration features.</li>
-                                <li>Designed permission management system with granular update controls, enhancing security and team collaboration workflows.</li>
+                                <li>Built a task and meeting management platform using <strong>Symfony/Vue.js/MySQL</strong>, implementing Role-Based Access Control (RBAC) and real-time collaboration features for team coordination.</li>
+                                <li>Designed granular permission management system with role-specific access controls, enhancing security for multi-user workflows and document sharing.</li>
                             </ul>
                         </div>
                     </div>

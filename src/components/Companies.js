@@ -1,25 +1,28 @@
 import React from 'react';
 import '../assets/styles/components/companies.css';
+import rfaLogo from '../assets/images/companies/rfa.png';
+import happyNationLogo from '../assets/images/companies/happy-nation.png';
+import talanLogo from '../assets/images/companies/talan.png';
 
 const Companies = () => {
     const companies = [
         {
             name: 'Rocket Factory Augsburg',
             role: 'Software Engineer',
-            logo: require('../assets/images/companies/rfa.png'),
-            website: 'https://www.rocketfactory.de/'
+            logo: rfaLogo,
+            website: 'https://www.rfa.space/'
         },
         {
             name: 'Happy Nation',
             role: 'Full Stack Developer',
-            logo: require('../assets/images/companies/happy-nation.png'),
-            website: 'https://happynation.com/'
+            logo: happyNationLogo,
+            website: 'https://citizen.happynation.global/home'
         },
         {
             name: 'Talan',
             role: 'Software Engineering Intern',
-            logo: require('../assets/images/companies/talan.png'),
-            website: 'https://talan.com/'
+            logo: talanLogo,
+            website: 'https://www.talan.com/global/en'
         }
     ];
 

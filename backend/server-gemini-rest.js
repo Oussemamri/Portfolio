@@ -13,18 +13,25 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// System prompt for the chatbot
-const SYSTEM_PROMPT = `You are an AI assistant for Oussema Amri's portfolio website. You help visitors learn about Oussema's:
+// Groq API key (set GROQ_API_KEY in your .env file or environment)
+const GROQ_API_KEY = process.env.GROQ_API_KEY;
 
-Skills: JavaScript, React, Node.js, MongoDB, Express, Docker, AWS, DevOps, Full-Stack Development
-Experience: Full-stack developer with expertise in building scalable web applications
-Projects: Portfolio websites, e-commerce platforms, AI-powered applications
-Education: Computer Science background
-Interests: Web development, cloud infrastructure, automation, AI/ML
+// System prompt for the chatbot
+const SYSTEM_PROMPT = `You are an AI assistant for Oussema Amri's portfolio website. You help visitors learn about Oussema's background and skills.
+
+About Oussema:
+- Current Role: Full Stack Software Intern at Rocket Factory Augsburg (RFA), Munich, Germany
+- Languages: Python, TypeScript, JavaScript, SQL
+- Frameworks: React, FastAPI, Django, NestJS, Spring Boot, Node.js
+- Cloud & DevOps: AWS, Docker, Jenkins, GitLab CI/CD
+- Databases: PostgreSQL, MongoDB, Redis
+- AI/ML: OpenAI/Gemini APIs, Hugging Face
+- Education: ESPRIT School of Engineering (Tunisia) + exchange semester at Hochschule Schmalkalden (Germany)
+- Based in: Munich, Germany
 
 Be helpful, professional, and concise (max 2-3 sentences). Encourage visitors to check out different sections of the portfolio or contact Oussema for opportunities.`;
 
-// Chat endpoint using direct Gemini REST API
+// Chat endpoint using Groq REST API
 app.post('/api/chat', async (req, res) => {
   try {
     const { message } = req.body;
@@ -35,31 +42,29 @@ app.post('/api/chat', async (req, res) => {
 
     console.log('Received message:', message);
 
-    // Create the full prompt
-    const fullPrompt = `${SYSTEM_PROMPT}\n\nUser: ${message}\nAssistant:`;
-
-    // Call Gemini API directly via REST - using v1 API with gemini-2.5-flash
-    const apiUrl = `https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`;
-    
-    const response = await axios.post(apiUrl, {
-      contents: [{
-        parts: [{
-          text: fullPrompt
-        }]
-      }],
-      generationConfig: {
-        temperature: 0.7,
-        maxOutputTokens: 200,
+    // Call Groq API (OpenAI-compatible)
+    const response = await axios.post('https://api.groq.com/openai/v1/chat/completions', {
+      model: 'llama-3.3-70b-versatile',
+      messages: [
+        { role: 'system', content: SYSTEM_PROMPT },
+        { role: 'user', content: message }
+      ],
+      temperature: 0.7,
+      max_tokens: 200
+    }, {
+      headers: {
+        'Authorization': `Bearer ${GROQ_API_KEY}`,
+        'Content-Type': 'application/json'
       }
     });
 
     // Check if response has the expected structure
-    if (!response.data || !response.data.candidates || !response.data.candidates[0]) {
+    if (!response.data || !response.data.choices || !response.data.choices[0]) {
       console.error('Unexpected API response structure:', JSON.stringify(response.data, null, 2));
-      throw new Error('Invalid response from Gemini API');
+      throw new Error('Invalid response from Groq API');
     }
 
-    const reply = response.data.candidates[0].content.parts[0].text;
+    const reply = response.data.choices[0].message.content;
     
     console.log('AI response:', reply);
 
@@ -107,5 +112,5 @@ app.get('/api/health', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
   console.log(`API endpoint: http://localhost:${PORT}/api/chat`);
-  console.log('Using Gemini 2.5 Flash via REST API');
+  console.log('Using Groq (Llama 3.3 70B)');
 });
