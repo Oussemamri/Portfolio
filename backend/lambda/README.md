@@ -2,7 +2,7 @@
 
 ## Overview
 This Lambda function handles the portfolio's API endpoints:
-- `POST /api/chat` - AI chatbot powered by Gemini
+- `POST /api/chat` - AI chatbot powered by Groq (Llama)
 - `POST /api/contact` - Contact form submissions
 - `GET /api/health` - Health check
 
@@ -49,7 +49,7 @@ aws lambda create-function \
 ```bash
 aws lambda update-function-configuration \
   --function-name portfolio-chatbot-api \
-  --environment "Variables={GEMINI_API_KEY=your_api_key_here}"
+  --environment "Variables={GROQ_API_KEY=your_api_key_here}"
 ```
 
 ### 5. Update Function Code
@@ -88,7 +88,7 @@ Access-Control-Allow-Methods: GET, POST, OPTIONS
 
 | Variable | Description |
 |----------|-------------|
-| `GEMINI_API_KEY` | Google Gemini API key |
+| `GROQ_API_KEY` | Groq API key for chat completions |
 
 ## Testing
 
@@ -117,7 +117,7 @@ cat response.json
 
 - **Architecture:** arm64 (20% cheaper than x86)
 - **Memory:** 256MB (sufficient for this use case)
-- **Timeout:** 30s (allows for Gemini API response time)
+- **Timeout:** 30s (allows for Groq API response time)
 - **Free Tier:** 1M requests/month FREE
 
 ## Logs

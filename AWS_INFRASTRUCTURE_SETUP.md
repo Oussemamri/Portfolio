@@ -134,7 +134,7 @@
 ### Environment Variables
 | Key | Value |
 |-----|-------|
-| `GEMINI_API_KEY` | (Your Google Gemini API key) |
+| `GROQ_API_KEY` | (Your Groq API key) |
 
 ### Endpoints Handled
 | Method | Path | Description |
@@ -312,7 +312,7 @@ ns-1648.awsdns-14.co.uk
 - [x] SSL certificate (eu-north-1) for API
 - [x] Custom domain: `api.oussemaamri.com`
 - [x] Route 53 A record for API
-- [x] GEMINI_API_KEY configured
+- [x] GROQ_API_KEY configured
 
 ### URLs
 - [x] https://oussemaamri.com ✅
