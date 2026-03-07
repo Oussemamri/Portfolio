@@ -46,7 +46,7 @@ const Hero = () => {
                         <div className="hero-image-blob">
                             <img
                                 src={heroPhoto}
-                                alt="Photo of Oussema Amri"
+                                alt="Oussema Amri"
                             />
                         </div>
                     </div>
