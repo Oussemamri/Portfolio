@@ -53,8 +53,7 @@ const ChatWidget = () => {
     setIsLoading(true);
 
     try {
-      // Call your backend API
-      console.log('Sending message to API:', `${API_URL}/chat`);
+      // Call backend API
       const response = await axios.post(`${API_URL}/chat`, {
         message: inputValue
       });

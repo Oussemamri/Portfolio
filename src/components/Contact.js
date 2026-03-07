@@ -1,18 +1,13 @@
-// EmailJS Setup Instructions:
-// 1. Go to https://www.emailjs.com/ and create a free account
-// 2. Create an Email Service (connect your Gmail: YOUR_CONTACT_EMAIL)
-// 3. Create an Email Template with variables: {{from_name}}, {{from_email}}, {{message}}
-// 4. Replace YOUR_SERVICE_ID, YOUR_TEMPLATE_ID, and YOUR_PUBLIC_KEY below
-
 import React, { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import toast from 'react-hot-toast';
 import '../assets/styles/components/contact.css';
 import { FaPaperPlane, FaMapMarkerAlt, FaGithub, FaLinkedin, FaCopy, FaCheck } from 'react-icons/fa';
 
-const EMAILJS_SERVICE_ID = 'YOUR_EMAILJS_SERVICE_ID';
-const EMAILJS_TEMPLATE_ID = 'YOUR_EMAILJS_TEMPLATE_ID';
-const EMAILJS_PUBLIC_KEY = 'YOUR_EMAILJS_PUBLIC_KEY';
+const EMAILJS_SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICE_ID;
+const EMAILJS_TEMPLATE_ID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID;
+const EMAILJS_PUBLIC_KEY = process.env.REACT_APP_EMAILJS_PUBLIC_KEY;
+const CONTACT_EMAIL = process.env.REACT_APP_CONTACT_EMAIL;
 
 const Contact = () => {
     const formRef = useRef();
@@ -21,6 +16,12 @@ const Contact = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
+            toast.error('Contact form is not configured yet. Please use the email copy button below.');
+            return;
+        }
+
         setSending(true);
 
         emailjs
@@ -40,14 +41,21 @@ const Contact = () => {
     };
 
     const copyEmail = () => {
-        navigator.clipboard.writeText('YOUR_CONTACT_EMAIL').then(() => {
+        if (!CONTACT_EMAIL) {
+            toast.error('Contact email is not configured yet.');
+            return;
+        }
+
+        const emailToCopy = CONTACT_EMAIL;
+
+        navigator.clipboard.writeText(emailToCopy).then(() => {
             setCopied(true);
             toast.success('Email copied to clipboard!');
             setTimeout(() => setCopied(false), 2000);
         }).catch(() => {
             // Fallback for older browsers
             const textArea = document.createElement('textarea');
-            textArea.value = 'YOUR_CONTACT_EMAIL';
+            textArea.value = emailToCopy;
             document.body.appendChild(textArea);
             textArea.select();
             document.execCommand('copy');
