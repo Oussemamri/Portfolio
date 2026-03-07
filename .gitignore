@@ -2,6 +2,14 @@ node_modules
 .git
 .env.local
 .env
+.env.development
+.env.production
 nul
 backend/.env
 backend/node_modules
+build/
+*.log
+*.pem
+*.key
+.DS_Store
+lambda-deploy.zip

@@ -1,155 +1,344 @@
+/* ===== HERO SECTION ===== */
 .hero {
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    background-color: #282c34;
-    color: white;
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed; /* Creates parallax effect */
+    background: #ffffff;
+    color: hsl(210 8% 14%);
     position: relative;
-    margin-bottom: 0;
     overflow: hidden;
     z-index: 1;
+    padding: 0;
+    font-family: 'Manrope', sans-serif, system-ui;
 }
 
-/* Dark overlay for better text visibility */
-.hero:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
+.hero-container {
+    display: flex;
+    align-items: center;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.3); /* Changed from 0.6 to 0.3 */
-    z-index: 1;
+    max-width: 1150px;
+    margin: 0 auto;
+    padding: 0 2.5rem;
 }
 
-/* Create a gradient transition at the bottom of the hero section */
-.hero:after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 150px;
-    background: linear-gradient(to top, white, rgba(255, 255, 255, 0));
-    z-index: 2;
-    opacity: 0.85; /* Adjust for desired effect */
-}
-
-.hero-content {
-    max-width: 800px;
-    padding: 30px 40px;
-    border-radius: 10px;
-    background-color: rgba(0, 0, 0, 0.2); /* Subtle background for content */
-    backdrop-filter: blur(5px); /* Slight blur effect */
-    -webkit-backdrop-filter: blur(5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    position: relative;
-    z-index: 3; /* Above overlay and gradient */
-    color: white;
-    animation: fadeIn 1.5s ease-out;
-    will-change: transform, opacity; /* Optimization for animation */
-}
-
-/* Remove the old page-transition element */
-.page-transition {
-    display: none;
-}
-
-/* Update smooth scrolling behavior */
-html {
-    scroll-behavior: smooth;
-    scroll-snap-type: none; /* Removing scroll snap which can cause getting stuck */
-    overflow-y: auto; /* Ensure page is scrollable */
-}
-
-/* Remove scroll snap for sections */
-.hero, .about-section {
-    scroll-snap-align: none; /* Remove scroll snap alignment */
+/* ===== LEFT SIDE - Text ===== */
+.hero-text {
+    flex: 1 1 55%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding-right: 4rem;
+    z-index: 10;
 }
 
 .hero h1 {
-    font-size: 3.5rem;
-    margin-bottom: 10px;
-    animation: fadeInDown 1s;
-    color: white; /* Explicitly set white color */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Stronger text shadow */
+    font-family: 'Manrope', sans-serif;
+    font-size: 4rem;
+    font-weight: 800;
+    margin: 0 0 0.4rem 0;
+    line-height: 1.1;
+    color: hsl(210 8% 14%);
+    background: none;
+    -webkit-text-fill-color: unset;
+    animation: fadeInDown 1s ease-out;
 }
 
 .hero h2 {
-    font-size: 1.8rem;
-    margin-bottom: 20px;
+    font-family: 'JetBrains Mono', 'Manrope', monospace;
+    font-size: 1.25rem;
     font-weight: 400;
-    animation: fadeInDown 1s 0.2s;
-    animation-fill-mode: both;
-    color: white; /* Explicitly set white color */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Stronger text shadow */
+    margin: 0 0 0.75rem 0;
+    color: hsl(210 8% 40%);
+    letter-spacing: 0;
+    animation: fadeInDown 1s 0.15s ease-out backwards;
 }
 
 .hero p {
-    font-size: 1.2rem;
-    margin-bottom: 30px;
+    font-size: 1rem;
+    margin: 0 0 1.5rem 0;
     line-height: 1.6;
-    animation: fadeInDown 1s 0.4s;
-    animation-fill-mode: both;
-    color: white; /* Explicitly set white color */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Stronger text shadow */
+    color: hsl(215 14% 50%);
+    max-width: 460px;
+    animation: fadeInDown 1s 0.3s ease-out backwards;
 }
 
+/* ===== Social icons ===== */
+.hero-socials {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1.75rem;
+    animation: fadeInDown 1s 0.45s ease-out backwards;
+}
+
+.hero-socials a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid hsl(220 10% 88%);
+    color: hsl(210 8% 30%);
+    background: transparent;
+    transition: all 0.25s ease;
+}
+
+.hero-socials a:hover {
+    border-color: hsl(210 8% 14%);
+    color: hsl(210 8% 14%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* ===== Buttons ===== */
 .hero-buttons {
-    animation: fadeInUp 1s 0.6s;
-    animation-fill-mode: both;
+    display: flex;
+    gap: 1rem;
+    animation: fadeInUp 1s 0.6s ease-out backwards;
 }
-
-/* Add or update these styles to be more specific and prevent conflicts */
 
 .hero-buttons .btn {
-    display: inline-block;
-    padding: 12px 24px;
-    border-radius: 30px;
-    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    border-radius: 0.5rem;
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.95rem;
     font-weight: 600;
     text-decoration: none;
-    text-align: center;
+    transition: all 0.25s ease;
+    letter-spacing: 0;
+    text-transform: none;
+    position: relative;
+    overflow: hidden;
     cursor: pointer;
-    transition: all 0.3s ease;
-    margin: 0 10px;
-    min-width: 150px;
-    max-width: 200px;
 }
 
 .hero-buttons .btn.primary {
-    background-color: #2196F3;
-    color: white;
-    border: none;
-    box-shadow: 0 4px 10px rgba(33, 150, 243, 0.3);
-}
-
-.hero-buttons .btn.secondary {
-    background-color: transparent;
-    color: white;
-    border: 2px solid white;
+    background: hsl(210 8% 8%);
+    color: #fff;
+    border: 1px solid hsl(210 8% 8%);
 }
 
 .hero-buttons .btn.primary:hover {
-    background-color: #1976D2;
-    transform: translateY(-3px);
-    box-shadow: 0 6px 15px rgba(33, 150, 243, 0.4);
+    background: hsl(210 8% 18%);
+    border-color: hsl(210 8% 18%);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+.hero-buttons .btn.secondary {
+    background: transparent;
+    color: hsl(210 8% 25%);
+    border: 1px solid hsl(220 10% 85%);
 }
 
 .hero-buttons .btn.secondary:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    transform: translateY(-3px);
+    color: hsl(210 8% 14%);
+    border-color: hsl(210 8% 40%);
+    transform: translateY(-2px);
 }
 
+/* ===== RIGHT SIDE - Blob Photo ===== */
+.hero-visual {
+    flex: 1 1 45%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 5;
+}
+
+/* Slide-up-blur entrance wrapper */
+.hero-animated-element {
+    will-change: transform, opacity, filter;
+    animation: slideUpBlur 2000ms cubic-bezier(.16, 1, .3, 1) forwards;
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(40px);
+}
+
+/* Morphing blob container */
+.hero-image-blob {
+    width: 420px;
+    height: 420px;
+    flex-shrink: 0;
+    overflow: hidden;
+    position: relative;
+    border-radius: 62% 47% 82% 35% / 45% 45% 80% 66%;
+    background: #ece9e5;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    will-change: border-radius, transform;
+    animation: animateBlob 8s ease-in-out infinite;
+    transition: transform 0.4s ease;
+}
+
+.hero-image-blob:hover {
+    transform: scale(1.03);
+}
+
+.hero-image-blob img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    pointer-events: none;
+    border-radius: 50%;
+    margin: auto;
+    position: absolute;
+    left: 50%;
+    animation: photoBounce 5s ease-in-out infinite;
+}
+
+@keyframes photoBounce {
+    0%, 100% {
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+    50% {
+        top: 50%;
+        transform: translate(-50%, -57%);
+    }
+}
+
+/* ===== SCROLL INDICATOR ===== */
+.scroll-indicator {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    opacity: 0;
+    animation: scrollIndicatorFadeIn 1s 1.4s ease-out forwards;
+    z-index: 20;
+    transition: transform 0.2s ease;
+    user-select: none;
+}
+
+.scroll-indicator:hover {
+    transform: translateX(-50%) translateY(-3px);
+}
+
+.scroll-indicator span {
+    font-size: 0.7rem;
+    font-family: 'JetBrains Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    color: hsl(215 14% 55%);
+    font-weight: 500;
+}
+
+/* Mouse icon body */
+.scroll-indicator .mouse {
+    width: 22px;
+    height: 34px;
+    border: 2px solid hsl(215 14% 65%);
+    border-radius: 11px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding-top: 5px;
+}
+
+/* Wheel inside mouse */
+.scroll-indicator .mouse::before {
+    content: '';
+    width: 3px;
+    height: 6px;
+    background: hsl(215 14% 55%);
+    border-radius: 2px;
+    animation: mouseWheel 1.6s ease-in-out infinite;
+}
+
+@keyframes mouseWheel {
+    0%, 100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    60% {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+}
+
+/* Two animated chevrons */
+.scroll-indicator .chevrons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.scroll-indicator .chevron {
+    width: 9px;
+    height: 9px;
+    border-right: 2px solid hsl(215 14% 65%);
+    border-bottom: 2px solid hsl(215 14% 65%);
+    transform: rotate(45deg);
+}
+
+.scroll-indicator .chevron:nth-child(1) {
+    animation: chevronFade 1.6s ease-in-out infinite 0s;
+}
+
+.scroll-indicator .chevron:nth-child(2) {
+    animation: chevronFade 1.6s ease-in-out infinite 0.2s;
+}
+
+@keyframes chevronFade {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+/* ===== KEYFRAMES ===== */
+
+/* Blob morphing animation */
+@keyframes animateBlob {
+    0% {
+        border-radius: 62% 47% 82% 35% / 45% 45% 80% 66%;
+    }
+    25% {
+        border-radius: 47% 62% 35% 82% / 80% 66% 45% 45%;
+    }
+    50% {
+        border-radius: 82% 35% 62% 47% / 66% 80% 45% 45%;
+    }
+    75% {
+        border-radius: 35% 82% 47% 62% / 45% 45% 66% 80%;
+    }
+    100% {
+        border-radius: 62% 47% 82% 35% / 45% 45% 80% 66%;
+    }
+}
+
+/* Slide up with blur entrance */
+@keyframes slideUpBlur {
+    0% {
+        opacity: 0;
+        filter: blur(10px);
+        transform: translateY(40px);
+    }
+    100% {
+        opacity: 1;
+        filter: blur(0px);
+        transform: translateY(0px);
+    }
+}
+
+/* Text animations */
 @keyframes fadeInDown {
     from {
         opacity: 0;
-        transform: translateY(-30px);
+        transform: translateY(-20px);
     }
     to {
         opacity: 1;
@@ -160,7 +349,7 @@ html {
 @keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(20px);
     }
     to {
         opacity: 1;
@@ -169,78 +358,164 @@ html {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
-/* Better solution for scroll indicator centering */
-.scroll-indicator {
-    position: absolute;
-    bottom: 80px; /* Positioned higher to be above the gradient */
-    left: 0;
-    right: 0; /* Add right: 0 to ensure full width centering */
-    margin: 0 auto; /* Center horizontally */
-    width: 120px; /* Fixed width */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 3;
-    color: white;
-    opacity: 0;
-    animation: fadeIn 1s forwards 2s;
-    cursor: pointer;
-    transition: transform 0.3s;
-}
-
-.scroll-indicator:hover {
-    transform: translateY(-5px); /* Removed translateX since we're using left/right/margin auto */
-}
-
-.scroll-indicator span {
-    font-size: 0.9rem;
-    margin-bottom: 10px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    font-weight: 500;
-    white-space: nowrap; /* Prevent text from wrapping */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Stronger text shadow */
-}
-
-.scroll-indicator .chevron {
-    width: 20px;
-    height: 20px;
-    border-style: solid;
-    border-width: 0 3px 3px 0;
-    display: block; /* Changed from inline-block to block */
-    transform: rotate(45deg);
-    animation: bounce 2s infinite;
-    margin: 0 auto;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Add shadow to match text */
-}
-
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
+@keyframes scrollBounce {
+    0%, 100% {
         transform: translateY(0) rotate(45deg);
+        opacity: 1;
     }
-    40% {
-        transform: translateY(-15px) rotate(45deg);
+    25% {
+        transform: translateY(-12px) rotate(45deg);
+        opacity: 0.6;
     }
-    60% {
-        transform: translateY(-7px) rotate(45deg);
+    50% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 1;
+    }
+    75% {
+        transform: translateY(-6px) rotate(45deg);
+        opacity: 0.8;
     }
 }
 
+@keyframes scrollIndicatorFadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(15px);
+    }
+    to {
+        opacity: 0.7;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+@keyframes pulseText {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* ===== RESPONSIVE ===== */
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .hero-container {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 100px 2.5rem 80px;
+        gap: 2rem;
+    }
+
+    .hero-text {
+        flex: none;
+        width: 100%;
+        padding-right: 0;
+        align-items: center;
+        text-align: center;
+        order: 2;
+    }
+
+    .hero-visual {
+        flex: none;
+        width: 100%;
+        order: 1;
+    }
+
+    .hero-image-blob {
+        width: 280px;
+        height: 280px;
+        margin: 0 auto;
+    }
+
+    .hero h1 {
+        font-size: 3rem;
+    }
+
+    .hero p {
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .hero-socials {
+        justify-content: center;
+    }
+
+    .scroll-indicator {
+        left: 50%;
+        bottom: 20px;
+    }
+}
+
+/* Mobile */
 @media (max-width: 768px) {
+    .hero-container {
+        padding: 90px 1.5rem 70px;
+        gap: 1.5rem;
+    }
+
+    .hero-image-blob {
+        width: 220px;
+        height: 220px;
+    }
+
     .hero h1 {
         font-size: 2.5rem;
     }
-    
+
     .hero h2 {
-        font-size: 1.5rem;
-    }
-    
-    .hero p {
         font-size: 1rem;
+    }
+
+    .hero p {
+        font-size: 0.95rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .hero-buttons .btn {
+        padding: 0.7rem 1.25rem;
+        font-size: 0.9rem;
+        width: 100%;
+        max-width: 220px;
+        justify-content: center;
+    }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+    .hero-container {
+        padding: 80px 1rem 60px;
+    }
+
+    .hero-image-blob {
+        width: 180px;
+        height: 180px;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero h2 {
+        font-size: 0.9rem;
     }
 }

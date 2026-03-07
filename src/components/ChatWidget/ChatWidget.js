@@ -4,15 +4,15 @@ import axios from 'axios';
 import './ChatWidget.css';
 
 // Use environment variable for API URL
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+const API_URL = process.env.REACT_APP_API_URL || 'https://api.oussemaamri.com/api';
 
 const ChatWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { 
-      id: 1, 
-      text: "Hi there! I'm Oussema's AI assistant. How can I help you today?", 
-      sender: 'bot' 
+    {
+      id: 1,
+      text: "Hi there! I'm Oussema's AI assistant. How can I help you today?",
+      sender: 'bot'
     }
   ]);
   const [inputValue, setInputValue] = useState('');
@@ -38,57 +38,51 @@ const ChatWidget = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!inputValue.trim()) return;
-    
+
     // Add user message to chat
     const userMessage = {
       id: messages.length + 1,
       text: inputValue,
       sender: 'user'
     };
-    
+
     setMessages(prev => [...prev, userMessage]);
     setInputValue('');
     setIsLoading(true);
-    
+
     try {
-      // Call your backend API
-      console.log('Sending message to API:', `${API_URL}/chat`);
-      const response = await axios.post(`${API_URL}/chat`, { 
-        message: inputValue 
+      // Call backend API
+      const response = await axios.post(`${API_URL}/chat`, {
+        message: inputValue
       });
-      
+
       // Add bot response to chat
       setMessages(prev => [
-        ...prev, 
-        { 
-          id: prev.length + 1, 
-          text: response.data.message || response.data.reply, 
-          sender: 'bot' 
+        ...prev,
+        {
+          id: prev.length + 1,
+          text: response.data.message || response.data.reply,
+          sender: 'bot'
         }
       ]);
     } catch (error) {
       console.error('Error getting AI response:', error);
-      console.error('Error response:', error.response?.data);
-      
-      let errorMessage = "Sorry, I couldn't process your request. ";
-      
+
+      // User-friendly error messages - no technical details
+      let errorMessage = "I'm having trouble connecting right now. Please try again in a moment, or use the contact form below to reach Oussema directly!";
+
       if (error.code === 'ERR_NETWORK' || error.message === 'Network Error') {
-        errorMessage += "The backend server is not reachable. Please make sure the API server is running.";
-      } else if (error.response) {
-        errorMessage += `Server error: ${error.response.status}. ${error.response.data?.details || ''}`;
-      } else {
-        errorMessage += "Please try again later.";
+        errorMessage = "I can't connect to the server right now. Please check your internet connection and try again!";
       }
-      
+
       setMessages(prev => [
-        ...prev, 
-        { 
-          id: prev.length + 1, 
-          text: errorMessage, 
-          sender: 'bot',
-          isError: true 
+        ...prev,
+        {
+          id: prev.length + 1,
+          text: errorMessage,
+          sender: 'bot'
         }
       ]);
     } finally {
@@ -105,19 +99,19 @@ const ChatWidget = () => {
               <FaRobot className="bot-icon" />
               <span>Chat with Oussema's AI</span>
             </div>
-            <button 
-              className="close-button" 
+            <button
+              className="close-button"
               onClick={toggleChat}
               aria-label="Close chat"
             >
               <FaTimes />
             </button>
           </div>
-          
+
           <div className="messages-container">
             {messages.map((message) => (
-              <div 
-                key={message.id} 
+              <div
+                key={message.id}
                 className={`message ${message.sender} ${message.isError ? 'error' : ''}`}
               >
                 {message.text}
@@ -134,7 +128,7 @@ const ChatWidget = () => {
             )}
             <div ref={messagesEndRef} />
           </div>
-          
+
           <form className="input-container" onSubmit={handleSubmit}>
             <input
               type="text"
@@ -143,8 +137,8 @@ const ChatWidget = () => {
               placeholder="Ask me anything about Oussema..."
               disabled={isLoading}
             />
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               disabled={!inputValue.trim() || isLoading}
               aria-label="Send message"
             >
@@ -153,8 +147,8 @@ const ChatWidget = () => {
           </form>
         </div>
       )}
-      
-      <button 
+
+      <button
         className={`chat-toggle-button ${isOpen ? 'open' : ''}`}
         onClick={toggleChat}
         aria-label="Toggle chat"

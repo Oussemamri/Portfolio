@@ -1,9 +1,11 @@
+const HEADER_OFFSET = 80;
+
 /**
  * Scrolls to the specified element with smooth behavior
  * @param {string} selector - The element selector (e.g., '#about')
  * @param {number} offset - Offset from the top (useful for fixed headers)
  */
-export const scrollToElement = (selector, offset = 80) => {
+export const scrollToElement = (selector, offset = HEADER_OFFSET) => {
   const element = document.querySelector(selector);
   if (element) {
     const elementPosition = element.getBoundingClientRect().top;

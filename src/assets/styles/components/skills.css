@@ -1,226 +1,163 @@
+/* ── Theme variables (adapted from maz-ui) ──────────────────── */
 .skills-section {
-    background-color: #f9f9f9;
-    padding: 80px 0;
+    --maz-accent: 272 99% 54%;
+    --maz-background-600: 0 5% 92.5%;
+    --maz-secondary: 220 14% 96%;
+    --maz-secondary-foreground: 0 0% 10%;
+    --maz-foreground: 210 8% 14%;
+    --maz-border: 220 10% 92%;
+    --maz-radius: 0.6rem;
+    --maz-border-width: 1px;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    font-family: 'Manrope', sans-serif, system-ui;
+    font-size: 14px;
+    font-weight: 500;
+    color: hsl(var(--maz-foreground));
+    background-color: hsl(var(--maz-background-600) / .3);
+    border-top: var(--maz-border-width) solid hsl(var(--maz-border));
+    padding: 5rem 2rem;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-/* Existing container styling */
-.container {
-    width: 85%;
-    max-width: 1200px;
+/* ── Inner wrapper ──────────────────────────────────────────── */
+.skills-inner {
+    max-width: 1150px;
     margin: 0 auto;
 }
 
-.skills-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 25px;
-    margin-top: 40px;
+/* ── Title ──────────────────────────────────────────────────── */
+.skills-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 3rem;
+    color: hsl(var(--maz-foreground));
+}
+.skills-title::after {
+    display: none;               /* override global h2::after */
 }
 
-.skill-category {
-    background-color: white;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    padding: 25px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    height: auto;
+@media (min-width: 768px) {
+    .skills-title {
+        font-size: 2.25rem;
+    }
+}
+
+/* ── 3-column grid ──────────────────────────────────────────── */
+.skills-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+@media (min-width: 768px) {
+    .skills-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* ── Spotlight card ─────────────────────────────────────────── */
+.m-card-spotlight {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--maz-radius);
+    background-color: hsl(var(--maz-accent) / 20%);
     display: flex;
     flex-direction: column;
 }
 
-.skill-category:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+/* Inner layer — sits above the blob, stretches to fill card */
+.m-card-spotlight > .inner {
+    position: relative;
+    z-index: 2;
+    border-radius: inherit;
+    background-color: hsl(0 0% 100% / 0.95);
+    margin: var(--maz-border-width);         /* reveal accent border */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
-.skill-header {
+.m-card-spotlight > .inner > .content {
+    padding: 1.25rem;
+}
+
+/* Blob that follows the cursor */
+.m-card-spotlight > .blob {
+    position: absolute;
+    z-index: 1;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-color: hsl(var(--maz-accent) / 60%);
+    filter: blur(40px);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    will-change: transform;
+    top: 0;
+    left: 0;
+}
+
+/* ── Card header (icon + title) ─────────────────────────────── */
+.card-header {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
 }
 
-.skill-header i {
-    font-size: 22px;
-    margin-right: 12px;
-    color: #0077cc;
-    width: 40px;
-    height: 40px;
+.icon-box {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(0, 119, 204, 0.1);
-    border-radius: 50%;
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+    background-color: hsl(var(--maz-foreground) / 8%);
+    font-size: 1.4rem;
+    color: hsl(var(--maz-foreground));
 }
 
-.skill-header h3 {
-    margin: 0;
-    font-size: 20px;
-    color: #333;
+.card-header h3 {
+    font-size: 1.1rem;
     font-weight: 600;
+    color: hsl(var(--maz-foreground));
+    margin: 0;
+}
+.card-header h3::after {
+    display: none;               /* override global h3::after if any */
 }
 
-.skills-grid {
+/* ── Skill badges ───────────────────────────────────────────── */
+.badges {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    flex-grow: 1;
+    gap: 0.5rem;
 }
 
-/* Modified skill-item to have consistent height and sizing */
-.skill-item {
-    background-color: #f8f9fa;
-    padding: 4px 10px;
-    border-radius: 16px;
-    font-size: 13px;
-    font-weight: 500;
-    color: #333;
-    border: 1px solid #e9ecef;
-    transition: all 0.3s;
-    height: 26px; /* Fixed height instead of min-height */
+.badge {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    line-height: 1;
-    margin: 2px;
-    box-sizing: border-box; /* Ensure padding is included in the height */
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    font-weight: 400;
+    padding: 0.3rem 0.65rem;
+    border-radius: 0.375rem;
+    background-color: hsl(var(--maz-secondary));
+    color: hsl(var(--maz-secondary-foreground));
+    white-space: nowrap;
+    transition: background-color 0.2s, color 0.2s;
 }
 
-.skill-item:hover {
-    background-color: #0077cc;
-    color: white;
-    border-color: #0077cc;
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+.badge:hover {
+    background-color: hsl(var(--maz-accent) / 15%);
+    color: hsl(var(--maz-accent));
 }
 
-/* Languages section */
-.languages-section {
-    margin-top: 50px;
-    background-color: white;
-    border-radius: 12px;
-    padding: 30px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-
-.languages-section h3 {
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 22px;
-    color: #333;
-    position: relative;
-    padding-bottom: 12px;
-}
-
-.languages-section h3:after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 3px;
-    background-image: linear-gradient(to right, #0077cc, #61dafb);
-    border-radius: 3px;
-}
-
-.language-items {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 25px;
-}
-
-.language-item {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.language-name {
-    font-weight: 600;
-    font-size: 18px;
-    color: #333;
-}
-
-.language-level {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.level-bar {
-    flex-grow: 1;
-    height: 8px;
-    background-color: #f8f9fa;
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-.level-fill {
-    height: 100%;
-    background-image: linear-gradient(to right, #0077cc, #61dafb);
-    border-radius: 4px;
-}
-
-.proficiency {
-    font-size: 14px;
-    font-weight: 600;
-    color: white;
-    background-color: #0077cc;
-    padding: 3px 8px;
-    border-radius: 4px;
-}
-
-/* UPDATED: Consistent sizing for all skills across all categories */
-.skill-category:nth-child(1) .skill-item,  /* Programming Languages */
-.skill-category:nth-child(2) .skill-item,  /* Frameworks & Libraries */
-.skill-category:nth-child(3) .skill-item,  /* Development Tools */
-.skill-category:nth-child(4) .skill-item,  /* IDEs & Environments */
-.skill-category:nth-child(5) .skill-item,  /* Databases */
-.skill-category:nth-child(6) .skill-item,  /* DevOps */
-.skill-category:nth-child(7) .skill-item   /* AWS Services */
-{
-    padding: 3px 10px;
-    height: 26px;
-    font-size: 13px;
-    white-space: nowrap; /* Prevent text wrapping */
-}
-
-/* For AWS services (typically longer names), make them a bit more compact */
-.skill-category:nth-child(7) .skill-item {
-    font-size: 12px;
-    padding: 3px 8px;
-}
-
-@media (max-width: 768px) {
-    .skills-container {
-        grid-template-columns: 1fr;
-    }
-    
-    .language-items {
-        grid-template-columns: 1fr;
-    }
-    
+/* ── Mobile tweaks ──────────────────────────────────────────── */
+@media (max-width: 767px) {
     .skills-section {
-        padding: 60px 20px;
+        padding: 3rem 1rem;
     }
-    
-    .container {
-        width: 100%;
-    }
-}
-
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.05);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-.skill-category:hover .skill-header i {
-    animation: pulse 1s infinite;
 }

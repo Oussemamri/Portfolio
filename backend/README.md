@@ -1,103 +1,59 @@
-# Portfolio Backend API
+# Portfolio Backend
 
-Backend server for Oussema's portfolio website with AI-powered chatbot.
+Serverless backend deployed as an AWS Lambda function behind API Gateway.
 
-## Features
+## Architecture
 
-- AI Chatbot powered by OpenAI GPT-3.5
-- Contact form API
-- CORS enabled for frontend communication
-- Environment-based configuration
+```
+Client -> API Gateway (api.oussemaamri.com) -> Lambda (Node.js 20, arm64)
+                                                  |-> Groq Chat API
+```
 
-## Setup Instructions
+## Endpoints
 
-### 1. Install Dependencies
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | `/api/health` | Health check |
+| POST | `/api/chat` | AI chatbot (Groq Llama) |
+| POST | `/api/contact` | Contact form submission |
+
+## Lambda Function
+
+All code lives in `lambda/index.js` — zero external runtime dependencies (uses Node.js built-in `https` module).
+
+### Environment Variables
+
+| Variable | Description |
+|----------|-------------|
+| `GROQ_API_KEY` | Groq API key for chat completions |
+
+### Deploy
 
 ```bash
-cd backend
-npm install
+cd lambda
+npm ci --omit=dev
+zip -r function.zip index.js package.json node_modules
+aws lambda update-function-code \
+  --function-name portfolio-chatbot-api \
+  --zip-file fileb://function.zip
 ```
 
-### 2. Configure Environment Variables
+Or push to `main` — GitHub Actions handles deployment automatically via `.github/workflows/deploy-aws.yml`.
 
-Create a `.env` file in the backend directory:
+## Local Testing
 
 ```bash
-cp .env.example .env
+node -e "
+const lambda = require('./lambda/index');
+lambda.handler({
+  requestContext: { http: { method: 'GET', path: '/api/health' } }
+}).then(r => console.log(JSON.parse(r.body)));
+"
 ```
 
-Then edit `.env` and add your OpenAI API key:
+## Logs
 
-```
-OPENAI_API_KEY=sk-your-actual-api-key-here
-PORT=5000
-```
-
-### 3. Get OpenAI API Key
-
-1. Go to [OpenAI Platform](https://platform.openai.com/)
-2. Sign up or log in
-3. Navigate to [API Keys](https://platform.openai.com/api-keys)
-4. Click "Create new secret key"
-5. Copy the key and paste it in your `.env` file
-
-**Note:** OpenAI API is a paid service. You'll need to add credits to your account.
-
-### 4. Run the Server
-
-Development mode (with auto-restart):
-```bash
-npm run dev
-```
-
-Production mode:
-```bash
-npm start
-```
-
-The server will start on `http://localhost:5000`
-
-## API Endpoints
-
-### POST /api/chat
-Chat with the AI assistant
-
-**Request:**
-```json
-{
-  "message": "What are your skills?"
-}
-```
-
-**Response:**
-```json
-{
-  "message": "I specialize in JavaScript, React, Node.js..."
-}
-```
-
-### POST /api/contact
-Submit contact form
-
-**Request:**
-```json
-{
-  "name": "John Doe",
-  "email": "john@example.com",
-  "message": "I'd like to discuss a project"
-}
-```
-
-### GET /api/health
-Check server status
-
-## Alternative: Use Other AI Services
-
-If you don't want to use OpenAI, you can integrate:
-
-1. **Google Gemini** (Free tier available)
-2. **Anthropic Claude**
-3. **Hugging Face models**
+CloudWatch log group: `/aws/lambda/portfolio-chatbot-api`
 4. **Cohere**
 
 Let me know if you need help setting up any of these alternatives!

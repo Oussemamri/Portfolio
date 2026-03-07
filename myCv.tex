@@ -1,0 +1,251 @@
+%-------------------------
+% Resume in Latex
+% Author
+% License : MIT
+%------------------------
+
+%---- Required Packages and Functions ----
+
+\documentclass[a4paper,10pt]{article}
+\usepackage{latexsym}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{ragged2e}
+\usepackage[empty]{fullpage}
+\usepackage{wrapfig}
+\usepackage{lipsum}
+\usepackage{tabularx}
+\usepackage{titlesec}
+\usepackage{geometry}
+\usepackage{marvosym}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage{fontawesome5}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{cfr-lm}
+\usepackage[T1]{fontenc}
+
+% Using babel with English since the content is now English
+\usepackage[english]{babel}
+\setlength{\multicolsep}{0pt} 
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\geometry{left=1.4cm, top=0.5cm, right=1.2cm, bottom=0.5cm}
+
+\usepackage[most]{tcolorbox}
+\tcbset{
+	frame code={}
+	center title,
+	left=0pt,
+	right=0pt,
+	top=0pt,
+	bottom=0pt,
+	colback=gray!20,
+	colframe=white,
+	width=\dimexpr\textwidth\relax,
+	enlarge left by=-2mm,
+	boxsep=4pt,
+	arc=0pt,outer arc=0pt,
+}
+
+\urlstyle{same}
+
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-6pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-6pt}]
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[2]{
+  \item{
+    \textbf{#1}{\hspace{0.5mm}#2 \vspace{-0.5mm}}
+  }
+}
+
+\newcommand{\resumePOR}[3]{
+\vspace{0.5mm}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{#1}\hspace{0.3mm}#2 & \textit{\small{#3}} 
+    \end{tabular*}
+    \vspace{-2mm}
+}
+
+\newcommand{\resumeSubheading}[4]{
+\vspace{0.5mm}\item
+    \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{#1} & \textit{\footnotesize{#4}} \\
+        \textit{\footnotesize{#3}} &  \footnotesize{#2}\\
+    \end{tabular*}
+    \vspace{-2.4mm}
+}
+
+\newcommand{\resumeProject}[4]{
+\vspace{0.5mm}\item
+    \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{#1} & \textit{\footnotesize{#3}} \\
+        \footnotesize{\textit{#2}} & \footnotesize{#4}
+    \end{tabular*}
+    \vspace{-2.4mm}
+}
+
+\newcommand{\resumeSubItem}[2]{\resumeItem{#1}{#2}\vspace{-4pt}}
+\renewcommand{\labelitemi}{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*,labelsep=0mm]}
+\newcommand{\resumeHeadingSkillStart}{\begin{itemize}[leftmargin=*,itemsep=1.7mm, rightmargin=2ex]}
+\newcommand{\resumeItemListStart}{\begin{justify}\begin{itemize}[leftmargin=3ex, rightmargin=2ex, noitemsep,labelsep=1.2mm,itemsep=0mm]\small}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}\vspace{2mm}}
+\newcommand{\resumeHeadingSkillEnd}{\end{itemize}\vspace{-2mm}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\end{justify}\vspace{-1mm}}
+\newcommand{\cvsection}[1]{%
+\vspace{2mm}
+\begin{tcolorbox}
+    \textbf{\large #1}
+\end{tcolorbox}
+    \vspace{-4mm}
+}
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}%
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}%
+\newcolumntype{C}{>{\centering\arraybackslash}X}%
+%---- End of Packages and Functions ------
+
+%-------------------------------------------
+%%%%%%  CV STARTS HERE  %%%%%%%%%%%
+%%%%%% DEFINE ELEMENTS HERE %%%%%%%
+\newcommand{\name}{OUSSEMA AMRI}
+\newcommand{\phone}{(+49) 15510 357723}
+\newcommand{\emaila}{YOUR_CONTACT_EMAIL}
+\newcommand{\github}{github.com/Oussemamri}
+\newcommand{\linkedin}{linkedin.com/in/oussema-amri}
+\newcommand{\location}{Munich, Augsburg, Germany}
+
+\begin{document}
+\fontfamily{cmr}\selectfont
+
+% Header with Photo
+\begin{minipage}[c]{0.75\textwidth}
+    \begin{flushleft}
+        \textbf{\Large OUSSEMA AMRI}\\ 
+        \vspace{1mm} 
+        Munich, Germany\\ 
+        Email: \href{mailto:o.amri@stud.fh-sm.de}{o.amri@stud.fh-sm.de} \,|\, Tel: (+49) 15510 357723\\ 
+        \href{https://github.com/Oussemamri}{\raisebox{-0.15\height}{\faGithub}\;GitHub} \hspace{10pt} 
+        \href{https://linkedin.com/in/oussema-amri}{\raisebox{-0.15\height}{\faLinkedin}\;LinkedIn} \hspace{10pt} 
+        \href{https://oussemaamri.com/}{\raisebox{-0.15\height}{\faGlobe}\;Portfolio}
+    \end{flushleft}
+\end{minipage}
+\begin{minipage}[c]{0.20\textwidth}
+    \begin{flushright}
+        \begin{tikzpicture}
+            \clip (0,0) circle (1.25cm);
+            % Restore original image inclusion logic. 
+            % Note: If photo.png is missing, it will show the 'Photo' text in a circle.
+            \node at (0,-0.3) {\includegraphics[width=2.5cm, keepaspectratio]{photo.png}};
+            % Fallback label if image is not found during compilation
+            \node at (0,0) {\fontsize{6}{7}\selectfont};
+        \end{tikzpicture}
+    \end{flushright}
+\end{minipage}
+
+% Professional Summary
+\section{\textbf{Professional Summary}}
+\resumeItemListStart
+\item{Full-Stack Software Engineer with over 3 years of experience developing scalable applications for the fintech and aerospace sectors. Currently a Software Engineer at Rocket Factory Augsburg, specializing in Python, TypeScript/JavaScript, and modern cloud architectures (AWS).}
+\resumeItemListEnd
+
+% Experience
+\section{\textbf{Professional Experience}}
+\resumeSubHeadingListStart
+\resumeSubheading
+  {Rocket Factory Augsburg (RFA)}{Augsburg, Germany}
+  {Full Stack Software Intern – Software Development}{02/2025 – Present}
+  \resumeItemListStart
+    \item{\textbf{Vehicle Parameter Management Platform (React/FastAPI/PostgreSQL):} Built an internal web application enabling 15+ engineering teams to configure, review, and collaborate on rocket vehicle parameters with real-time feedback loops and team-based parameter grouping workflows.}
+    \item{\textbf{P\&ID Visualization Dashboard:} Developed an interactive electrical schematic viewer for avionics diagrams, enabling engineers to navigate complex P\&ID schematics, create revisions autonomously without admin access, and track KiCAD schematic file changes with automated diff detection.}
+    \item{\textbf{Automated Validation Pipeline:} Designed a Python-based validation engine that reconciles electrical schema components (500+ parts) with business logic rules, eliminating manual verification errors and providing instant feedback on component compatibility.}
+    \item{\textbf{Performance Optimization:} Reduced dashboard load time by 20\% through React code-splitting with React.lazy(), component memoization with useMemo/useCallback, and TanStack Query (React Query) for server-state caching and background refetching.}
+    \item{\textbf{DevOps \& Deployment:} Configured GitLab CI pipelines with Docker containerization for automated testing and deployment, integrated pytest unit tests and pre-commit hooks for code quality enforcement.}
+    \item{\textbf{Testing \& Quality Assurance:} Achieved 85\%+ code coverage using pytest (backend) and Playwright (E2E frontend tests), implementing comprehensive test suites for parameter validation logic and UI workflows.}
+  \resumeItemListEnd
+
+
+\resumeSubheading
+  {Happy Nation GmbH}{Berlin, Germany}
+  {Full Stack Developer (Intern)}{06/2024 – 12/2024}
+  \resumeItemListStart
+    \item\ Built a digital identity platform (React/Django/PostgreSQL) unifying community members through personalized NFT passports, featuring responsive interface with dynamic stamp collection, event ticketing system, and purchasable art marketplace with real-time notifications.\ 
+    \item{Architected and deployed production infrastructure on \textbf{AWS} (EC2, S3, CloudWatch, CodePipeline) with automated CI/CD workflows, achieving 98.5\% uptime and API response times under 200ms.}
+    \item{Built reusable React component library and integrated Brevo API for newsletter management with \textbf{Redis} caching layer, reducing PostgreSQL database queries by 80\%.}
+    \item{Achieved 88\% test coverage using pytest (backend) and Jest (frontend) with PR-based code reviews and implemented accessibility features following WCAG 2.1 guidelines.}
+  \resumeItemListEnd
+
+
+\resumeSubheading
+  {Talan Tunisia}{Tunis, Tunisia}
+  {Software Engineering Intern – Full Stack Development}{07/2023 – 09/2023}
+  \resumeItemListStart
+    \item{Developed HR platform features (profile management, document workflows, leave tracking) using \textbf{NestJS/React/PostgreSQL}, delivering a real-time analytics dashboard for workforce data visualization.}
+    \item{Configured \textbf{Jenkins} CI/CD pipeline with \textbf{Docker} containerization, reducing deployment time by 30\% and enabling automated daily production releases.}
+  \resumeItemListEnd
+
+\resumeSubheading
+  {Talan Tunisia}{Tunis, Tunisia}
+  {Software Engineering Intern – Full Stack Development}{02/2023 – 05/2023}
+  \resumeItemListStart
+    \item{Built a task and meeting management platform using \textbf{Symfony/Vue.js/MySQL}, implementing Role-Based Access Control (RBAC) and real-time collaboration features for team coordination.}
+    \item{Designed granular permission management system with role-specific access controls, enhancing security for multi-user workflows and document sharing.}
+  \resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+% Technical Skills
+\section{\textbf{Technical Skills}}
+\resumeItemListStart
+\item{\textbf{Languages}: Python, TypeScript, JavaScript, SQL}
+\vspace{2mm}
+\item{\textbf{Frameworks}: FastAPI, Django, NestJS, React, Spring Boot, Node.js}
+\vspace{2mm}
+\item{\textbf{Cloud \& DevOps}: AWS (EC2, S3, Lambda, CodePipeline), Docker, Jenkins, GitLab CI/CD}
+\vspace{2mm}
+\item{\textbf{Databases}: PostgreSQL, MongoDB, Redis (Cache)}
+\vspace{2mm}
+\item{\textbf{AI \& ML}: OpenAI/Gemini APIs, Hugging Face, Prompt Engineering}
+\vspace{2mm}
+\item{\textbf{Engineering}: Microservices, Event-driven systems, REST API Design, TDD, Agile/Scrum}
+\resumeItemListEnd
+
+% Education
+\section{\textbf{Education}}
+\resumeSubHeadingListStart
+  \resumeSubheading
+    {ESPRIT School of Engineering}{Tunis, Tunisia}
+    {Engineering Degree in Computer Science (M.Eng. Equivalent)}{09/2022 – 06/2025}
+  \resumeSubheading
+    {Hochschule Schmalkalden}{Schmalkalden, Germany}
+    {Exchange Semester – Master in Computer Science}{10/2024 – 03/2025}
+  \resumeSubheading
+    {Preparatory Institute for Engineering Studies}{Tunisia}
+    {Intensive Mathematics, Physics \& Computer Science}{09/2020 – 06/2022}
+\resumeSubHeadingListEnd
+
+
+
+
+
+% Languages
+\section{\textbf{Languages}}
+\resumeItemListStart
+\item{\textbf{English}: C1 \hfill \textbf{German}: A2 \hfill \textbf{French}: C1 \hfill \textbf{Arabic}: C2 }
+\resumeItemListEnd
+    
+\end{document}

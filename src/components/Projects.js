@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Card from './common/Card';
 import '../assets/styles/components/projects.css';
-import { FaGithub } from 'react-icons/fa'; // Import GitHub icon
+import { FaGithub } from 'react-icons/fa';
 
 const Projects = () => {
     const [activeFilter, setActiveFilter] = useState('all');
@@ -134,7 +134,6 @@ const Projects = () => {
                                 )}
                             </>
                         }
-                        link={project.link}
                     />
                 ))}
             </div>
