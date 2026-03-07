@@ -1,77 +1,91 @@
-# Portfolio Website
+# Oussema Amri Portfolio
 
-This is a personal portfolio website built with React. It showcases my projects, skills, and provides a way for potential clients or employers to contact me.
+Production portfolio website with an AI assistant and contact form.
 
-## Project Structure
-
-```
-portfolio-website
-├── public
-│   ├── index.html         # Main HTML document
-│   └── favicon.ico        # Favicon for the website
-├── src
-│   ├── components         # Reusable components
-│   │   ├── Header.js      # Navigation and branding
-│   │   ├── Footer.js      # Footer content
-│   │   ├── Hero.js        # Introduction section
-│   │   ├── About.js       # About me section
-│   │   ├── Projects.js     # Projects showcase
-│   │   ├── Skills.js      # Skills and technologies
-│   │   ├── Contact.js      # Contact form
-│   │   └── common         # Common reusable components
-│   │       ├── Button.js  # Reusable button component
-│   │       └── Card.js    # Reusable card component
-│   ├── pages              # Page components
-│   │   └── Home.js        # Main homepage
-│   ├── assets             # Assets like styles
-│   │   └── styles
-│   │       ├── global.css  # Global styles
-│   │       └── components
-│   │           └── header.css # Header specific styles
-│   ├── utils              # Utility functions
-│   │   └── helpers.js     # Helper functions
-│   ├── hooks              # Custom hooks
-│   │   └── useScrollPosition.js # Hook for scroll position
-│   ├── App.js             # Main application component
-│   └── index.js           # Entry point of the application
-├── package.json           # npm configuration file
-├── .gitignore             # Git ignore file
-└── README.md              # Project documentation
-```
-
-## Getting Started
-
-To get started with this project, follow these steps:
-
-1. Clone the repository:
-   ```
-   git clone <repository-url>
-   ```
-
-2. Navigate to the project directory:
-   ```
-   cd portfolio-website
-   ```
-
-3. Install the dependencies:
-   ```
-   npm install
-   ```
-
-4. Start the development server:
-   ```
-   npm start
-   ```
-
-5. Open your browser and go to `http://localhost:3000` to view the portfolio website.
+- Live site: `https://oussemaamri.com`
+- API health: `https://api.oussemaamri.com/api/health`
 
 ## Features
 
-- Responsive design
-- Smooth scrolling
-- Reusable components
-- Easy to customize and extend
+- Responsive one-page portfolio (Hero, About, Experience, Projects, Skills, Languages, Contact)
+- AI chatbot widget connected to backend API
+- Contact form integration via EmailJS
+- Smooth-scroll sections and animated reveals
+- Cloud deployment on AWS (S3 + CloudFront + Lambda + API Gateway + Route 53)
+
+## Tech Stack
+
+| Layer | Technologies |
+|------|------|
+| Frontend | React 17, React Router, CSS, Axios |
+| Backend | AWS Lambda (Node.js 20), API Gateway |
+| AI | Groq-compatible chat completion API |
+| Infra | S3, CloudFront, Route 53, ACM |
+| CI/CD | GitHub Actions |
+
+## Local Development
+
+### 1. Prerequisites
+
+- Node.js 18+
+- npm 9+
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Configure environment
+
+Copy `.env.example` to `.env.local` and fill values:
+
+```env
+REACT_APP_API_URL=https://api.oussemaamri.com/api
+REACT_APP_EMAILJS_SERVICE_ID=your_service_id
+REACT_APP_EMAILJS_TEMPLATE_ID=your_template_id
+REACT_APP_EMAILJS_PUBLIC_KEY=your_public_key
+REACT_APP_CONTACT_EMAIL=your-email@example.com
+```
+
+### 4. Start development server
+
+```bash
+npm start
+```
+
+### 5. Create production build
+
+```bash
+npm run build
+```
+
+## Deployment
+
+- Frontend is deployed to S3 and invalidated through CloudFront.
+- Backend is deployed as an AWS Lambda function.
+- CI/CD workflow: `.github/workflows/deploy-aws.yml`
+- Infrastructure reference: `AWS_INFRASTRUCTURE_SETUP.md`
+
+## Project Structure
+
+```text
+src/
+  components/
+  hooks/
+  pages/
+  services/
+  utils/
+backend/
+  lambda/
+.github/workflows/
+```
+
+## Security Notes
+
+- Keep all API keys in environment variables.
+- Never commit `.env.*`, build artifacts, or deployment zip files.
 
 ## License
 
-This project is licensed under the MIT License.
+MIT
