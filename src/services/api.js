@@ -12,13 +12,3 @@ export const submitContactForm = async (formData) => {
     throw error.response?.data || { message: 'Network error' };
   }
 };
-
-// Get all projects
-export const getProjects = async () => {
-  try {
-    const response = await axios.get(`${API_URL}/projects`);
-    return response.data;
-  } catch (error) {
-    throw error.response?.data || { message: 'Network error' };
-  }
-};

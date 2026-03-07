@@ -7,9 +7,6 @@
     "zip": "zip -r function.zip index.js node_modules package.json",
     "deploy": "aws lambda update-function-code --function-name portfolio-chatbot-api --zip-file fileb://function.zip"
   },
-  "dependencies": {
-    "axios": "^1.6.0"
-  },
   "engines": {
     "node": ">=18.0.0"
   }

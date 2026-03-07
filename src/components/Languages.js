@@ -20,7 +20,7 @@ const Languages = () => {
                                 <div className="language-name">{lang.name}</div>
                                 <div className="language-level">
                                     <div className="level-bar">
-                                        <div className="level-fill" style={{ width: lang.width }} />
+                                        <div className="level-fill" style={{ '--level-width': lang.width }} />
                                     </div>
                                     <span className="proficiency">{lang.level}</span>
                                 </div>

@@ -1,4 +1,5 @@
 const https = require('https');
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 // System prompt for the chatbot
 const SYSTEM_PROMPT = `You are an AI assistant for Oussema Amri's portfolio website. You help visitors learn about Oussema's background and skills.
@@ -67,12 +68,19 @@ exports.handler = async (event) => {
       statusCode: 500,
       headers: corsHeaders,
       body: JSON.stringify({
-        error: 'Internal Server Error',
-        message: error.message
+        error: 'Internal Server Error'
       })
     };
   }
 };
+
+function safeParseBody(rawBody) {
+  try {
+    return JSON.parse(rawBody || '{}');
+  } catch (error) {
+    return null;
+  }
+}
 
 // Health check handler
 function handleHealth() {
@@ -110,7 +118,16 @@ function httpsRequest(url, options, postData) {
 
 // Chat handler - Groq API integration
 async function handleChat(event) {
-  const body = JSON.parse(event.body || '{}');
+  const body = safeParseBody(event.body);
+
+  if (!body) {
+    return {
+      statusCode: 400,
+      headers: corsHeaders,
+      body: JSON.stringify({ error: 'Invalid JSON body' })
+    };
+  }
+
   const { message } = body;
 
   if (!message) {
@@ -124,6 +141,17 @@ async function handleChat(event) {
   console.log('Received message:', message);
 
   const apiKey = process.env.GROQ_API_KEY;
+
+  if (!apiKey) {
+    console.error('Missing GROQ_API_KEY environment variable');
+    return {
+      statusCode: 500,
+      headers: corsHeaders,
+      body: JSON.stringify({
+        message: 'Service is temporarily unavailable. Please try again later.'
+      })
+    };
+  }
 
   const postData = JSON.stringify({
     model: 'llama-3.3-70b-versatile',
@@ -204,8 +232,33 @@ async function handleChat(event) {
 
 // Contact form handler
 function handleContact(event) {
-  const body = JSON.parse(event.body || '{}');
+  const body = safeParseBody(event.body);
+
+  if (!body) {
+    return {
+      statusCode: 400,
+      headers: corsHeaders,
+      body: JSON.stringify({ error: 'Invalid JSON body' })
+    };
+  }
+
   const { name, email, message } = body;
+
+  if (!name || !email || !message) {
+    return {
+      statusCode: 400,
+      headers: corsHeaders,
+      body: JSON.stringify({ error: 'Name, email, and message are required' })
+    };
+  }
+
+  if (!EMAIL_PATTERN.test(String(email).trim())) {
+    return {
+      statusCode: 400,
+      headers: corsHeaders,
+      body: JSON.stringify({ error: 'A valid email address is required' })
+    };
+  }
 
   console.log('Contact form submission:', { name, email, message });
 
