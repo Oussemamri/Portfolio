@@ -13,16 +13,17 @@ const Experience = () => {
                         <div className="experience-content">
                             <div className="experience-header">
                                 <h3>Rocket Factory Augsburg (RFA)</h3>
-                                <span className="experience-date">February 2025 - Present</span>
+                                <span className="experience-date">02/2025 - Present</span>
                             </div>
-                            <h4 className="experience-title">Full Stack Software Intern – Software Development</h4>
+                            <h4 className="experience-title">Software Engineer Working Student</h4>
                             <ul className="experience-description">
-                                <li>Built a Vehicle Parameter Management Platform (<strong>React/FastAPI/PostgreSQL</strong>) enabling 15+ engineering teams to configure, review, and collaborate on rocket vehicle parameters with real-time feedback loops.</li>
-                                <li>Developed an interactive P&ID Visualization Dashboard for avionics diagrams, enabling engineers to navigate complex schematics, create revisions autonomously, and track KiCAD file changes with automated diff detection.</li>
-                                <li>Designed a Python-based validation engine reconciling 500+ electrical schema components with business logic rules, eliminating manual verification errors.</li>
-                                <li>Reduced dashboard load time by <strong>20%</strong> through React code-splitting with React.lazy(), component memoization with useMemo/useCallback, and TanStack Query for server-state caching.</li>
-                                <li>Configured GitLab CI pipelines with <strong>Docker</strong> containerization for automated testing and deployment, integrated pytest unit tests and pre-commit hooks for code quality enforcement.</li>
-                                <li>Achieved <strong>85%+ code coverage</strong> using pytest (backend) and Playwright (E2E frontend tests), implementing comprehensive test suites for parameter validation logic and UI workflows.</li>
+                                <li>Built an internal engineering document management system from requirements to production, later adopted company-wide.</li>
+                                <li>Designed and operated a full-stack application using <strong>FastAPI</strong>, <strong>React</strong>, and <strong>PostgreSQL</strong>, deployed with <strong>Docker Compose</strong>, <strong>GitLab CI/CD</strong>, and <strong>Portainer</strong>.</li>
+                                <li>Implemented core workflows including automated DOCX-to-PDF conversion, document versioning, and approval workflows.</li>
+                                <li>Owned development and maintenance of multiple internal production applications, resolving incidents and improving system reliability.</li>
+                                <li>Improved performance and fault tolerance by moving long-running tasks to <strong>Celery</strong> and <strong>Redis</strong>, and expanded test coverage with <strong>pytest</strong> and <strong>Playwright</strong>.</li>
+                                <li>Integrated the <strong>Personio API</strong> with the central user service to synchronize employee data and automate account lifecycle, access control, notifications, and cross-application user provisioning.</li>
+                                <li>Reworked monitoring across internal applications by migrating from <strong>Sentry</strong> to <strong>Grafana</strong> and <strong>Loki</strong>.</li>
                             </ul>
                         </div>
                     </div>
@@ -32,14 +33,16 @@ const Experience = () => {
                         <div className="experience-content">
                             <div className="experience-header">
                                 <h3>Happy Nation GmbH</h3>
-                                <span className="experience-date">June 2024 - December 2024</span>
+                                <span className="experience-date">06/2024 - 12/2024</span>
                             </div>
                             <h4 className="experience-title">Full Stack Developer (Intern)</h4>
                             <ul className="experience-description">
-                                <li>Built a digital identity platform (<strong>React/Django/PostgreSQL</strong>) unifying community members through personalized NFT passports, featuring responsive interface with dynamic stamp collection, event ticketing, and purchasable art marketplace.</li>
-                                <li>Architected and deployed production infrastructure on <strong>AWS</strong> (EC2, S3, CloudWatch, CodePipeline) with automated CI/CD workflows, achieving <strong>98.5% uptime</strong> and API response times under 200ms.</li>
-                                <li>Built reusable React component library and integrated Brevo API for newsletter management with <strong>Redis</strong> caching layer, reducing PostgreSQL database queries by <strong>80%</strong>.</li>
-                                <li>Achieved <strong>88% test coverage</strong> using pytest (backend) and Jest (frontend) with PR-based code reviews, implementing accessibility features following WCAG 2.1 guidelines.</li>
+                                <li>Built a full-stack citizen platform with <strong>Django REST Framework</strong>, <strong>React</strong>, and <strong>PostgreSQL</strong>, including <strong>JWT</strong> authentication, role-based access control, and an admin-gated account approval workflow.</li>
+                                <li>Engineered a multi-step onboarding flow with ticket verification, brute-force protection, and automated transactional emails.</li>
+                                <li>Designed a hierarchical stamp system with image upload, server-side compression using <strong>Pillow</strong>, <strong>S3</strong> storage integration, and usage-milestone email alerts.</li>
+                                <li>Implemented an interactive digital passport with a custom flip-book UI using <strong>react-pageflip</strong>, preloading assets at startup with <strong>fflate</strong> compression to reduce load time.</li>
+                                <li>Integrated the <strong>Brevo API</strong> for newsletter subscriptions and configurable stamp reminder notifications.</li>
+                                <li>Containerized the platform with <strong>Docker</strong>, configured <strong>Nginx</strong> as a reverse proxy, deployed behind <strong>Cloudflare</strong>, and documented endpoints with <strong>Swagger</strong> using <strong>drf-yasg</strong>.</li>
                             </ul>
                         </div>
                     </div>
@@ -49,12 +52,12 @@ const Experience = () => {
                         <div className="experience-content">
                             <div className="experience-header">
                                 <h3>Talan Tunisia</h3>
-                                <span className="experience-date">July 2023 - September 2023</span>
+                                <span className="experience-date">07/2023 - 09/2023</span>
                             </div>
                             <h4 className="experience-title">Software Engineering Intern – Full Stack Development</h4>
                             <ul className="experience-description">
-                                <li>Developed HR platform features (profile management, document workflows, leave tracking) using <strong>NestJS/React/PostgreSQL</strong>, delivering a real-time analytics dashboard for workforce data visualization.</li>
-                                <li>Configured <strong>Jenkins</strong> CI/CD pipeline with <strong>Docker</strong> containerization, reducing deployment time by <strong>30%</strong> and enabling automated daily production releases.</li>
+                                <li>Delivered HR platform features including profile management, document workflows, leave tracking, and analytics dashboards using <strong>NestJS</strong>, <strong>React</strong>, and <strong>PostgreSQL</strong>.</li>
+                                <li>Established a <strong>Jenkins</strong> CI/CD pipeline with <strong>Docker</strong> to streamline deployments and support more reliable release workflows.</li>
                             </ul>
                         </div>
                     </div>
@@ -64,12 +67,11 @@ const Experience = () => {
                         <div className="experience-content">
                             <div className="experience-header">
                                 <h3>Talan Tunisia</h3>
-                                <span className="experience-date">February 2023 - May 2023</span>
+                                <span className="experience-date">02/2023 - 05/2023</span>
                             </div>
                             <h4 className="experience-title">Software Engineering Intern – Full Stack Development</h4>
                             <ul className="experience-description">
-                                <li>Built a task and meeting management platform using <strong>Symfony/Vue.js/MySQL</strong>, implementing Role-Based Access Control (RBAC) and real-time collaboration features for team coordination.</li>
-                                <li>Designed granular permission management system with role-specific access controls, enhancing security for multi-user workflows and document sharing.</li>
+                                <li>Created a task and meeting management platform with <strong>Symfony</strong>, <strong>Vue.js</strong>, and <strong>MySQL</strong>, including role-based access control and collaboration features for team coordination.</li>
                             </ul>
                         </div>
                     </div>
