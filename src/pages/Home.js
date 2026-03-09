@@ -4,6 +4,7 @@ import ScrollReveal from '../components/common/ScrollReveal';
 import usePageTransition from '../hooks/usePageTransition';
 
 const Skills = React.lazy(() => import('../components/Skills'));
+const Services = React.lazy(() => import('../components/Services'));
 const About = React.lazy(() => import('../components/About'));
 const Companies = React.lazy(() => import('../components/Companies'));
 const Experience = React.lazy(() => import('../components/Experience'));
@@ -27,6 +28,9 @@ const Home = () => {
             <Suspense fallback={<SectionFallback />}>
                 <ScrollReveal animation="fade-up" duration={800}>
                     <Skills />
+                </ScrollReveal>
+                <ScrollReveal animation="fade-up" delay={100} duration={800}>
+                    <Services />
                 </ScrollReveal>
                 <ScrollReveal animation="fade-up" delay={100} duration={800}>
                     <Companies />
