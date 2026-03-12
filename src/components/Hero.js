@@ -1,5 +1,4 @@
 import React from 'react';
-import heroPhoto from '../assets/images/my_photo.png';
 import '../assets/styles/components/hero.css';
 
 const Hero = () => {
@@ -44,10 +43,19 @@ const Hero = () => {
                 <div className="hero-visual">
                     <div className="hero-animated-element">
                         <div className="hero-image-blob">
-                            <img
-                                src={heroPhoto}
-                                alt="Oussema Amri"
-                            />
+                            <picture>
+                                <source
+                                    srcSet={`${process.env.PUBLIC_URL}/images/my_photo.webp`}
+                                    type="image/webp"
+                                />
+                                <img
+                                    src={`${process.env.PUBLIC_URL}/images/my_photo.png`}
+                                    alt="Oussema Amri — Full-Stack Software Engineer"
+                                    width="420"
+                                    height="420"
+                                    fetchpriority="high"
+                                />
+                            </picture>
                         </div>
                     </div>
                 </div>
