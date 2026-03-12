@@ -44,6 +44,9 @@ const Companies = () => {
                                 <img 
                                     src={company.logo} 
                                     alt={`${company.name} logo`}
+                                    width="120"
+                                    height="60"
+                                    loading="lazy"
                                     onError={(e) => {
                                         e.target.style.display = 'none';
                                         e.target.parentElement.innerHTML = `<div class="company-name-fallback">${company.name}</div>`;
