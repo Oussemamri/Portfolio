@@ -1,14 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../assets/styles/components/hero.css';
 
 const Hero = () => {
-    const scrollToSkills = () => {
-        const skillsSection = document.getElementById('skills');
-        if (skillsSection) {
-            window.scrollTo({
-                top: skillsSection.offsetTop - 80,
-                behavior: 'smooth'
-            });
+    const scrollToOverview = () => {
+        const el = document.getElementById('skills');
+        if (el) {
+            window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
         }
     };
 
@@ -30,10 +28,10 @@ const Hero = () => {
                     </div>
 
                     <div className="hero-buttons">
-                        <a href="#contact" className="btn primary">
+                        <Link to="/contact" className="btn primary">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
                             Contact me
-                        </a>
+                        </Link>
                         <a href={`${process.env.PUBLIC_URL}/cv/Oussema_Amri_CV.pdf`} className="btn secondary" download="Oussema_Amri_CV.pdf">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
                             Download CV
@@ -61,7 +59,7 @@ const Hero = () => {
                 </div>
             </div>
 
-            <div className="scroll-indicator" onClick={scrollToSkills} role="button" aria-label="Scroll to Technical Stack section">
+            <div className="scroll-indicator" onClick={scrollToOverview} role="button" aria-label="Scroll to Technical Stack section">
                 <span>Explore More</span>
                 <div className="mouse"></div>
                 <div className="chevrons">

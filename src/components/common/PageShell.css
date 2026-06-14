@@ -1,0 +1,107 @@
+/* ── PageShell — shared section-page wrapper ─────────────────── */
+
+.page-shell {
+  min-height: calc(100vh - 76px);
+  padding-top: 76px;
+}
+
+/* ── Banner ──────────────────────────────────────────────────── */
+.page-shell-banner {
+  background: #1c1c1c;
+  position: relative;
+  overflow: hidden;
+  padding: 5rem 2rem 4rem;
+  animation: shell-enter 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes shell-enter {
+  from { opacity: 0; transform: translateY(-14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.page-shell-banner-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+/* meta label  // section */
+.page-shell-meta {
+  display: block;
+  font-family: 'DM Mono', 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  color: var(--shell-accent, #0077cc);
+  margin-bottom: 0.9rem;
+  opacity: 0.85;
+}
+
+/* big title */
+.page-shell-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2.6rem, 6vw, 4.8rem);
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  margin: 0 0 0.9rem;
+}
+.page-shell-title::after { display: none; }
+
+/* subtitle */
+.page-shell-subtitle {
+  font-family: 'DM Mono', 'JetBrains Mono', monospace;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.38);
+  margin: 0 0 2rem;
+  letter-spacing: 0.025em;
+}
+
+/* accent rule */
+.page-shell-rule {
+  width: 52px;
+  height: 3px;
+  background: var(--shell-accent, #0077cc);
+  border-radius: 2px;
+}
+
+/* ── Geometric grid pattern (CSS-only) ───────────────────────── */
+.page-shell-pattern {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+/* accent glow in top-right corner */
+.page-shell-banner::after {
+  content: '';
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: var(--shell-accent, #0077cc);
+  opacity: 0.06;
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Content area ────────────────────────────────────────────── */
+.page-shell-content {
+  background: var(--bg-color);
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .page-shell-banner {
+    padding: 3.5rem 1.25rem 3rem;
+  }
+}

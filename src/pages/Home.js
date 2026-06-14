@@ -3,14 +3,14 @@ import Hero from '../components/Hero';
 import ScrollReveal from '../components/common/ScrollReveal';
 import usePageTransition from '../hooks/usePageTransition';
 
-const Skills = React.lazy(() => import('../components/Skills'));
-const Services = React.lazy(() => import('../components/Services'));
-const About = React.lazy(() => import('../components/About'));
-const Companies = React.lazy(() => import('../components/Companies'));
-const Experience = React.lazy(() => import('../components/Experience'));
-const Projects = React.lazy(() => import('../components/Projects'));
-const Contact = React.lazy(() => import('../components/Contact'));
-const Languages = React.lazy(() => import('../components/Languages'));
+const Skills      = React.lazy(() => import('../components/skills'));
+const Services    = React.lazy(() => import('../components/Services'));
+const Companies   = React.lazy(() => import('../components/Companies'));
+const Experience  = React.lazy(() => import('../components/Experience'));
+const Projects    = React.lazy(() => import('../components/Projects'));
+const About       = React.lazy(() => import('../components/About'));
+const Contact     = React.lazy(() => import('../components/Contact'));
+const Languages   = React.lazy(() => import('../components/Languages'));
 
 const SectionFallback = () => (
     <div style={{ minHeight: '200px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -21,7 +21,7 @@ const SectionFallback = () => (
 
 const Home = () => {
     usePageTransition();
-    
+
     return (
         <main>
             <Hero />

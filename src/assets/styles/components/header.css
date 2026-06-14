@@ -135,6 +135,15 @@
     width: 100%;
 }
 
+.nav-link.active {
+    color: var(--primary-color, #0077cc);
+}
+
+.nav-link.active::after {
+    width: 100%;
+    background-color: var(--primary-color, #0077cc);
+}
+
 /* Fix Contact button styling */
 .contact-btn {
     background-color: #61dafb;
