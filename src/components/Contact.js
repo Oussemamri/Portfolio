@@ -4,37 +4,36 @@ import toast from 'react-hot-toast';
 import '../assets/styles/components/contact.css';
 import { FaPaperPlane, FaMapMarkerAlt, FaGithub, FaLinkedin, FaCopy, FaCheck } from 'react-icons/fa';
 
-const EMAILJS_SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICE_ID;
+const EMAILJS_SERVICE_ID  = process.env.REACT_APP_EMAILJS_SERVICE_ID;
 const EMAILJS_TEMPLATE_ID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID;
-const EMAILJS_PUBLIC_KEY = process.env.REACT_APP_EMAILJS_PUBLIC_KEY;
-const CONTACT_EMAIL = process.env.REACT_APP_CONTACT_EMAIL;
+const EMAILJS_PUBLIC_KEY  = process.env.REACT_APP_EMAILJS_PUBLIC_KEY;
+const CONTACT_EMAIL       = process.env.REACT_APP_CONTACT_EMAIL;
 
 const Contact = () => {
-    const formRef = useRef();
+    const formRef  = useRef();
     const [sending, setSending] = useState(false);
-    const [copied, setCopied] = useState(false);
+    const [copied,  setCopied]  = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
-            toast.error('Contact form is not configured yet. Please use the email copy button below.');
+            toast.error('Contact form is not configured yet. Please use the email copy button.');
             return;
         }
 
         setSending(true);
-
         emailjs
             .sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, formRef.current, EMAILJS_PUBLIC_KEY)
             .then(
                 () => {
-                    toast.success('Message sent! I\'ll get back to you soon.');
+                    toast.success("Message sent! I'll get back to you soon.");
                     formRef.current.reset();
                     setSending(false);
                 },
                 (error) => {
                     console.error('EmailJS error:', error);
-                    toast.error('Something went wrong. Please try again or use the email link below.');
+                    toast.error('Something went wrong. Please try again or use the email link.');
                     setSending(false);
                 }
             );
@@ -46,20 +45,18 @@ const Contact = () => {
             return;
         }
 
-        const emailToCopy = CONTACT_EMAIL;
-
-        navigator.clipboard.writeText(emailToCopy).then(() => {
+        navigator.clipboard.writeText(CONTACT_EMAIL).then(() => {
             setCopied(true);
             toast.success('Email copied to clipboard!');
             setTimeout(() => setCopied(false), 2000);
         }).catch(() => {
-            // Fallback for older browsers
-            const textArea = document.createElement('textarea');
-            textArea.value = emailToCopy;
-            document.body.appendChild(textArea);
-            textArea.select();
+            // fallback for older browsers
+            const ta = document.createElement('textarea');
+            ta.value = CONTACT_EMAIL;
+            document.body.appendChild(ta);
+            ta.select();
             document.execCommand('copy');
-            document.body.removeChild(textArea);
+            document.body.removeChild(ta);
             setCopied(true);
             toast.success('Email copied to clipboard!');
             setTimeout(() => setCopied(false), 2000);
@@ -68,37 +65,110 @@ const Contact = () => {
 
     return (
         <section id="contact" className="contact-section">
-            <div className="container">
-                <h2 className="section-title">Get In Touch</h2>
-                <p className="section-description">
-                    Feel free to reach out for opportunities, collaborations, or just to say hello.
-                </p>
+            <div className="contact-layout">
 
-                <div className="contact-card">
+                {/* ── Left: heading + contact details ── */}
+                <div className="contact-info">
+                    <div className="contact-intro">
+                        <h2 className="contact-heading">Get In Touch</h2>
+                        <p className="contact-description">
+                            Feel free to reach out for opportunities, collaborations, or just to say hello.
+                        </p>
+                    </div>
+
+                    <div className="contact-details">
+                        <h3 className="contact-details-title">Contact Details</h3>
+                        <ul className="contact-details-list">
+                            <li>
+                                <FaMapMarkerAlt className="detail-icon" />
+                                <span><strong>Location:</strong> Munich, Germany</span>
+                            </li>
+                            <li>
+                                <FaGithub className="detail-icon" />
+                                <span>
+                                    <strong>GitHub:</strong>{' '}
+                                    <a
+                                        href="https://github.com/Oussemamri"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        Oussemamri
+                                    </a>
+                                </span>
+                            </li>
+                            <li>
+                                <FaLinkedin className="detail-icon" />
+                                <span>
+                                    <strong>LinkedIn:</strong>{' '}
+                                    <a
+                                        href="https://linkedin.com/in/oussema-amri"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        oussema-amri
+                                    </a>
+                                </span>
+                            </li>
+                            <li>
+                                <FaCopy className="detail-icon" />
+                                <span>
+                                    <strong>Email:</strong>{' '}
+                                    <button
+                                        type="button"
+                                        className="copy-email-btn"
+                                        onClick={copyEmail}
+                                    >
+                                        {copied ? (
+                                            <><FaCheck /> Copied!</>
+                                        ) : (
+                                            'Copy address'
+                                        )}
+                                    </button>
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                {/* ── Right: form card ── */}
+                <div className="contact-form-panel">
                     <form ref={formRef} onSubmit={handleSubmit} className="contact-form">
-                        <div className="form-group">
-                            <label htmlFor="from_name">Name</label>
+
+                        {/* Name + Email side by side */}
+                        <div className="form-row">
+                            <div className="form-field">
+                                <label htmlFor="from_name">Name</label>
+                                <input
+                                    type="text"
+                                    id="from_name"
+                                    name="from_name"
+                                    placeholder="Your name"
+                                    required
+                                />
+                            </div>
+                            <div className="form-field">
+                                <label htmlFor="from_email">Email</label>
+                                <input
+                                    type="email"
+                                    id="from_email"
+                                    name="from_email"
+                                    placeholder="your@email.com"
+                                    required
+                                />
+                            </div>
+                        </div>
+
+                        <div className="form-field">
+                            <label htmlFor="subject">Subject</label>
                             <input
                                 type="text"
-                                id="from_name"
-                                name="from_name"
-                                placeholder="Your name"
-                                required
+                                id="subject"
+                                name="subject"
+                                placeholder="What's this about?"
                             />
                         </div>
 
-                        <div className="form-group">
-                            <label htmlFor="from_email">Email</label>
-                            <input
-                                type="email"
-                                id="from_email"
-                                name="from_email"
-                                placeholder="your@email.com"
-                                required
-                            />
-                        </div>
-
-                        <div className="form-group">
+                        <div className="form-field">
                             <label htmlFor="message">Message</label>
                             <textarea
                                 id="message"
@@ -109,9 +179,13 @@ const Contact = () => {
                             />
                         </div>
 
-                        <button type="submit" className="contact-submit-btn" disabled={sending}>
+                        <button
+                            type="submit"
+                            className="contact-submit-btn"
+                            disabled={sending}
+                        >
                             {sending ? (
-                                'Sending...'
+                                'Sending…'
                             ) : (
                                 <>
                                     <FaPaperPlane className="btn-icon" />
@@ -120,57 +194,8 @@ const Contact = () => {
                             )}
                         </button>
                     </form>
-
-                    <div className="contact-divider">
-                        <span>or</span>
-                    </div>
-
-                    <button
-                        type="button"
-                        className="contact-email-btn"
-                        onClick={copyEmail}
-                    >
-                        {copied ? (
-                            <>
-                                <FaCheck className="btn-icon" />
-                                Email Copied!
-                            </>
-                        ) : (
-                            <>
-                                <FaCopy className="btn-icon" />
-                                Copy Email Address
-                            </>
-                        )}
-                    </button>
-
-                    <div className="contact-meta">
-                        <span className="contact-location">
-                            <FaMapMarkerAlt className="meta-icon" />
-                            Munich, Germany
-                        </span>
-                    </div>
-
-                    <div className="contact-socials">
-                        <a
-                            href="https://github.com/Oussemamri"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label="GitHub"
-                            className="social-link"
-                        >
-                            <FaGithub />
-                        </a>
-                        <a
-                            href="https://linkedin.com/in/oussema-amri"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label="LinkedIn"
-                            className="social-link"
-                        >
-                            <FaLinkedin />
-                        </a>
-                    </div>
                 </div>
+
             </div>
         </section>
     );

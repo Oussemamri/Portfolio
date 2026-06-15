@@ -9,18 +9,21 @@ const About = () => {
                 <div className="about-content">
                     <div className="about-text">
                         <p>
-                            Full-Stack Software Engineer with over 3 years of experience developing scalable applications 
-                            for the fintech and aerospace sectors. Currently a Software Engineer at Rocket Factory Augsburg (RFA), 
-                            specializing in Python, TypeScript/JavaScript, and modern cloud architectures (AWS).
+                            Full-Stack Software Engineer with hands-on experience building production systems
+                            across the aerospace and civic tech sectors. Currently contributing as a Software Engineer
+                            at Rocket Factory Augsburg, where I own the design, development, and maintenance
+                            of internal applications used company-wide.
                         </p>
                         <p>
-                            Track record of delivering high-performance systems with measurable impact: 20% performance gains 
-                            through optimization, 98.5% uptime for production platforms, and 80% reduction in database load 
-                            through caching strategies.
+                            I work across the entire stack — from React frontends and FastAPI services to
+                            PostgreSQL schemas and Docker deployments — with a focus on writing clean, maintainable
+                            code that solves real operational problems. I'm comfortable taking features from
+                            requirements to production and keeping them running reliably.
                         </p>
                         <p>
-                            Proficient in CI/CD automation, microservices design, and Agile development methodologies. 
-                            Currently based in Munich, Germany.
+                            Passionate about developer tooling, CI/CD automation, and AI-assisted workflows.
+                            Open to frontend, backend, and full-stack roles. Based in Munich, Germany —
+                            available for on-site, hybrid, or remote positions.
                         </p>
                     </div>
                     <div className="education">

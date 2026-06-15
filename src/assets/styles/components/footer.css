@@ -1,31 +1,335 @@
+/* ══════════════════════════════════════════
+   FOOTER — 21st.dev design + background boxes
+   Z-index stack (bottom → top):
+     0   boxes (animated background)
+     1   overlay (vignette mask, pointer-events:none)
+     2   footer-bg-text watermark   (pointer-events:none)
+     3   footer-divider              (pointer-events:none)
+     4   footer-shadow gradient      (pointer-events:none)
+     5   footer-inner (interactive content)
+     10  footer-logo-box
+   ══════════════════════════════════════════ */
+
+.footer-section {
+    position: relative;
+    width: 100%;
+    /* Override the global `section { padding: 5rem 2rem }` rule:
+       the 2rem horizontal padding (no global border-box) caused a 64px
+       horizontal overflow, and the 5rem vertical padding created the
+       empty space above/below the footer. */
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
 .footer {
-    background-color: #282c34;
-    color: white;
-    padding: 30px 20px;
+    position: relative;
+    background-color: var(--footer-bg);
+    color: var(--footer-text);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    overflow: hidden;          /* clip the boxes that extend outside */
+}
+
+/* ── Vignette overlay ─────────────────────
+   Covers edges with footer-bg color, center
+   is transparent so boxes peek through.
+   Uses mask-image (alpha mode):
+     transparent (alpha=0) → overlay hidden → boxes visible
+     black       (alpha=1) → overlay visible → dark bg shows
+   ─────────────────────────────────────── */
+.footer-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: var(--footer-bg);
+    mask-image: radial-gradient(ellipse at 50% 50%, transparent 10%, black 70%);
+    -webkit-mask-image: radial-gradient(ellipse at 50% 50%, transparent 10%, black 70%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* ── Inner content column ──
+   min-height = content (~13rem) + decorative clearance (~14rem for logo+watermark)
+   justify-content: space-between pushes copyright to the footer bottom. */
+.footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.75rem 1rem 0.75rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 22rem;
+    position: relative;
+    z-index: 5;
+    pointer-events: none;      /* pass-through; children override */
+}
+
+/* ── Brand block ── */
+.footer-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.footer-brand-name {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: var(--footer-text);
+    letter-spacing: -0.01em;
+}
+
+.footer-brand-desc {
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-align: center;
+    max-width: 24rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* ── Social icons ── */
+.footer-socials {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+    pointer-events: auto;      /* restore interactivity */
+}
+
+.footer-social-link {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 1.375rem;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    transition: color 0.25s, transform 0.25s;
+}
+
+.footer-social-link:hover {
+    color: var(--footer-text);
+    transform: scale(1.15);
+}
+
+/* ── Nav links ── */
+.footer-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.4rem 1.25rem;
+    pointer-events: auto;      /* restore interactivity */
+}
+
+.footer-nav-link {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    transition: color 0.25s;
+}
+
+.footer-nav-link:hover {
+    color: var(--footer-text);
+    font-weight: 600;
+}
+
+/* ── Copyright bar ── */
+.footer-bottom {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 1.25rem;
+    pointer-events: auto;
+}
+
+.footer-bottom p {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.4);
+    margin: 0;
     text-align: center;
 }
 
-.footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
+/* ══════════════════════════════════════════
+   DECORATIVE — absolutely positioned
+   All pointer-events: none (purely visual)
+   ══════════════════════════════════════════ */
+
+/* Large background watermark */
+.footer-bg-text {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 9rem;
+    font-size: clamp(2.5rem, 10vw, 7.5rem);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    text-align: center;
+    pointer-events: none;
+    user-select: none;
+    white-space: nowrap;
+    color: transparent;
+    background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.22),
+        rgba(255, 255, 255, 0.08),
+        transparent
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    z-index: 2;
 }
 
-.footer p {
-    margin-bottom: 15px;
-}
-
-.footer-links {
+/* Outer glass wrapper */
+.footer-logo-box {
+    position: absolute;
+    bottom: 6rem;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
+    align-items: center;
     justify-content: center;
-    gap: 30px;
+    padding: 12px;
+    background: rgba(40, 44, 52, 0.6);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    border: 2px solid rgba(255, 255, 255, 0.12);
+    border-radius: 24px;
+    filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.5));
+    transition: border-color 0.3s;
+    z-index: 10;
+    cursor: default;
+    pointer-events: auto;
 }
 
-.footer-links a {
-    color: #61dafb;
-    transition: color 0.3s;
+.footer-logo-box:hover {
+    border-color: rgba(255, 255, 255, 0.35);
 }
 
-.footer-links a:hover {
-    color: white;
-    text-decoration: underline;
+/* Inner gradient square */
+.footer-logo-inner {
+    width: 6rem;
+    height: 6rem;
+    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+
+.footer-logo-icon {
+    font-size: 2.5rem;
+    color: #fff;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
+}
+
+/* Gradient divider line */
+.footer-divider {
+    position: absolute;
+    bottom: 8rem;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(
+        to right,
+        transparent,
+        rgba(255, 255, 255, 0.15),
+        transparent
+    );
+    pointer-events: none;
+    z-index: 3;
+}
+
+/* Bottom fill — fades footer-bg up from the very bottom */
+.footer-shadow {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 9rem;
+    background: linear-gradient(
+        to top,
+        var(--footer-bg) 0%,
+        var(--footer-bg) 45%,
+        transparent 100%
+    );
+    pointer-events: none;
+    z-index: 4;
+}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════ */
+
+/* sm ≥ 640px */
+@media (min-width: 640px) {
+    .footer-inner {
+        min-height: 24rem;
+    }
+
+    .footer-logo-inner {
+        width: 4rem;
+        height: 4rem;
+    }
+
+    .footer-logo-icon {
+        font-size: 1.8rem;
+    }
+}
+
+/* md ≥ 768px */
+@media (min-width: 768px) {
+    .footer-inner {
+        min-height: 26rem;
+    }
+
+    .footer-bg-text {
+        bottom: 7rem;
+    }
+
+    .footer-logo-box {
+        bottom: 5rem;
+    }
+
+    .footer-logo-inner {
+        width: 6rem;
+        height: 6rem;
+    }
+
+    .footer-logo-icon {
+        font-size: 2.5rem;
+    }
+}
+
+/* xs < 640px */
+@media (max-width: 639px) {
+    .footer-inner {
+        min-height: 20rem;
+    }
+
+    .footer-logo-box {
+        padding: 8px;
+        border-radius: 18px;
+        bottom: 5rem;
+    }
+
+    .footer-logo-inner {
+        width: 3rem;
+        height: 3rem;
+    }
+
+    .footer-logo-icon {
+        font-size: 1.4rem;
+    }
+
+    .footer-bg-text {
+        bottom: 8rem;
+    }
+
+    .footer-divider {
+        bottom: 7.5rem;
+    }
+
+    .footer-shadow {
+        height: 8rem;
+    }
 }

@@ -15,7 +15,7 @@ const Hero = () => {
             <div className="hero-container">
                 <div className="hero-text">
                     <h1>Oussema Amri</h1>
-                    <h2>Full-Stack Developer JS &amp; TS</h2>
+                    <h2>Full-Stack Developer JS, TS &amp; Python</h2>
                     <p>Full-Stack Software Engineer open to frontend, backend, and full-stack opportunities. I build clean, scalable products that solve real business problems.</p>
 
                     <div className="hero-socials">

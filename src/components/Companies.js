@@ -1,68 +1,110 @@
 import React from 'react';
 import '../assets/styles/components/companies.css';
-import rfaLogo from '../assets/images/companies/rfa.png';
+import rfaLogo      from '../assets/images/companies/rfa.png';
 import happyNationLogo from '../assets/images/companies/happy-nation.png';
-import talanLogo from '../assets/images/companies/talan.png';
+import talanLogo    from '../assets/images/companies/talan.png';
 
-const Companies = () => {
-    const companies = [
-        {
-            name: 'Rocket Factory Augsburg',
-            role: 'Software Engineer',
-            logo: rfaLogo,
-            website: 'https://www.rfa.space/'
-        },
-        {
-            name: 'Happy Nation',
-            role: 'Full Stack Developer',
-            logo: happyNationLogo,
-            website: 'https://citizen.happynation.global/home'
-        },
-        {
-            name: 'Talan',
-            role: 'Software Engineering Intern',
-            logo: talanLogo,
-            website: 'https://www.talan.com/global/en'
-        }
-    ];
+const COMPANIES = [
+    {
+        num:     '01',
+        name:    'Rocket Factory Augsburg',
+        short:   'RFA',
+        role:    'Software Engineer — Working Student',
+        period:  '02 / 2025 — Present',
+        sector:  ['Aerospace', 'Munich'],
+        accent:  '#E63946',
+        logo:    rfaLogo,
+        website: 'https://www.rfa.space/',
+    },
+    {
+        num:     '02',
+        name:    'Happy Nation GmbH',
+        short:   'Happy Nation',
+        role:    'Full Stack Developer — Intern',
+        period:  '06 / 2024 — 12 / 2024',
+        sector:  ['Civic Tech', 'Munich'],
+        accent:  '#22C55E',
+        logo:    happyNationLogo,
+        website: 'https://citizen.happynation.global/home',
+    },
+    {
+        num:     '03',
+        name:    'Talan Tunisia',
+        short:   'Talan',
+        role:    'Software Engineering Intern',
+        period:  '2023',
+        sector:  ['Consulting', 'Tunisia'],
+        accent:  '#F59E0B',
+        logo:    talanLogo,
+        website: 'https://www.talan.com/global/en',
+    },
+];
 
-    return (
-        <section className="companies-section">
-            <div className="container">
-                <h2>Companies I've Worked With</h2>
-                <div className="companies-grid">
-                    {companies.map((company, index) => (
-                        <a 
-                            key={index}
-                            href={company.website}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="company-card"
-                            aria-label={`Visit ${company.name} website`}
-                        >
-                            <div className="company-logo">
-                                <img 
-                                    src={company.logo} 
-                                    alt={`${company.name} logo`}
-                                    width="120"
-                                    height="60"
-                                    loading="lazy"
-                                    onError={(e) => {
-                                        e.target.style.display = 'none';
-                                        e.target.parentElement.innerHTML = `<div class="company-name-fallback">${company.name}</div>`;
-                                    }}
-                                />
-                            </div>
-                            <div className="company-info">
-                                <h3>{company.name}</h3>
-                                <p>{company.role}</p>
-                            </div>
-                        </a>
-                    ))}
+const Companies = () => (
+    <section className="co-section">
+        {/* subtle scan-line texture */}
+        <div className="co-texture" aria-hidden="true" />
+
+        <div className="co-inner">
+            <header className="co-header">
+                <span className="co-eyebrow">{'// where I\'ve worked'}</span>
+                <div className="co-title-row">
+                    <h2 className="co-title">Companies</h2>
+                    <span className="co-counter">03 engagements</span>
                 </div>
+            </header>
+
+            <div className="co-list">
+                {COMPANIES.map((co, i) => (
+                    <a
+                        key={co.num}
+                        href={co.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="co-entry"
+                        aria-label={`Visit ${co.name}`}
+                        style={{ '--co-accent': co.accent, '--co-delay': `${i * 90}ms` }}
+                    >
+                        {/* big watermark number */}
+                        <span className="co-num" aria-hidden="true">{co.num}</span>
+
+                        {/* logo */}
+                        <div className="co-logo-wrap">
+                            <img
+                                src={co.logo}
+                                alt={`${co.name} logo`}
+                                width="100"
+                                height="50"
+                                loading="lazy"
+                            />
+                        </div>
+
+                        {/* name + role */}
+                        <div className="co-body">
+                            <h3 className="co-name">{co.name}</h3>
+                            <span className="co-role">{co.role}</span>
+                        </div>
+
+                        {/* period + tags */}
+                        <div className="co-meta">
+                            <span className="co-period">{co.period}</span>
+                            <div className="co-tags">
+                                {co.sector.map(tag => (
+                                    <span key={tag} className="co-tag">{tag}</span>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* hover CTA */}
+                        <span className="co-cta" aria-hidden="true">Visit ↗</span>
+
+                        {/* animated left border */}
+                        <span className="co-bar" aria-hidden="true" />
+                    </a>
+                ))}
             </div>
-        </section>
-    );
-};
+        </div>
+    </section>
+);
 
 export default Companies;

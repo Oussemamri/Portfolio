@@ -1,78 +1,113 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import useScrollPosition from '../hooks/useScrollPosition';
+import { motion } from 'framer-motion';
+import {
+    FaHome, FaCode, FaBriefcase, FaHistory,
+    FaFolder, FaUser, FaEnvelope, FaRobot
+} from 'react-icons/fa';
 import '../assets/styles/components/header.css';
 import ChatWidget from '../components/ChatWidget/ChatWidget';
 import logoImg from '../assets/images/logo_app.png';
+import useScrollPosition from '../hooks/useScrollPosition';
 
 const NAV_LINKS = [
-  { label: 'Home',       to: '/'           },
-  { label: 'Skills',     to: '/skills'     },
-  { label: 'Services',   to: '/services'   },
-  { label: 'Experience', to: '/experience' },
-  { label: 'Work',       to: '/work'       },
-  { label: 'About',      to: '/about'      },
-  { label: 'Contact',    to: '/contact'    },
+    { label: 'Home',       to: '/',           Icon: FaHome      },
+    { label: 'Skills',     to: '/skills',     Icon: FaCode      },
+    { label: 'Services',   to: '/services',   Icon: FaBriefcase },
+    { label: 'Experience', to: '/experience', Icon: FaHistory   },
+    { label: 'Work',       to: '/work',       Icon: FaFolder    },
+    { label: 'About',      to: '/about',      Icon: FaUser      },
+    { label: 'Contact',    to: '/contact',    Icon: FaEnvelope  },
 ];
 
+const SPRING = { type: 'spring', stiffness: 350, damping: 30 };
+
 const Header = () => {
-  const scrollPosition = useScrollPosition();
-  const [menuOpen, setMenuOpen]   = useState(false);
-  const [hasScrolled, setHasScrolled] = useState(false);
-  const location = useLocation();
+    const location = useLocation();
+    const scrollY = useScrollPosition();
+    const scrolled = scrollY > 60;
 
-  useEffect(() => {
-    setHasScrolled(scrollPosition > 50);
-  }, [scrollPosition]);
+    return (
+        <>
+            <header className={`header${scrolled ? ' header--scrolled' : ''}`}>
+                <div className="header-row">
+                    {/* Logo */}
+                    <Link to="/" className="header-logo" aria-label="Home">
+                        <img src={logoImg} alt="OA" className="logo-img" />
+                    </Link>
 
-  useEffect(() => {
-    setMenuOpen(false);
-  }, [location.pathname]);
+                    {/* Desktop glass pill nav */}
+                    <nav className="nav-pill" aria-label="Main navigation">
+                        {NAV_LINKS.map(({ label, to }) => {
+                            const isActive = location.pathname === to;
+                            return (
+                                <Link
+                                    key={to}
+                                    to={to}
+                                    className={`nav-item${isActive ? ' nav-item--active' : ''}`}
+                                    aria-current={isActive ? 'page' : undefined}
+                                >
+                                    {isActive && (
+                                        <motion.span
+                                            layoutId="nav-lamp"
+                                            className="nav-lamp"
+                                            initial={false}
+                                            transition={SPRING}
+                                        />
+                                    )}
+                                    <span className="nav-label">{label}</span>
+                                </Link>
+                            );
+                        })}
+                    </nav>
 
-  return (
-    <>
-      <header className={`header ${hasScrolled ? 'scrolled' : ''}`}>
-        <div className="header-container">
-          <div className="logo">
-            <Link to="/">
-              <img src={logoImg} alt="OA" className="logo-img" />
-            </Link>
-          </div>
+                    {/* AI Chat button — right column */}
+                    <div className="header-right">
+                        <button
+                            className="ai-chat-btn"
+                            onClick={() => document.querySelector('.chat-toggle-button')?.click()}
+                            aria-label="Open AI Chat"
+                        >
+                            <FaRobot aria-hidden="true" />
+                            <span className="ai-chat-label">AI Chat</span>
+                        </button>
+                    </div>
+                </div>
+            </header>
 
-          <nav className="main-nav">
-            <ul className={`nav-links ${menuOpen ? 'active' : ''}`}>
-              {NAV_LINKS.map(({ label, to }) => (
-                <li key={to}>
-                  <Link
-                    to={to}
-                    className={`nav-link${location.pathname === to ? ' active' : ''}`}
-                  >
-                    {label}
-                  </Link>
-                </li>
-              ))}
-              <li>
-                <button
-                  className="nav-link chat-button"
-                  onClick={() => document.querySelector('.chat-toggle-button')?.click()}
-                >
-                  Chat with AI
-                </button>
-              </li>
-            </ul>
+            {/* Mobile bottom pill nav — icons only */}
+            <nav className="mobile-nav" aria-label="Mobile navigation">
+                <div className="mobile-nav-pill">
+                    {NAV_LINKS.map(({ label, to, Icon }) => {
+                        const isActive = location.pathname === to;
+                        return (
+                            <Link
+                                key={to}
+                                to={to}
+                                className={`mobile-item${isActive ? ' mobile-item--active' : ''}`}
+                                aria-label={label}
+                                aria-current={isActive ? 'page' : undefined}
+                            >
+                                {isActive && (
+                                    <motion.span
+                                        layoutId="mobile-lamp"
+                                        className="nav-lamp"
+                                        initial={false}
+                                        transition={SPRING}
+                                    />
+                                )}
+                                <span className="mobile-icon">
+                                    <Icon size={17} aria-hidden="true" />
+                                </span>
+                            </Link>
+                        );
+                    })}
+                </div>
+            </nav>
 
-            <div className="menu-icon" onClick={() => setMenuOpen(m => !m)}>
-              <div className={`menu-line ${menuOpen ? 'active' : ''}`} />
-              <div className={`menu-line ${menuOpen ? 'active' : ''}`} />
-              <div className={`menu-line ${menuOpen ? 'active' : ''}`} />
-            </div>
-          </nav>
-        </div>
-      </header>
-
-      <ChatWidget />
-    </>
-  );
+            <ChatWidget />
+        </>
+    );
 };
 
 export default Header;
