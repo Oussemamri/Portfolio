@@ -1,0 +1,44 @@
+.projects-page {
+    padding: 6rem 2rem 5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.projects-page-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.projects-page-eyebrow {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--primary-color);
+    margin: 0 0 0.6rem;
+}
+
+.projects-page-title {
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text-color);
+    margin: 0 0 1rem;
+    line-height: 1.1;
+}
+
+.projects-page-sub {
+    font-size: 0.95rem;
+    color: #64748b;
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.65;
+}
+
+body.dark .projects-page-sub {
+    color: #94a3b8;
+}
+
+.projects-page-grid {
+    margin-top: 0;
+}

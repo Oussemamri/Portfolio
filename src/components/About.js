@@ -4,44 +4,78 @@ import '../assets/styles/components/about.css';
 const About = () => {
     return (
         <section id="about" className="about-section">
-            <div className="container">
-                <h2>About Me</h2>
-                <div className="about-content">
-                    <div className="about-text">
-                        <p>
-                            Full-Stack Software Engineer with hands-on experience building production systems
-                            across the aerospace and civic tech sectors. Currently contributing as a Software Engineer
-                            at Rocket Factory Augsburg, where I own the design, development, and maintenance
-                            of internal applications used company-wide.
-                        </p>
-                        <p>
-                            I work across the entire stack — from React frontends and FastAPI services to
-                            PostgreSQL schemas and Docker deployments — with a focus on writing clean, maintainable
-                            code that solves real operational problems. I'm comfortable taking features from
-                            requirements to production and keeping them running reliably.
-                        </p>
-                        <p>
-                            Passionate about developer tooling, CI/CD automation, and AI-assisted workflows.
-                            Open to frontend, backend, and full-stack roles. Based in Munich, Germany —
-                            available for on-site, hybrid, or remote positions.
-                        </p>
-                    </div>
-                    <div className="education">
-                        <h3>Education</h3>
-                        <div className="education-item">
-                            <h4>Engineering Degree in Computer Science (M.Eng. equivalent)</h4>
-                            <p>ESPRIT School of Engineering, Tunisia (09/2022 – 06/2025)</p>
-                        </div>
-                        <div className="education-item">
-                            <h4>Exchange Semester – Master in Computer Science</h4>
-                            <p>Hochschule Schmalkalden, Germany (10/2024 – 03/2025)</p>
-                        </div>
-                        <div className="education-item">
-                            <h4>Preparatory Institute for Engineering Studies</h4>
-                            <p>Intensive Mathematics, Physics & Computer Science (09/2020 – 06/2022)</p>
-                        </div>
-                    </div>
+            <div className="about-grid">
+
+                {/* Col 1, Row 1 — "ABOUT" headline */}
+                <div className="about-cell cell-about-title">
+                    <span>ABOUT</span>
                 </div>
+
+                {/* Col 2, Row 1 — descriptor */}
+                <div className="about-cell cell-top-descriptor">
+                    <p className="descriptor-label">Full-Stack Engineer</p>
+                    <p className="descriptor-sub">Munich, Germany</p>
+                </div>
+
+                {/* Col 3, Rows 1–4 — large portrait photo */}
+                <div className="about-cell cell-photo-main">
+                    <img src={`${process.env.PUBLIC_URL}/about_me_img.png`} alt="Oussema Amri" />
+                </div>
+
+                {/* Col 1, Row 2 — visual separator */}
+                <div className="about-cell cell-separator">
+                    <span className="sep-line" />
+                </div>
+
+                {/* Col 2, Row 2 — manifesto tagline */}
+                <div className="about-cell cell-tagline">
+                    <p>
+                        THE BEST CODE IS THE CODE THAT SOLVES
+                        REAL PROBLEMS — RELIABLY, READABLY,
+                        AND WITHOUT DRAMA.
+                    </p>
+                </div>
+
+                {/* Col 1, Row 3 — "ME" headline */}
+                <div className="about-cell cell-me-title">
+                    <span>ME</span>
+                </div>
+
+                {/* Col 2, Row 3 — bio */}
+                <div className="about-cell cell-bio">
+                    <p className="bio-name">Oussema Amri</p>
+                    <p>
+                        Full-Stack Software Engineer currently at{' '}
+                        <strong>Rocket Factory Augsburg</strong>, where I own the design,
+                        development, and maintenance of internal applications used company-wide.
+                        I work across the entire stack — React frontends, FastAPI services,
+                        PostgreSQL schemas, and Docker deployments.
+                    </p>
+                    <p>
+                        Previously contributed to civic tech at <strong>Talan</strong> and
+                        built production systems that handle real operational load. Comfortable
+                        taking features from requirements to production and keeping them running.
+                    </p>
+                    <p>
+                        M.Eng. Computer Science, ESPRIT School of Engineering. Exchange semester
+                        at Hochschule Schmalkalden, Germany.
+                    </p>
+                </div>
+
+                {/* Col 1, Row 4 — location */}
+                <div className="about-cell cell-location">
+                    <p className="location-city">Munich,<br />Germany</p>
+                    <p className="location-open">Open to on-site, hybrid &amp; remote</p>
+                </div>
+
+                {/* Col 2, Row 4 — email CTA */}
+                <div className="about-cell cell-email-cta">
+                    <p className="email-label">Get in touch</p>
+                    <a href="mailto:amriouseema@gmail.com" className="email-link">
+                        AMRIOUSEEMA@GMAIL.COM
+                    </a>
+                </div>
+
             </div>
         </section>
     );

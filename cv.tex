@@ -1,6 +1,6 @@
 %-------------------------
 % Resume in Latex
-% Author
+% ATS-Optimized Version
 % License : MIT
 %------------------------
 
@@ -28,12 +28,11 @@
 \usepackage{graphicx}
 \usepackage[T1]{fontenc}
 \usepackage{charter}
-
-% Using babel with English since the content is now English
 \usepackage[english]{babel}
-\setlength{\multicolsep}{0pt} 
+
+\setlength{\multicolsep}{0pt}
 \pagestyle{fancy}
-\fancyhf{} % clear all header and footer fields
+\fancyhf{}
 \fancyfoot{}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
@@ -43,22 +42,21 @@
 
 \usepackage[most]{tcolorbox}
 \tcbset{
-	frame code={}
-	center title,
-	left=0pt,
-	right=0pt,
-	top=0pt,
-	bottom=0pt,
-	colback=gray!20,
-	colframe=white,
-	width=\dimexpr\textwidth\relax,
-	enlarge left by=-2mm,
-	boxsep=4pt,
-	arc=0pt,outer arc=0pt,
+    frame code={}
+    center title,
+    left=0pt,
+    right=0pt,
+    top=0pt,
+    bottom=0pt,
+    colback=gray!20,
+    colframe=white,
+    width=\dimexpr\textwidth\relax,
+    enlarge left by=-2mm,
+    boxsep=4pt,
+    arc=0pt,outer arc=0pt,
 }
 
 \urlstyle{same}
-
 \raggedright
 \setlength{\tabcolsep}{0in}
 
@@ -78,7 +76,7 @@
 \newcommand{\resumePOR}[3]{
 \vspace{0.5mm}\item
     \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
-        \textbf{#1}\hspace{0.3mm}#2 & \textit{\small{#3}} 
+        \textbf{#1}\hspace{0.3mm}#2 & \textit{\small{#3}}
     \end{tabular*}
     \vspace{-2mm}
 }
@@ -102,7 +100,10 @@
 }
 
 \newcommand{\resumeSubItem}[2]{\resumeItem{#1}{#2}\vspace{-4pt}}
-\renewcommand{\labelitemi}{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+% FIX: Use standard bullet character instead of custom LaTeX symbol (ATS-safe)
+\renewcommand{\labelitemi}{--}
+
 \newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*,labelsep=0mm]}
 \newcommand{\resumeHeadingSkillStart}{\begin{itemize}[leftmargin=*,itemsep=1.7mm, rightmargin=2ex]}
 \newcommand{\resumeItemListStart}{\begin{justify}\begin{itemize}[leftmargin=3ex, rightmargin=2ex, labelsep=1.2mm,itemsep=0.5pt,parsep=0.5pt,topsep=1pt]\normalsize}
@@ -116,6 +117,7 @@
 \end{tcolorbox}
     \vspace{-4mm}
 }
+
 \newcolumntype{L}{>{\raggedright\arraybackslash}X}%
 \newcolumntype{R}{>{\raggedleft\arraybackslash}X}%
 \newcolumntype{C}{>{\centering\arraybackslash}X}%
@@ -123,53 +125,53 @@
 
 %-------------------------------------------
 %%%%%%  CV STARTS HERE  %%%%%%%%%%%
-%%%%%% DEFINE ELEMENTS HERE %%%%%%%
 \newcommand{\name}{OUSSEMA AMRI}
 \newcommand{\phone}{(+49) 15510 357723}
 \newcommand{\emaila}{amriouseema@gmail.com}
 \newcommand{\github}{github.com/Oussemamri}
 \newcommand{\linkedin}{linkedin.com/in/oussema-amri}
-\newcommand{\location}{Munich, Augsburg, Germany}
+\newcommand{\location}{Munich, Germany}
 
 \begin{document}
 
-% Header with Photo
+% Header: text left, photo right, vertically centered
 \begin{minipage}[c]{0.75\textwidth}
     \begin{flushleft}
-        \textbf{\Large OUSSEMA AMRI}\\ 
-        \vspace{1mm} 
-        Munich, Germany\\ 
-        Email: \href{mailto:amriouseema@gmail.com}{amriouseema@gmail.com} \,|\, Tel: (+49) 15510 357723\\ 
-        \href{https://github.com/Oussemamri}{\raisebox{-0.15\height}{\faGithub}\;GitHub} \hspace{10pt} 
-        \href{https://linkedin.com/in/oussema-amri}{\raisebox{-0.15\height}{\faLinkedin}\;LinkedIn} \hspace{10pt} 
-        \href{https://oussemaamri.com/}{\raisebox{-0.15\height}{\faGlobe}\;Portfolio}
+        {\LARGE \textbf{OUSSEMA AMRI}}\\[1mm]
+        {\large Full-Stack Software Engineer}\\[2mm]
+        Munich, Germany \,$|$\,
+        \href{mailto:amriouseema@gmail.com}{amriouseema@gmail.com} \,$|$\,
+        (+49) 15510 357723\\[1mm]
+        \href{https://github.com/Oussemamri}{\faGithub\; GitHub} \hspace{14pt}
+        \href{https://linkedin.com/in/oussema-amri}{\faLinkedin\; LinkedIn} \hspace{14pt}
+        \href{https://oussemaamri.com/}{\faGlobe\; Portfolio}
     \end{flushleft}
-\end{minipage}
+\end{minipage}%
+\hfill
 \begin{minipage}[c]{0.20\textwidth}
     \begin{flushright}
         \begin{tikzpicture}
             \clip (0,0) circle (1.25cm);
-            % Restore original image inclusion logic. 
-            % Note: If photo.png is missing, it will show the 'Photo' text in a circle.
             \node at (0,-0.3) {\includegraphics[width=2.5cm, keepaspectratio]{profile.jpg}};
-            % Fallback label if image is not found during compilation
-            \node at (0,0) {\fontsize{6}{7}\selectfont};
         \end{tikzpicture}
     \end{flushright}
 \end{minipage}
 
+\vspace{-2mm}
+
 % Professional Summary
 \section{\textbf{Summary}}
 \resumeItemListStart
-\item{Full-Stack Software Engineer with over 2 years of experience developing scalable applications for the fintech and aerospace sectors. Currently a Software Engineer at Rocket Factory Augsburg, specializing in React, Python, TypeScript/JavaScript, and modern cloud architectures (AWS). AWS Certified Cloud Practitioner (CLF-C02).}
+\item{Full-Stack Software Engineer with over 1 year of experience developing scalable applications for the aerospace and civic-tech sectors. Currently a Software Engineer at Rocket Factory Augsburg, specializing in React, Python, TypeScript/JavaScript, and modern cloud architectures (AWS). AWS Certified Cloud Practitioner (CLF-C02).}
 \resumeItemListEnd
 
 % Experience
 \section{\textbf{Professional Experience}}
 \resumeSubHeadingListStart
+
 \resumeSubheading
   {Rocket Factory Augsburg (RFA)}{Augsburg, Germany}
-  {Software Engineer Working Student}{02/2025 – Present}
+  {Software Engineer -- Working Student}{02/2025 -- Present}
   \resumeItemListStart
     \item{Built an internal engineering document management system from requirements to production, later adopted company-wide.}
     \item{Designed and operated a full-stack application using \textbf{FastAPI}, \textbf{React}, and \textbf{PostgreSQL}, deployed with \textbf{Docker Compose}, \textbf{GitLab CI/CD} pipelines, and \textbf{Portainer}.}
@@ -181,30 +183,53 @@
   \resumeItemListEnd
 
 \resumeSubheading
-  {Happy Nation GmbH}{Berlin, Germany}
-  {Full Stack Developer (Intern)}{06/2024 – 12/2024}
+  {Happy Nation Global}{Berlin, Germany}
+  {Full Stack Developer -- Intern}{06/2024 -- 12/2024}
   \resumeItemListStart
-    \item{Built a full-stack citizen platform with \textbf{Django REST Framework}, \textbf{React}, and \textbf{PostgreSQL}, including \textbf{JWT} authentication, role-based access control, and an admin-gated account approval workflow.}
+    \item{Built and deployed a full-stack platform on \textbf{AWS} using \textbf{Django REST Framework}, \textbf{React}, and \textbf{PostgreSQL}, enabling users to register as Happy Nation citizens, collect achievement stamps, and engage with the community.}
     \item{Engineered a multi-step onboarding flow with ticket verification, brute-force protection, and automated transactional emails.}
-    \item{Designed a hierarchical stamp system with image upload, server-side compression using \textbf{Pillow}, \textbf{S3} storage integration, and usage-milestone email alerts.}
-    \item{Implemented an interactive digital passport with a custom flip-book UI using \textbf{react-pageflip}, preloading assets at startup with \textbf{fflate} compression to reduce load time.}
-    \item{Integrated the \textbf{Brevo API} for newsletter subscriptions and configurable stamp reminder notifications.}
-    \item{Containerized the platform with \textbf{Docker}, configured \textbf{Nginx} as a reverse proxy, deployed behind \textbf{Cloudflare}, and documented endpoints with \textbf{Swagger} using \textbf{drf-yasg}.}
+    \item{Built a media processing pipeline with server-side image compression (\textbf{Pillow}), \textbf{S3} storage, and milestone-triggered automated email alerts.}
+    \item{Integrated the \textbf{Brevo API} for newsletter and reminder flows, and improved discoverability through sitemap generation and \textbf{Lighthouse}-driven SEO optimizations, reaching a 95\% SEO score.}
+    \item{Set up a \textbf{GitHub Actions} CI/CD pipeline to build \textbf{Docker} images, push them to \textbf{Amazon ECR}, deploy to \textbf{EC2}, and restart containers automatically with no manual steps.}
+    \item{Configured \textbf{AWS} infrastructure (\textbf{S3}, \textbf{IAM}, \textbf{CloudFront}) for static delivery and access control, and hardened the deployment with \textbf{Nginx}, \textbf{Cloudflare Tunnel}, and automated API documentation via \textbf{drf-yasg}.}
   \resumeItemListEnd
 
 \resumeSubheading
   {Talan Tunisia}{Tunis, Tunisia}
-  {Software Engineering Intern – Full Stack Development}{07/2023 – 09/2023}
+  {Software Engineering Intern -- Full Stack Development}{02/2023 -- 09/2023}
   \resumeItemListStart
-    \item{Delivered HR platform features including profile management, document workflows, leave tracking, and analytics dashboards using \textbf{NestJS}, \textbf{React}, and \textbf{PostgreSQL}.}
-    \item{Established a \textbf{Jenkins} CI/CD pipeline with \textbf{Docker} to streamline deployments and support more reliable release workflows.}
+    \item{Built HR platform features (profile management, document workflows, leave tracking, dashboards) using \textbf{NestJS}, \textbf{React}, \textbf{PostgreSQL}, and \textbf{Docker}, with a \textbf{Jenkins} CI/CD pipeline.}
+    \item{Built a task and meeting management platform with \textbf{Symfony}, \textbf{Vue.js}, and \textbf{MySQL}.}
   \resumeItemListEnd
 
-\resumeSubheading
-  {Talan Tunisia}{Tunis, Tunisia}
-  {Software Engineering Intern – Full Stack Development}{02/2023 – 05/2023}
+\resumeSubHeadingListEnd
+
+% Personal Projects
+\section{\textbf{Personal Projects}}
+\resumeSubHeadingListStart
+
+\resumeProject
+  {Reqlume -- Aerospace Requirements Traceability SaaS}
+  {Next.js 15, Django 5, PostgreSQL, Celery, Redis, TanStack Query, shadcn/ui, Tailwind v4, Playwright}
+  {2025 -- Present}
+  {\href{https://reqlume.com}{reqlume.com}}
   \resumeItemListStart
-    \item{Created a task and meeting management platform with \textbf{Symfony}, \textbf{Vue.js}, and \textbf{MySQL}, including role-based access control and collaboration features for team coordination.}
+    \item{Built a full-stack B2B SaaS replacing IBM DOORS and Jama Connect for aerospace teams tracking requirements, trace links, and compliance (DO-178C/ISO 26262).}
+    \item{Implemented a Polarion data import pipeline (CSV/Excel/ReqIF) with a two-pass Celery task, tree building via \textbf{django-treebeard}, and SSE real-time progress streaming.}
+    \item{Designed a traceability graph with BFS cycle detection, 10 link types, FMEA/RPN auto-calculation, and WeasyPrint compliance PDF export.}
+    \item{Shipped 30+ features across Approvals \& Change Control, Test Execution, Document Branching, Plans \& Milestones, Webhook Delivery, and a Tiptap rich-text editor.}
+    \item{Deployed on \textbf{Vercel} (frontend) and \textbf{Railway} (backend/Celery/Redis) with Neon PostgreSQL, Cloudflare R2 file storage, and Playwright E2E test suite.}
+  \resumeItemListEnd
+
+% FIX: Added a second project to increase keyword surface area and demonstrate breadth
+\resumeProject
+  {Personal Portfolio Website}
+  {React 18, JavaScript, CSS, AWS Lambda (Node.js), S3, CloudFront, GitHub Actions}
+  {2024}
+  {\href{https://oussemaamri.com}{oussemaamri.com}}
+  \resumeItemListStart
+    \item{Built a responsive single-page portfolio with an AI chatbot widget, contact form (EmailJS), and animated scroll reveals.}
+    \item{Achieved 95+ Lighthouse scores across performance, accessibility, and SEO; deployed frontend to \textbf{S3 + CloudFront} and backend as an \textbf{AWS Lambda} function behind API Gateway via \textbf{GitHub Actions} CI/CD.}
   \resumeItemListEnd
 
 \resumeSubHeadingListEnd
@@ -214,13 +239,13 @@
 \resumeItemListStart
 \item{\textbf{Languages}: Python, TypeScript, JavaScript, SQL}
 \vspace{0.5mm}
-\item{\textbf{Frameworks/Libraries}: React, Node.js, Vue.js, FastAPI, Django, NestJS, Spring Boot, Celery}
+\item{\textbf{Frameworks/Libraries}: React, Next.js, Node.js, Vue.js, FastAPI, Django, NestJS, Celery}
 \vspace{0.5mm}
-\item{\textbf{Cloud \& DevOps}: AWS (EC2, S3, Lambda, CodePipeline), Docker, Docker Compose, Portainer, Jenkins, GitLab CI/CD, Grafana, Loki}
+\item{\textbf{Cloud \& DevOps}: AWS (EC2, S3, ECR, CloudFront), Docker, Docker Compose, Portainer, Jenkins, GitLab CI/CD, GitHub Actions, Cloudflare, Grafana, Loki}
 \vspace{0.5mm}
-\item{\textbf{Databases}: PostgreSQL, MongoDB, Redis (Cache)}
+\item{\textbf{Databases}: PostgreSQL, MySQL, Redis}
 \vspace{0.5mm}
-\item{\textbf{AI \& ML}: Copilot, Claude Code, MCP Integration, OpenAI/Groq APIs, Hugging Face, Prompt Engineering}
+\item{\textbf{AI \& ML}: Copilot, Claude Code, MCP Integration, OpenAI/Groq APIs, Prompt Engineering}
 \vspace{0.5mm}
 \item{\textbf{Engineering}: Microservices, Event-Driven Architecture, REST API Design, GraphQL, TDD, Agile/Scrum}
 \resumeItemListEnd
@@ -230,29 +255,25 @@
 \resumeSubHeadingListStart
   \resumeSubheading
     {ESPRIT School of Engineering}{Tunis, Tunisia}
-    {Engineering Degree in Computer Science (M.Eng. Equivalent)}{09/2022 – 06/2025}
+    {Master Engineering Degree in Computer Science}{09/2022 -- 06/2025}
   \resumeSubheading
     {Hochschule Schmalkalden}{Schmalkalden, Germany}
-    {Exchange Semester – Master in Computer Science}{10/2024 – 03/2025}
+    {Exchange Semester -- Master in Computer Science}{10/2024 -- 03/2025}
   \resumeSubheading
     {Preparatory Institute for Engineering Studies}{Tunisia}
-    {Intensive Mathematics, Physics \& Computer Science}{09/2020 – 06/2022}
+    {Intensive Mathematics, Physics \& Computer Science}{09/2020 -- 06/2022}
 \resumeSubHeadingListEnd
-
-
-
-
 
 % Certifications
 \section{\textbf{Certifications}}
 \resumeItemListStart
-\item{\textbf{AWS Certified Cloud Practitioner (CLF-C02)} – Amazon Web Services}
+\item{\textbf{AWS Certified Cloud Practitioner (CLF-C02)} -- Amazon Web Services}
 \resumeItemListEnd
 
 % Languages
 \section{\textbf{Languages}}
 \resumeItemListStart
-\item{\textbf{English}: C1 \hfill \textbf{German}: B1 \hfill \textbf{French}: C1 \hfill \textbf{Arabic}: C2 }
+\item{\textbf{English}: C1 \hfill \textbf{German}: B1 \hfill \textbf{French}: C1 \hfill \textbf{Arabic}: C2}
 \resumeItemListEnd
-    
+
 \end{document}

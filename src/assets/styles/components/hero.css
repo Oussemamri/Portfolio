@@ -4,7 +4,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #ffffff;
+    background:
+        radial-gradient(ellipse at 18% 55%, hsl(250 65% 78% / 0.28) 0%, transparent 52%),
+        radial-gradient(ellipse at 82% 28%, hsl(195 70% 72% / 0.22) 0%, transparent 48%),
+        radial-gradient(ellipse at 58% 88%, hsl(340 55% 80% / 0.18) 0%, transparent 44%),
+        hsl(40 15% 97%);
     color: hsl(210 8% 14%);
     position: relative;
     overflow: hidden;
@@ -21,6 +25,8 @@
     max-width: 1150px;
     margin: 0 auto;
     padding: 0 2.5rem;
+    position: relative;
+    z-index: 2;
 }
 
 /* ===== LEFT SIDE - Text ===== */

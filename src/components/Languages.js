@@ -1,36 +1,59 @@
 import React from 'react';
 import '../assets/styles/components/languages.css';
 
-const Languages = () => {
-    const languages = [
-        { name: 'English',  level: 'C1', width: '90%' },
-        { name: 'German',   level: 'A2', width: '35%' },
-        { name: 'French',   level: 'C1', width: '90%' },
-        { name: 'Arabic',   level: 'C2', width: '100%' }
-    ];
+const CEFR_LEVELS = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
 
-    return (
-        <section id="languages" className="languages-section-standalone">
-            <div className="languages-inner">
-                <h2 className="languages-title">Languages</h2>
-                <div className="languages-card">
-                    <div className="language-items">
-                        {languages.map((lang, idx) => (
-                            <div key={idx} className="language-item">
-                                <div className="language-name">{lang.name}</div>
-                                <div className="language-level">
-                                    <div className="level-bar">
-                                        <div className="level-fill" style={{ '--level-width': lang.width }} />
-                                    </div>
-                                    <span className="proficiency">{lang.level}</span>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
+const PROFICIENCY_LABELS = {
+    'A1': 'Beginner',
+    'A2': 'Elementary',
+    'B1': 'Intermediate',
+    'B2': 'Upper Intermediate',
+    'C1': 'Advanced',
+    'C2': 'Mastery',
 };
+
+const languages = [
+    { name: 'English', level: 'C1' },
+    { name: 'French',  level: 'C1' },
+    { name: 'German',  level: 'B1' },
+    { name: 'Arabic',  level: 'C2' },
+];
+
+const Languages = () => (
+    <section id="languages" className="languages-section-standalone">
+        <div className="languages-inner">
+            <h2 className="languages-title">Languages</h2>
+            <div className="language-cards">
+                {languages.map((lang, idx) => {
+                    const levelIdx = CEFR_LEVELS.indexOf(lang.level);
+                    return (
+                        <div key={idx} className="lang-card">
+                            <div className="lang-card-header">
+                                <span className="lang-name">{lang.name}</span>
+                                <span className="lang-label">{PROFICIENCY_LABELS[lang.level]}</span>
+                            </div>
+                            <div className="lang-dots">
+                                {CEFR_LEVELS.map((lvl, i) => {
+                                    const cls =
+                                        i < levelIdx ? 'achieved' :
+                                        i === levelIdx ? 'current' : '';
+                                    return (
+                                        <span
+                                            key={lvl}
+                                            className={`lang-dot${cls ? ' ' + cls : ''}`}
+                                            style={{ '--dot-index': i }}
+                                        >
+                                            {lvl}
+                                        </span>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    );
+                })}
+            </div>
+        </div>
+    </section>
+);
 
 export default Languages;

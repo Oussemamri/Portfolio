@@ -11,7 +11,8 @@ const ServicesPage = React.lazy(() => import('./pages/ServicesPage'));
 const ExperiencePage = React.lazy(() => import('./pages/ExperiencePage'));
 const WorkPage     = React.lazy(() => import('./pages/WorkPage'));
 const AboutPage    = React.lazy(() => import('./pages/AboutPage'));
-const LanguagesPage = React.lazy(() => import('./pages/LanguagesPage'));
+const LanguagesPage  = React.lazy(() => import('./pages/LanguagesPage'));
+const ProjectsPage   = React.lazy(() => import('./pages/ProjectsPage'));
 
 const PageFallback = () => (
   <div style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -39,6 +40,7 @@ function App() {
             <Route path="/work"       element={<WorkPage />} />
             <Route path="/about"      element={<AboutPage />} />
             <Route path="/languages"  element={<LanguagesPage />} />
+            <Route path="/projects"   element={<ProjectsPage />} />
           </Routes>
         </Suspense>
         <Footer />

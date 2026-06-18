@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import '../assets/styles/components/hero.css';
+import InkReveal from './ui/InkReveal';
 
 const Hero = () => {
+    const heroRef = useRef(null);
+
     const scrollToOverview = () => {
         const el = document.getElementById('skills');
         if (el) {
@@ -11,7 +14,15 @@ const Hero = () => {
     };
 
     return (
-        <section className="hero" id="home">
+        <section className="hero" id="home" ref={heroRef}>
+            <InkReveal
+                maskColor={[255, 255, 255]}
+                brushSize={160}
+                lifetime={900}
+                stampStep={8}
+                maxStamps={300}
+                eventSourceRef={heroRef}
+            />
             <div className="hero-container">
                 <div className="hero-text">
                     <h1>Oussema Amri</h1>

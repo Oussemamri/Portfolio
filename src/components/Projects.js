@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
-import { FaGithub, FaGlobe, FaServer, FaCloud } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { FaGithub, FaGlobe, FaServer, FaCloud, FaArrowRight } from 'react-icons/fa';
+import { Sparkles } from './Sparkles';
+import useTheme from '../hooks/useTheme';
+
 import '../assets/styles/components/projects.css';
 
 const categoryConfig = {
@@ -10,7 +14,68 @@ const categoryConfig = {
 
 const primaryCategory = (category) => Array.isArray(category) ? category[0] : category;
 
-const ProjectCard = ({ title, description, technologies, period, repos, category }) => {
+export const projectList = [
+    {
+        title: 'Personal Portfolio Website',
+        description: 'Responsive portfolio website with React frontend and Express.js backend. Features include an AI-powered chat assistant, dynamic project filtering, and contact form with email integration.',
+        technologies: 'React, Express.js, Docker, AWS (EC2, S3, Lambda, CodePipeline)',
+        period: '2025/01 - 2025/03',
+        link: 'https://oussemaamri.com',
+        repos: [
+            { name: 'Frontend', url: 'https://github.com/Oussemamri/Portfolio' },
+            { name: 'Backend', url: 'https://github.com/Oussemamri/portfolio-backend' }
+        ],
+        category: ['web', 'devops', 'cloud']
+    },
+    {
+        title: 'Quiz Application',
+        description: 'AI-driven quiz management system with adaptive learning algorithms that personalize quizzes based on user performance.',
+        technologies: 'Django, Bootstrap, PostgreSQL',
+        period: '2024/09 - 2024/11',
+        repos: [
+            { name: 'Repository', url: 'https://github.com/Oussemamri/MindTrack-django' }
+        ],
+        category: 'web'
+    },
+    {
+        title: 'Collaboradoc — Real-Time Collaboration Platform',
+        description: 'Document management system with versioning, real-time commenting features, and AI tools for automated content suggestions.',
+        technologies: 'React, NestJS',
+        period: '2024/01 - 2024/05',
+        repos: [
+            { name: 'Frontend', url: 'https://github.com/Oussemamri/CollaboraDocFront' },
+            { name: 'Backend', url: 'https://github.com/Oussemamri/CollaboraDocBack' }
+        ],
+        category: 'web'
+    },
+    {
+        title: 'DevOps — Application Lifecycle Automation',
+        description: 'CI/CD pipeline automation project with monitoring solutions for improved application reliability.',
+        technologies: 'Jenkins, Maven, Git, SonarQube, Docker',
+        period: '2024/01 - 2024/05',
+        category: 'devops'
+    },
+    {
+        title: 'Microservices Architecture',
+        description: 'Designed and deployed a microservices architecture with service discovery and container management.',
+        technologies: 'Spring Boot, Docker',
+        period: '2023/09 - 2023/12',
+        category: 'cloud'
+    },
+    {
+        title: 'University Dormitory Management System',
+        description: 'Web application for dormitory and event management with features for room booking and event scheduling.',
+        technologies: 'Angular, Spring Boot',
+        period: '2023/09 - 2023/12',
+        repos: [
+            { name: 'Frontend', url: 'https://github.com/wadhahzoldyck/FoyerFront' },
+            { name: 'Backend', url: 'https://github.com/wadhahzoldyck/GestionFoyerBack' }
+        ],
+        category: 'web'
+    }
+];
+
+export const ProjectCard = ({ title, description, technologies, period, repos, category }) => {
     const cat = primaryCategory(category);
     const cfg = categoryConfig[cat] || categoryConfig.web;
 
@@ -62,83 +127,10 @@ const ProjectCard = ({ title, description, technologies, period, repos, category
     );
 };
 
+/* ─── Home preview: 3 projects + arch CTA ─── */
 const Projects = () => {
-    const [activeFilter, setActiveFilter] = useState('all');
-
-    const projectList = [
-        {
-            title: 'Personal Portfolio Website',
-            description: 'Responsive portfolio website with React frontend and Express.js backend. Features include an AI-powered chat assistant, dynamic project filtering, and contact form with email integration.',
-            technologies: 'React, Express.js, Docker, AWS (EC2, S3, Lambda, CodePipeline)',
-            period: '2025/01 - 2025/03',
-            link: 'https://oussemaamri.com',
-            repos: [
-                { name: 'Frontend', url: 'https://github.com/Oussemamri/Portfolio' },
-                { name: 'Backend', url: 'https://github.com/Oussemamri/portfolio-backend' }
-            ],
-            category: ['web', 'devops', 'cloud']
-        },
-        {
-            title: 'Quiz Application',
-            description: 'AI-driven quiz management system with adaptive learning algorithms that personalize quizzes based on user performance.',
-            technologies: 'Django, Bootstrap, PostgreSQL',
-            period: '2024/09 - 2024/11',
-            repos: [
-                { name: 'Repository', url: 'https://github.com/Oussemamri/MindTrack-django' }
-            ],
-            category: 'web'
-        },
-        {
-            title: 'Collaboradoc — Real-Time Collaboration Platform',
-            description: 'Document management system with versioning, real-time commenting features, and AI tools for automated content suggestions.',
-            technologies: 'React, NestJS',
-            period: '2024/01 - 2024/05',
-            repos: [
-                { name: 'Frontend', url: 'https://github.com/Oussemamri/CollaboraDocFront' },
-                { name: 'Backend', url: 'https://github.com/Oussemamri/CollaboraDocBack' }
-            ],
-            category: 'web'
-        },
-        {
-            title: 'DevOps — Application Lifecycle Automation',
-            description: 'CI/CD pipeline automation project with monitoring solutions for improved application reliability.',
-            technologies: 'Jenkins, Maven, Git, SonarQube, Docker',
-            period: '2024/01 - 2024/05',
-            category: 'devops'
-        },
-        {
-            title: 'Microservices Architecture',
-            description: 'Designed and deployed a microservices architecture with service discovery and container management.',
-            technologies: 'Spring Boot, Docker',
-            period: '2023/09 - 2023/12',
-            category: 'cloud'
-        },
-        {
-            title: 'University Dormitory Management System',
-            description: 'Web application for dormitory and event management with features for room booking and event scheduling.',
-            technologies: 'Angular, Spring Boot',
-            period: '2023/09 - 2023/12',
-            repos: [
-                { name: 'Frontend', url: 'https://github.com/wadhahzoldyck/FoyerFront' },
-                { name: 'Backend', url: 'https://github.com/wadhahzoldyck/GestionFoyerBack' }
-            ],
-            category: 'web'
-        }
-    ];
-
-    const filters = [
-        { name: 'All', value: 'all' },
-        { name: 'Web Development', value: 'web' },
-        { name: 'DevOps', value: 'devops' },
-        { name: 'Cloud', value: 'cloud' }
-    ];
-
-    const filteredProjects = activeFilter === 'all'
-        ? projectList
-        : projectList.filter(project => {
-            if (Array.isArray(project.category)) return project.category.includes(activeFilter);
-            return project.category === activeFilter;
-        });
+    const preview = projectList.slice(0, 3);
+    const { theme } = useTheme();
 
     return (
         <section id="projects" className="projects-section">
@@ -148,22 +140,43 @@ const Projects = () => {
                 A collection of projects built with intention — from web apps to DevOps pipelines and cloud infrastructure.
             </p>
 
-            <div className="project-filters">
-                {filters.map((filter, index) => (
-                    <button
-                        key={index}
-                        className={`filter-btn ${activeFilter === filter.value ? 'active' : ''}`}
-                        onClick={() => setActiveFilter(filter.value)}
-                    >
-                        {filter.name}
-                    </button>
+            <div className="project-list">
+                {preview.map((project, index) => (
+                    <ProjectCard key={index} {...project} />
                 ))}
             </div>
 
-            <div className="project-list">
-                {filteredProjects.map((project, index) => (
-                    <ProjectCard key={index} {...project} />
-                ))}
+            {/* ── Arch + Sparkles CTA ── */}
+            <div className="projects-arch-outer">
+                {/* Purple radial glow */}
+                <div className="projects-arch-glow" aria-hidden="true" />
+
+                {/* The arch curve — top edge of a large circle creates the rainbow shape */}
+                <div className="projects-arch-curve" aria-hidden="true" />
+
+                {/* Sparkle particles masked to fade at edges */}
+                <Sparkles
+                    density={800}
+                    speed={0.6}
+                    color={theme === 'dark' ? '#ffffff' : '#8350e8'}
+                    className="projects-arch-sparkles"
+                />
+
+                {/* Floating 3D geometric assets */}
+                <div className="projects-floating-assets" aria-hidden="true">
+                    <div className="float-asset float-asset--1" />
+                    <div className="float-asset float-asset--2" />
+                    <div className="float-asset float-asset--3" />
+                    <div className="float-asset float-asset--4" />
+                    <div className="float-asset float-asset--5" />
+                </div>
+
+                {/* Floating CTA button above the arch curve */}
+                <div className="projects-arch-cta">
+                    <Link to="/projects" className="projects-explore-btn">
+                        Explore all projects <FaArrowRight />
+                    </Link>
+                </div>
             </div>
         </section>
     );

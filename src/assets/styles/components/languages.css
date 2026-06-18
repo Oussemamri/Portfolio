@@ -1,4 +1,4 @@
-/* ── Languages Section (standalone) ─────────────────────────── */
+/* ── Languages Section ────────────────────────────────────────── */
 .languages-section-standalone {
     --maz-accent: 272 99% 54%;
     --maz-background-600: 0 5% 92.5%;
@@ -14,7 +14,7 @@
     font-size: 14px;
     font-weight: 500;
     color: hsl(var(--maz-foreground));
-    background-color: hsl(var(--maz-background-600) / .3);
+    background-color: hsl(var(--maz-background-600) / 0.3);
     border-top: var(--maz-border-width) solid hsl(var(--maz-border));
     padding: 5rem 2rem;
     width: 100%;
@@ -22,7 +22,7 @@
 }
 
 .languages-inner {
-    max-width: 900px;
+    max-width: 860px;
     margin: 0 auto;
 }
 
@@ -30,7 +30,7 @@
     text-align: center;
     font-size: 2rem;
     font-weight: 600;
-    margin-bottom: 3rem;
+    margin-bottom: 2.5rem;
     color: hsl(var(--maz-foreground));
 }
 .languages-title::after {
@@ -43,75 +43,123 @@
     }
 }
 
-.languages-card {
-    border-radius: var(--maz-radius);
-    padding: 2rem;
-    background-color: hsl(0 0% 100%);
-    border: var(--maz-border-width) solid hsl(var(--maz-border));
-}
-
-.language-items {
+/* ── 2×2 card grid ────────────────────────────────────────────── */
+.language-cards {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
+    grid-template-columns: 1fr;
+    gap: 1rem;
 }
 
-.language-item {
+@media (min-width: 580px) {
+    .language-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ── Language card ────────────────────────────────────────────── */
+.lang-card {
+    background: hsl(0 0% 100%);
+    border: var(--maz-border-width) solid hsl(var(--maz-border));
+    border-radius: var(--maz-radius);
+    padding: 1.5rem;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 1rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
-.language-name {
-    font-weight: 600;
-    font-size: 1rem;
-    color: hsl(var(--maz-foreground));
+.lang-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px hsl(var(--maz-accent) / 12%);
+    border-color: hsl(var(--maz-accent) / 28%);
 }
 
-.language-level {
+/* ── Card header: name + proficiency label ────────────────────── */
+.lang-card-header {
     display: flex;
-    align-items: center;
+    align-items: baseline;
+    justify-content: space-between;
     gap: 0.5rem;
 }
 
-.level-bar {
-    flex-grow: 1;
-    height: 6px;
-    background-color: hsl(var(--maz-secondary));
-    border-radius: 3px;
-    overflow: hidden;
+.lang-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: hsl(var(--maz-foreground));
+    letter-spacing: -0.01em;
 }
 
-.level-fill {
-    width: var(--level-width, 0%);
-    height: 100%;
-    background: hsl(var(--maz-accent));
-    border-radius: 3px;
-    transition: width 0.8s ease;
+.lang-label {
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: hsl(var(--maz-foreground) / 40%);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
 }
 
-.proficiency {
+/* ── CEFR segment strip ───────────────────────────────────────── */
+.lang-dots {
+    display: flex;
+    gap: 5px;
+}
+
+.lang-dot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    height: 28px;
+    border-radius: 5px;
     font-family: var(--font-mono);
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: hsl(0 0% 100%);
-    background-color: hsl(var(--maz-accent));
-    padding: 0.15rem 0.5rem;
-    border-radius: 0.25rem;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    background: hsl(var(--maz-secondary));
+    color: hsl(var(--maz-foreground) / 25%);
+    animation: lang-dot-in 0.35s ease both;
+    animation-delay: calc(var(--dot-index, 0) * 65ms + 0.05s);
 }
 
-/* ── Mobile tweaks ──────────────────────────────────────────── */
-@media (max-width: 767px) {
+.lang-dot.achieved {
+    background: hsl(var(--maz-accent) / 12%);
+    color: hsl(var(--maz-accent) / 70%);
+}
+
+.lang-dot.current {
+    background: hsl(var(--maz-accent));
+    color: hsl(0 0% 100%);
+    box-shadow: 0 2px 8px hsl(var(--maz-accent) / 30%);
+}
+
+@keyframes lang-dot-in {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ── Mobile ───────────────────────────────────────────────────── */
+@media (max-width: 579px) {
     .languages-section-standalone {
         padding: 3rem 1rem;
     }
-    .language-items {
-        grid-template-columns: 1fr;
+
+    .lang-dot {
+        height: 26px;
+        font-size: 0.58rem;
     }
 }
 
-@media (min-width: 768px) and (max-width: 1023px) {
-    .language-items {
-        grid-template-columns: repeat(2, 1fr);
+@media (prefers-reduced-motion: reduce) {
+    .lang-dot {
+        animation: none;
+    }
+
+    .lang-card {
+        transition: none;
     }
 }

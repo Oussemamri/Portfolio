@@ -1,5 +1,5 @@
 import {
-  SiReact, SiNextdotjs, SiVuedotjs, SiTypescript, SiJavascript,
+  SiReact, SiNextdotjs, SiVuedotjs, SiTypescript, SiJavascript, SiThreedotjs,
   SiPython, SiFastapi, SiDjango, SiNestjs, SiSpring, SiNodedotjs,
   SiPostgresql, SiMongodb, SiRedis,
   SiAmazonwebservices, SiDocker, SiJenkins, SiGitlab,
@@ -21,6 +21,7 @@ export const SKILL_CATEGORIES = [
       { name: 'Vue',         Icon: SiVuedotjs,   color: '#4FC08D' },
       { name: 'TypeScript',  Icon: SiTypescript, color: '#3178C6' },
       { name: 'JavaScript',  Icon: SiJavascript, color: '#F7DF1E' },
+      { name: '3D Animation', Icon: SiThreedotjs, color: '#049EF4' },
     ],
   },
   {
