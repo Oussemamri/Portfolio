@@ -15,7 +15,7 @@ const PROFICIENCY_LABELS = {
 const languages = [
     { name: 'English', level: 'C1' },
     { name: 'French',  level: 'C1' },
-    { name: 'German',  level: 'B1' },
+    { name: 'German',  level: 'A2' },
     { name: 'Arabic',  level: 'C2' },
 ];
 

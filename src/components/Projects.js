@@ -16,6 +16,14 @@ const primaryCategory = (category) => Array.isArray(category) ? category[0] : ca
 
 export const projectList = [
     {
+        title: 'Reqlume — Aerospace Requirements Traceability SaaS',
+        description: 'B2B SaaS replacing IBM DOORS / Jama Connect for aerospace teams managing requirements and compliance (DO-178C / ISO 26262). Features 30+ capabilities including approvals, change control, FMEA/RPN auto-calculation, Polarion data import, traceability graph with BFS cycle detection, and compliance PDF export.',
+        technologies: 'Next.js 15, Django 5, PostgreSQL, Celery, Redis, TanStack Query, Playwright, Vercel, Railway',
+        period: '2024 - Present',
+        link: 'https://reqlume.com',
+        category: ['web', 'cloud']
+    },
+    {
         title: 'Personal Portfolio Website',
         description: 'Responsive portfolio website with React frontend and Express.js backend. Features include an AI-powered chat assistant, dynamic project filtering, and contact form with email integration.',
         technologies: 'React, Express.js, Docker, AWS (EC2, S3, Lambda, CodePipeline)',

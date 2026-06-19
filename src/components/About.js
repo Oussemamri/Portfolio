@@ -52,13 +52,13 @@ const About = () => {
                         PostgreSQL schemas, and Docker deployments.
                     </p>
                     <p>
-                        Previously contributed to civic tech at <strong>Talan</strong> and
-                        built production systems that handle real operational load. Comfortable
-                        taking features from requirements to production and keeping them running.
+                        Previously built a civic platform at <strong>Happy Nation Global</strong>{' '}
+                        and contributed to HR platform features at <strong>Talan Tunisia</strong>.
+                        Comfortable taking features from requirements to production and keeping them running.
                     </p>
                     <p>
-                        M.Eng. Computer Science, ESPRIT School of Engineering. Exchange semester
-                        at Hochschule Schmalkalden, Germany.
+                        Diplôme d'Ingénieur in Computer Science (equiv. M.Sc., Bac+5), ESPRIT School of Engineering.
+                        Academic exchange at <strong>Philipps-Universität Marburg</strong>, Germany (10/2024 – 03/2026).
                     </p>
                 </div>
 
