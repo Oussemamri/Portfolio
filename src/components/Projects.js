@@ -12,8 +12,6 @@ const categoryConfig = {
     cloud:  { icon: <FaCloud />,  bg: '#fdf4ff', border: '#e9d5ff', color: '#7c3aed', label: 'Cloud' },
 };
 
-const primaryCategory = (category) => Array.isArray(category) ? category[0] : category;
-
 export const projectList = [
     {
         title: 'Reqlume — Aerospace Requirements Traceability SaaS',
@@ -84,24 +82,32 @@ export const projectList = [
 ];
 
 export const ProjectCard = ({ title, description, technologies, period, repos, category }) => {
-    const cat = primaryCategory(category);
-    const cfg = categoryConfig[cat] || categoryConfig.web;
+    const cats = Array.isArray(category) ? category : [category];
+    const primaryCfg = categoryConfig[cats[0]] || categoryConfig.web;
 
     return (
         <div className="project-card">
             <div className="project-card-header">
                 <div
                     className="project-icon"
-                    style={{ background: cfg.bg, borderColor: cfg.border, color: cfg.color }}
+                    style={{ background: primaryCfg.bg, borderColor: primaryCfg.border, color: primaryCfg.color }}
                 >
-                    {cfg.icon}
+                    {primaryCfg.icon}
                 </div>
-                <span
-                    className="project-category-badge"
-                    style={{ background: cfg.bg, borderColor: cfg.border, color: cfg.color }}
-                >
-                    {cfg.label}
-                </span>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                    {cats.map((c) => {
+                        const cfg = categoryConfig[c] || categoryConfig.web;
+                        return (
+                            <span
+                                key={c}
+                                className="project-category-badge"
+                                style={{ background: cfg.bg, borderColor: cfg.border, color: cfg.color }}
+                            >
+                                {cfg.label}
+                            </span>
+                        );
+                    })}
+                </div>
             </div>
 
             <h3 className="project-title">{title}</h3>

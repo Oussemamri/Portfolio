@@ -97,6 +97,8 @@
 /* ── Content area ────────────────────────────────────────────── */
 .page-shell-content {
   background: var(--bg-color);
+  padding-top: 2.5rem;
+  padding-bottom: 6rem;
 }
 
 /* ── Responsive ──────────────────────────────────────────────── */
