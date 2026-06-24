@@ -2,6 +2,7 @@
     --bg-color: #f9f9f9;
     --text-color: #333;
     --card-bg: white;
+    --card-bg-rgb: 255, 255, 255;
     --primary-color: #0077cc;
     --secondary-color: #61dafb;
     --accent-color: #ff69b4;
@@ -18,6 +19,7 @@ body.dark {
     --bg-color: #1a1a1a;
     --text-color: #f0f0f0;
     --card-bg: #282c34;
+    --card-bg-rgb: 40, 44, 52;
     --primary-color: #61dafb;
     --secondary-color: #0077cc;
     --border-color: #444;

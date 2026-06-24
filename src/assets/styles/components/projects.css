@@ -238,29 +238,25 @@ body.dark .project-description {
     transform: scale(1.06);
 }
 
+/* light overlay: image fades into the card colour so text stays dark/normal */
 .project-card-overlay {
     position: absolute;
     inset: 0;
     z-index: 1;
     background: linear-gradient(
         to top,
-        rgba(13, 15, 23, 0.97) 0%,
-        rgba(13, 15, 23, 0.94) 28%,
-        rgba(13, 15, 23, 0.72) 46%,
-        rgba(13, 15, 23, 0.32) 68%,
-        rgba(13, 15, 23, 0.08) 100%
+        rgba(var(--card-bg-rgb), 1) 0%,
+        rgba(var(--card-bg-rgb), 0.99) 32%,
+        rgba(var(--card-bg-rgb), 0.85) 48%,
+        rgba(var(--card-bg-rgb), 0.45) 68%,
+        rgba(var(--card-bg-rgb), 0) 100%
     );
 }
 
-/* cluster content at the bottom, over the darkest part of the gradient */
+/* cluster content at the bottom, over the solid part of the gradient */
 .project-card--image .project-card-body {
     flex: none;
     margin-top: auto;
-}
-
-.project-card--image .project-title {
-    color: #fff;
-    text-shadow: 0 1px 12px rgba(0, 0, 0, 0.45);
 }
 
 .project-card--image .project-description {
@@ -270,38 +266,6 @@ body.dark .project-description {
     line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    color: rgba(255, 255, 255, 0.82);
-    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.4);
-}
-
-.project-card--image .tech-tag {
-    background: rgba(255, 255, 255, 0.13);
-    border-color: rgba(255, 255, 255, 0.22);
-    color: #fff;
-    -webkit-backdrop-filter: blur(4px);
-    backdrop-filter: blur(4px);
-}
-
-.project-card--image .project-footer {
-    border-top-color: rgba(255, 255, 255, 0.18);
-}
-
-.project-card--image .project-period {
-    color: rgba(255, 255, 255, 0.72);
-}
-
-.project-card--image .project-github-link {
-    background: rgba(255, 255, 255, 0.13);
-    border-color: rgba(255, 255, 255, 0.22);
-    color: #fff;
-    -webkit-backdrop-filter: blur(4px);
-    backdrop-filter: blur(4px);
-}
-
-.project-card--image .project-github-link:hover {
-    background: rgba(255, 255, 255, 0.95);
-    color: #111;
-    border-color: #fff;
 }
 
 /* ─── Arch + Sparkles CTA (21st.dev-style) ─── */

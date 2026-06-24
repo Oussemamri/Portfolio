@@ -20,6 +20,7 @@ export const projectList = [
         period: '2024 - Present',
         link: 'https://reqlume.com',
         image: 'reclume_header.png',
+        featured: true,
         category: ['web', 'cloud']
     },
     {
@@ -29,6 +30,7 @@ export const projectList = [
         period: '2025/01 - 2025/03',
         link: 'https://oussemaamri.com',
         image: 'portofolio_img.png',
+        featured: true,
         repos: [
             { name: 'Frontend', url: 'https://github.com/Oussemamri/Portfolio' },
             { name: 'Backend', url: 'https://github.com/Oussemamri/portfolio-backend' }
@@ -52,6 +54,7 @@ export const projectList = [
         technologies: 'React, NestJS',
         period: '2024/01 - 2024/05',
         image: 'collabora_doc.png',
+        featured: true,
         repos: [
             { name: 'Frontend', url: 'https://github.com/Oussemamri/CollaboraDocFront' },
             { name: 'Backend', url: 'https://github.com/Oussemamri/CollaboraDocBack' }
@@ -160,7 +163,7 @@ export const ProjectCard = ({ title, description, technologies, period, repos, c
 
 /* ─── Home preview: 3 projects + arch CTA ─── */
 const Projects = () => {
-    const preview = projectList.slice(0, 3);
+    const preview = projectList.filter((p) => p.featured).slice(0, 3);
     const { theme } = useTheme();
 
     return (
