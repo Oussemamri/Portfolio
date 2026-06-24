@@ -1,8 +1,8 @@
 /* ── PageShell — shared section-page wrapper ─────────────────── */
 
 .page-shell {
-  min-height: calc(100vh - 76px);
-  padding-top: 76px;
+  min-height: calc(100vh - 100px);
+  padding-top: 100px;
 }
 
 /* ── Banner ──────────────────────────────────────────────────── */
@@ -100,6 +100,13 @@
 }
 
 /* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .page-shell {
+    padding-top: 80px;
+    min-height: calc(100vh - 80px);
+  }
+}
+
 @media (max-width: 640px) {
   .page-shell-banner {
     padding: 3.5rem 1.25rem 3rem;
