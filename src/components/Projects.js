@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaGithub, FaGlobe, FaServer, FaCloud, FaArrowRight } from 'react-icons/fa';
 import { Sparkles } from './Sparkles';
@@ -181,7 +181,7 @@ const Projects = () => {
 
                 {/* Floating CTA button above the arch curve */}
                 <div className="projects-arch-cta">
-                    <Link to="/projects" className="projects-explore-btn">
+                    <Link to="/work" className="projects-explore-btn">
                         Explore all projects <FaArrowRight />
                     </Link>
                 </div>
