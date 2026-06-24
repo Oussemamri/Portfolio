@@ -76,6 +76,9 @@ body.dark .projects-subtitle {
 
 /* --- card --- */
 .project-card {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     border-radius: 14px;
@@ -85,14 +88,30 @@ body.dark .projects-subtitle {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+/* stretched link — makes the whole card clickable to the primary URL */
+.project-card-link {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.project-card-link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+.project-card:hover .project-card-link {
+    color: var(--primary-color);
+}
+
 .project-card:hover {
     transform: translateY(-3px);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.09);
 }
 
 .project-card-body {
-    position: relative;
-    z-index: 2;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -190,6 +209,8 @@ body.dark .project-description {
 }
 
 .project-repo-links {
+    position: relative;
+    z-index: 2;
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
@@ -218,8 +239,6 @@ body.dark .project-description {
 
 /* ─── Image variant: project screenshot as card background ─── */
 .project-card--image {
-    position: relative;
-    overflow: hidden;
     border: none;
     min-height: 470px;
 }
@@ -227,7 +246,7 @@ body.dark .project-description {
 .project-card-bg {
     position: absolute;
     inset: 0;
-    z-index: 0;
+    z-index: -2;
     background-size: cover;
     background-position: top center;
     background-repeat: no-repeat;
@@ -242,7 +261,7 @@ body.dark .project-description {
 .project-card-overlay {
     position: absolute;
     inset: 0;
-    z-index: 1;
+    z-index: -1;
     background: linear-gradient(
         to top,
         rgba(var(--card-bg-rgb), 1) 0%,

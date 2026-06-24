@@ -88,9 +88,11 @@ export const projectList = [
     }
 ];
 
-export const ProjectCard = ({ title, description, technologies, period, repos, category, image }) => {
+export const ProjectCard = ({ title, description, technologies, period, repos, category, image, link }) => {
     const cats = Array.isArray(category) ? category : [category];
     const primaryCfg = categoryConfig[cats[0]] || categoryConfig.web;
+    // Whole card links to the live site if there is one, otherwise the repo (README).
+    const primaryUrl = link || repos?.[0]?.url || null;
 
     return (
         <div className={`project-card${image ? ' project-card--image' : ''}`}>
@@ -129,7 +131,19 @@ export const ProjectCard = ({ title, description, technologies, period, repos, c
                     </div>
                 </div>
 
-                <h3 className="project-title">{title}</h3>
+                <h3 className="project-title">
+                    {primaryUrl ? (
+                        <a
+                            className="project-card-link"
+                            href={primaryUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`Open ${title}`}
+                        >
+                            {title}
+                        </a>
+                    ) : title}
+                </h3>
                 <p className="project-description">{description}</p>
 
                 <div className="project-tech-list">
