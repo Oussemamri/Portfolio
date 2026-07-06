@@ -299,8 +299,8 @@ body.dark .project-description {
     height: 280px;
     width: 100%;
     overflow: hidden;
-    mask-image: radial-gradient(50% 50%, white, transparent);
-    -webkit-mask-image: radial-gradient(50% 50%, white, transparent);
+    mask-image: radial-gradient(ellipse 50% 50% at center, white, transparent);
+    -webkit-mask-image: radial-gradient(ellipse 50% 50% at center, white, transparent);
 }
 
 /* Purple radial glow — strongest at bottom center */
@@ -343,8 +343,8 @@ body.dark .projects-arch-curve {
     inset: 0 !important;
     width: 100% !important;
     height: 100% !important;
-    mask-image: radial-gradient(50% 50%, white, transparent 85%);
-    -webkit-mask-image: radial-gradient(50% 50%, white, transparent 85%);
+    mask-image: radial-gradient(ellipse 50% 50% at center, white, transparent 85%);
+    -webkit-mask-image: radial-gradient(ellipse 50% 50% at center, white, transparent 85%);
     z-index: 5;
 }
 
