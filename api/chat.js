@@ -34,15 +34,21 @@ function httpsRequest(url, options, postData) {
   });
 }
 
+const ALLOWED_ORIGINS = [
+  'https://oussemaamri.com',
+  'https://www.oussemaamri.com',
+  'http://localhost:3000'
+];
+
 module.exports = async (req, res) => {
-  // CORS Headers
-  res.setHeader('Access-Control-Allow-Credentials', true);
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
-  res.setHeader(
-    'Access-Control-Allow-Headers',
-    'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
-  );
+  // CORS: only allow the portfolio's own origins
+  const origin = ALLOWED_ORIGINS.includes(req.headers.origin)
+    ? req.headers.origin
+    : ALLOWED_ORIGINS[0];
+  res.setHeader('Access-Control-Allow-Origin', origin);
+  res.setHeader('Vary', 'Origin');
+  res.setHeader('Access-Control-Allow-Methods', 'POST,OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   // Handle OPTIONS preflight request
   if (req.method === 'OPTIONS') {
@@ -57,8 +63,13 @@ module.exports = async (req, res) => {
 
   const { message } = req.body || {};
 
-  if (!message) {
+  if (!message || typeof message !== 'string') {
     res.status(400).json({ error: 'Message is required' });
+    return;
+  }
+
+  if (message.length > 500) {
+    res.status(400).json({ error: 'Message is too long (max 500 characters)' });
     return;
   }
 
