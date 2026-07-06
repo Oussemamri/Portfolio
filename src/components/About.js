@@ -19,7 +19,7 @@ const About = () => {
 
                 {/* Col 3, Rows 1–4 — large portrait photo */}
                 <div className="about-cell cell-photo-main">
-                    <img src={`${process.env.PUBLIC_URL}/about_me_img.png`} alt="Oussema Amri" />
+                    <img src={`${process.env.PUBLIC_URL}/about_me_img.webp`} alt="Oussema Amri" loading="lazy" />
                 </div>
 
                 {/* Col 1, Row 2 — visual separator */}

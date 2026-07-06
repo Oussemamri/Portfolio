@@ -19,7 +19,7 @@ export const projectList = [
         technologies: 'Next.js 15, Django 5, PostgreSQL, Celery, Redis, TanStack Query, Playwright, Vercel, Railway',
         period: '2024 - Present',
         link: 'https://reqlume.com',
-        image: 'reclume_header.png',
+        image: 'reclume_header.webp',
         featured: true,
         category: ['web', 'cloud']
     },
@@ -29,7 +29,7 @@ export const projectList = [
         technologies: 'React, Express.js, Docker, AWS (EC2, S3, Lambda, CodePipeline)',
         period: '2025/01 - 2025/03',
         link: 'https://oussemaamri.com',
-        image: 'portofolio_img.png',
+        image: 'portofolio_img.webp',
         featured: true,
         repos: [
             { name: 'Frontend', url: 'https://github.com/Oussemamri/Portfolio' },
@@ -42,7 +42,7 @@ export const projectList = [
         description: 'AI-driven quiz management system with adaptive learning algorithms that personalize quizzes based on user performance.',
         technologies: 'Django, Bootstrap, PostgreSQL',
         period: '2024/09 - 2024/11',
-        image: 'mindtrack.png',
+        image: 'mindtrack.webp',
         repos: [
             { name: 'Repository', url: 'https://github.com/Oussemamri/MindTrack-django' }
         ],
@@ -53,7 +53,7 @@ export const projectList = [
         description: 'Document management system with versioning, real-time commenting features, and AI tools for automated content suggestions.',
         technologies: 'React, NestJS',
         period: '2024/01 - 2024/05',
-        image: 'collabora_doc.png',
+        image: 'collabora_doc.webp',
         featured: true,
         repos: [
             { name: 'Frontend', url: 'https://github.com/Oussemamri/CollaboraDocFront' },

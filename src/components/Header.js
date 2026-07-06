@@ -7,7 +7,7 @@ import {
 } from 'react-icons/fa';
 import '../assets/styles/components/header.css';
 import ChatWidget from '../components/ChatWidget/ChatWidget';
-import logoImg from '../assets/images/logo_app.png';
+import logoImg from '../assets/images/logo_app.webp';
 import useScrollPosition from '../hooks/useScrollPosition';
 
 const NAV_LINKS = [
