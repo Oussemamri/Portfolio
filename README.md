@@ -1,161 +1,87 @@
-# Oussema Amri Portfolio
+# Oussema Amri — Portfolio
 
-Production portfolio website with an AI assistant and contact form.
+Personal portfolio website with an AI chat assistant and contact form.
 
-- Live site: `https://oussemaamri.com`
-- API health: `https://api.oussemaamri.com/api/health`
+**Live site:** [oussemaamri.com](https://oussemaamri.com)
 
 ## Overview
 
-This repository contains:
+A multi-page React application deployed on Vercel:
 
-- A React frontend deployed to S3 and served through CloudFront
-- A serverless backend deployed as an AWS Lambda function behind API Gateway
-- A GitHub Actions workflow that deploys frontend and backend
-
-## Architecture
+- **Frontend** — React SPA (Create React App) with dedicated routes for Work, Skills, Experience, Services, About, Languages, and Contact
+- **AI chatbot** — Vercel serverless function (`api/chat.js`) calling Groq's Llama 3.3 70B, with the system prompt grounded in my background
+- **Contact form** — EmailJS, sent directly from the browser
 
 ```text
-oussemaamri.com (CloudFront)
-  -> S3 bucket: frontend.portfolio
-
-api.oussemaamri.com (API Gateway HTTP API)
-  -> Lambda: portfolio-chatbot-api
+oussemaamri.com (Vercel)
+  ├── /            → React SPA (all routes rewritten to index.html)
+  └── /api/chat    → Serverless function → Groq API
 ```
 
 ## Features
 
-- Responsive one-page portfolio (Hero, About, Experience, Projects, Skills, Languages, Contact)
-- AI chatbot widget connected to backend API
-- Contact form integration via EmailJS
-- Smooth-scroll sections and animated reveals
-- Automated AWS deployment through GitHub Actions
+- Multi-page portfolio with React Router v6 and per-section entrance animations
+- AI assistant that answers questions about my experience and skills
+- Project cards with live screenshots, demo links, and category filtering
+- Contact form with EmailJS integration and copy-to-clipboard email
+- Optimized WebP images, long-lived CDN caching, security headers
+- Automatic deployment on every push to `main` via Vercel's GitHub integration
 
 ## Tech Stack
 
-| Layer | Technologies |
-|------|------|
-| Frontend | React 18, React Router v6, CSS, Axios |
-| Backend | AWS Lambda (Node.js 20), API Gateway |
-| AI | Groq-compatible chat completion API |
-| Infra | S3, CloudFront, Route 53, ACM |
-| CI/CD | GitHub Actions |
-
-## Prerequisites
-
-- Node.js 18+
-- npm 9+
-- AWS account with IAM user for CI/CD deploy
+| Layer    | Technologies                                        |
+| -------- | --------------------------------------------------- |
+| Frontend | React 18, React Router v6, Framer Motion, Axios     |
+| Backend  | Vercel Serverless Functions (Node.js)               |
+| AI       | Groq API (Llama 3.3 70B)                            |
+| Email    | EmailJS                                             |
+| Hosting  | Vercel (CDN, HTTPS, preview deployments)            |
 
 ## Local Development
-
-1. Install dependencies:
 
 ```bash
 npm ci
 ```
 
-2. Create `.env.local` from `.env.example` and fill values:
+Create `.env.local` from `.env.example` and fill in your EmailJS values:
 
 ```env
-REACT_APP_API_URL=https://api.oussemaamri.com/api
 REACT_APP_EMAILJS_SERVICE_ID=your_service_id
 REACT_APP_EMAILJS_TEMPLATE_ID=your_template_id
 REACT_APP_EMAILJS_PUBLIC_KEY=your_public_key
 REACT_APP_CONTACT_EMAIL=your-email@example.com
 ```
 
-3. Start development server:
+Then:
 
 ```bash
-npm start
+npm start            # dev server on localhost:3000
+npm run lint         # ESLint
+npm run build        # production build (CI treats warnings as errors)
 ```
 
-4. Run checks and build:
+## Deployment
 
-```bash
-npm test -- --watchAll=false --passWithNoTests
-npm run lint
-npm run build
-```
+Every push to `main` triggers a Vercel production deployment. Configuration lives in [vercel.json](vercel.json):
 
-## Deployment (GitHub Actions)
+- SPA rewrites (all non-`/api` routes serve `index.html`)
+- Immutable caching for hashed static assets, daily revalidation for images
+- Security headers (`X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`)
 
-Workflow file: `.github/workflows/deploy-aws.yml`
-
-### Trigger
-
-- Push to `main`
-- Manual run via `workflow_dispatch`
-
-### Required GitHub Secrets
-
-AWS:
-
-- `AWS_ACCESS_KEY_ID`
-- `AWS_SECRET_ACCESS_KEY`
-- `CLOUDFRONT_DISTRIBUTION_ID`
-
-Frontend build env:
-
-- `REACT_APP_EMAILJS_SERVICE_ID`
-- `REACT_APP_EMAILJS_TEMPLATE_ID`
-- `REACT_APP_EMAILJS_PUBLIC_KEY`
-- `REACT_APP_CONTACT_EMAIL`
-
-### Current AWS Resource IDs
-
-- AWS account: `811890957426`
-- Region: `eu-north-1`
-- S3 bucket: `frontend.portfolio`
-- CloudFront distribution: `EZNF7L67YTAII`
-- Lambda function: `portfolio-chatbot-api`
-- API Gateway API ID: `rlry97d9d6`
-
-## IAM Policy Requirements (Deploy User)
-
-The IAM user used by GitHub Actions must allow at least:
-
-- S3: `ListBucket`, `GetBucketLocation`, `GetObject`, `PutObject`, `DeleteObject`
-- CloudFront: `CreateInvalidation`
-- Lambda: `GetFunction`, `UpdateFunctionCode`, `UpdateFunctionConfiguration`
-
-Use this exact Lambda ARN format in policy resources (note `function:` with colon):
-
-`arn:aws:lambda:eu-north-1:811890957426:function:portfolio-chatbot-api`
-
-## Troubleshooting
-
-`AccessDenied` for CloudFront invalidation:
-
-- Ensure `CLOUDFRONT_DISTRIBUTION_ID` secret is set
-- Ensure IAM policy allows `cloudfront:CreateInvalidation`
-
-`AccessDeniedException` for Lambda update:
-
-- Ensure IAM policy allows `lambda:UpdateFunctionCode`
-- Ensure policy resource uses correct Lambda ARN format with colon
-- Confirm the newest policy version is set as default
+Environment variables (`GROQ_API_KEY`, `REACT_APP_EMAILJS_*`) are managed in the Vercel dashboard — no secrets live in this repository.
 
 ## Project Structure
 
 ```text
+api/            Vercel serverless functions (chat, health)
+public/         Static assets, sitemap, robots.txt
 src/
-  components/
-  hooks/
-  pages/
-  services/
-  utils/
-backend/
-  lambda/
-.github/workflows/
+  components/   UI components (Hero, Projects, ChatWidget, ...)
+  pages/        Route-level pages
+  hooks/        useTheme, useScrollReveal, ...
+  services/     API client
+  assets/       Styles and images
 ```
-
-## Security
-
-- Keep all API keys in environment variables and GitHub Secrets
-- Never commit `.env.*`, build artifacts, or deployment zip files
-- Rotate leaked credentials immediately and scrub git history when needed
 
 ## License
 
