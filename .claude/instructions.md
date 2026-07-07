@@ -1,168 +1,140 @@
-# Multi-Page Navigation — Implementation Instructions
+# Portfolio Roadmap — Remaining Audit Items
 
-Convert the portfolio from single-page anchor navigation to a proper multi-page React Router site where each navbar item (Skills, Services, Experience, Work, About) routes to its own dedicated page.
+**Created:** 2026-07-07 · Supersedes the completed multi-page-navigation plan.
+**Source:** [AUDIT.md](../AUDIT.md) scorecard + July 2026 security review.
+**Goal:** close every open audit item so the site and repo read as professional to recruiters.
 
----
-
-## Current state (before changes)
-
-- All sections live on one page (`/`) as anchor targets (`#skills`, `#experience`, etc.)
-- Header uses `href="#..."` anchors + `scrollToElement()` util for in-page scroll
-- React Router only handles `/` (Home) and `/contact`
-- Section components are self-contained in `src/components/` with their own CSS
+Legend: `[ ]` open · `[x]` done · 🔴 **YOUR ACTION** = requires Oussema (dashboard access, content, or a decision Claude must not make alone). Everything unmarked, Claude can execute autonomously.
 
 ---
 
-## What must NOT change
+## Ground rules (apply to every phase)
 
-- All existing section components (`Skills.js`, `Projects.js`, `Experience.js`, etc.) — do not rewrite content
-- All CSS files and design tokens (`--primary-color`, `--bg-color`, etc. in `global.css`)
-- `ChatWidget` and `Footer` — remain global in `App.js`
-- `useTheme`, `ScrollReveal`, `useScrollReveal` hooks — keep using them
-- `usePageTransition` parallax — it only targets `.hero`, which stays on `/`
-
----
-
-## Phase 1 — Routing layer
-
-**Files:** `src/App.js`, `src/components/Header.js`
-
-- Add routes in `App.js` for: `/skills`, `/services`, `/experience`, `/work`, `/about`, `/languages`
-- Replace all `href="#..."` anchors in `Header.js` with React Router `<Link to="...">` components
-- Remove the `scrollToElement` import from Header — it is no longer used for nav
-- `Chat with AI` button stays as-is (opens `ChatWidget`, no route)
-- `/contact` route already exists — leave it untouched
-- Mobile hamburger: update `onClick` on each `<Link>` to call `setMenuOpen(false)` so the menu closes on navigation
+1. **Build gate:** `CI=true npx react-scripts build` must pass locally before any push — Vercel fails the deploy on any warning.
+2. **Deploy gate:** after each push, confirm the Vercel deployment succeeds (`gh api repos/Oussemamri/Portfolio/deployments` → latest status) and spot-check the change live on oussemaamri.com.
+3. **Design tokens only:** all colors via the CSS custom properties in `global.css` — never hardcoded values. Dark mode (Phase 1) depends on this discipline.
+4. **No secrets in the repo.** Env vars live in the Vercel dashboard. The repo is public.
+5. One phase per commit (or a small series); commit messages follow the existing `feat:/fix:/perf:/docs:` convention.
 
 ---
 
-## Phase 2 — Shared page shell
+## Phase 0 — Ten-minute protections (mostly yours)
 
-**File to create:** `src/components/common/PageShell.js` (+ paired CSS)
+- [ ] 🔴 **EmailJS domain allowlist** — dashboard.emailjs.com → Account → Security → allow only `oussemaamri.com` (+ `www`). Your public key is visible in the bundle by design; this stops strangers from burning your 200-email quota from other sites.
+- [ ] 🔴 **CV freshness** — `uptaed_cv.tex` in the project root looks newer than the deployed `public/cv/Oussema_Amri_CV.pdf`. Compile and replace the PDF if it's the newer version, and rename/move the `.tex` out of the repo folder (typo'd filename, and LaTeX source doesn't belong in the site repo).
+- [ ] 🔴 **Decide:** should `reqlume_mid_page.png` (untracked, unused) become the Reqlume card/case-study image? If yes, Claude compresses to WebP and wires it in; if no, delete it.
+- [ ] **Chat abuse guard (code)** — add a lightweight per-IP token bucket in `api/chat.js` (in-memory, best-effort per warm instance) and log rejected requests. CORS + 500-char cap are already live; this closes the direct-`curl` gap well enough for a portfolio.
 
-A reusable wrapper that every section page uses. Props: `title`, `subtitle`, `children`.
-
-Structure:
-```
-<div class="page-shell">
-  <div class="page-shell-banner">        ← full-width dark banner (same bg as header: #282c34)
-    <h1>{title}</h1>                      ← large section title
-    <p>{subtitle}</p>                     ← short descriptor line
-    <div class="page-shell-accent" />    ← colored underline bar (var(--primary-color))
-  </div>
-  <div class="page-shell-content">
-    {children}                            ← existing section component slots in here
-  </div>
-</div>
-```
-
-Design rules for the banner:
-- Background: `var(--header-bg)` (matches the site header — dark, consistent)
-- Title color: white
-- Subtitle color: `var(--secondary-color)` (light blue)
-- Accent bar: 60px wide, 3px tall, `var(--primary-color)`, centered
-- Padding: `5rem 2rem` vertically, same rhythm as existing `section` padding
-- Add a subtle fade-in animation on mount (`@keyframes fadeInDown`) — reuse the same pattern as `ScrollReveal`
+**Acceptance:** EmailJS test from an allowed origin still sends; a scripted burst against `/api/chat` starts returning 429.
 
 ---
 
-## Phase 3 — Individual page files
+## Phase 1 — Fix what's broken (P0, ~half a day)
 
-**Files to create:** `src/pages/SkillsPage.js`, `ServicesPage.js`, `ExperiencePage.js`, `WorkPage.js`, `AboutPage.js`, `LanguagesPage.js`
+### 1.1 Wire up dark mode
+The hook exists ([src/hooks/useTheme.js](../src/hooks/useTheme.js)) but nothing mounts it; every `body.dark` rule in the CSS is dead code today.
 
-Each page file is a thin wrapper — no new logic, just composition:
+- [ ] Mount `useTheme` once in `App.js`; on first visit (no localStorage entry) respect `prefers-color-scheme`.
+- [ ] Sun/moon toggle button in the Header (desktop + mobile), keyboard-accessible with `aria-label`.
+- [ ] Sweep ALL component CSS for dark coverage — the new-design sections (Skills, Companies) have `body.dark` rules; older ones (About, Experience, Contact, Languages, footer, chat widget) need auditing. Fix contrast failures, don't just invert.
+- [ ] 🔴 **Review checkpoint:** before pushing, Claude screenshots every route in dark mode (or runs the dev server for you) — you approve the palette. Dark mode ships site-wide or not at all; a half-dark site looks worse than none.
 
-```js
-// Example: src/pages/SkillsPage.js
-import React from 'react';
-import PageShell from '../components/common/PageShell';
-import Skills from '../components/Skills';
+### 1.2 Real 404 page
+- [ ] `<Route path="*" element={<NotFound />} />` in `App.js` + a small branded NotFound page (big 404, one-liner, links to `/` and `/work`). Keep it consistent with the design system.
 
-const SkillsPage = () => (
-  <PageShell title="Technical Stack" subtitle="Technologies and tools I work with">
-    <Skills />
-  </PageShell>
-);
-
-export default SkillsPage;
-```
-
-Subtitles for each page:
-- Skills → "Technologies and tools I work with"
-- Services → "What I can build for you"
-- Experience → "Where I've worked and what I've shipped"
-- Work → "Projects I've designed and developed"
-- About → "A bit about who I am"
-- Languages → "Human languages I speak"
-
-Keep `React.lazy` + `Suspense` in `App.js` for code-splitting per route (same pattern already used in `Home.js`).
+**Acceptance:** toggle persists across reload and route changes; `oussemaamri.com/definitely-not-a-page` shows the branded 404; CI build green.
 
 ---
 
-## Phase 4 — Home page rework
+## Phase 2 — Per-route SEO (~half a day)
 
-**File:** `src/pages/Home.js`
+**Architect's note (read first):** CRA renders client-side. Google executes JS, so per-route `<title>`/`<meta description>` via `react-helmet-async` works for search. **Social scrapers (LinkedIn/WhatsApp/X) do not run JS** — per-route OG images/titles will NOT show when sharing deep links unless we add prerendering or migrate to a framework. Scope here is the honest 80%: search SEO now, social previews stay the (good) static homepage card. A Next.js migration is deliberately out of scope — revisit only if case studies (Phase 4) justify it.
 
-Remove all lazy-loaded section components from Home. Home becomes: **Hero + overview grid only.**
+- [ ] Add `react-helmet-async`; `<HelmetProvider>` in `index.js`.
+- [ ] Small `<PageMeta title description path>` component; apply to all 8 routes with unique, recruiter-oriented copy (~155-char descriptions).
+- [ ] Canonical URL per route.
+- [ ] Extend the existing JSON-LD `Person` schema in `index.html` (add `jobTitle`, `worksFor`, `sameAs` → GitHub/LinkedIn).
+- [ ] 🔴 **Google Search Console** — verify the domain (DNS TXT or HTML file — Claude prepares whichever you pick) and submit `sitemap.xml`. Needs your Google account.
 
-Below the `<Hero />`, add an `<OverviewGrid />` section (can be inlined in Home.js or extracted to `src/components/OverviewGrid.js`).
-
-Overview grid: 6 cards in a responsive CSS grid (3 columns on desktop, 2 on tablet, 1 on mobile). Each card:
-- Icon (from `react-icons`)
-- Section title
-- One-line description
-- `<Link to="/skills">` wrapping the whole card
-
-Card data:
-
-| Route | Icon | Title | Description |
-|-------|------|-------|-------------|
-| `/skills` | `FaCode` | Technical Stack | React, Node.js, TypeScript & more |
-| `/services` | `FaBriefcase` | Services | What I can build for you |
-| `/experience` | `FaHistory` | Experience | Companies and roles |
-| `/work` | `FaFolderOpen` | Work | Projects I've shipped |
-| `/about` | `FaUser` | About | Who I am |
-| `/languages` | `FaGlobe` | Languages | Languages I speak |
-
-Card hover: lift effect (`translateY(-4px)`, `box-shadow`) using existing `.btn:hover` pattern. Use `var(--card-bg)`, `var(--border-color)`, `var(--primary-color)` — no new color values.
-
-Update `Hero.js`: change the "Contact me" button's `href="#contact"` to a React Router `<Link to="/contact">` and the scroll-down indicator's `onClick` to scroll to `#overview` (the new grid section id) instead of `#skills`.
+**Acceptance:** each route shows a unique tab title live; Google Rich Results test passes on the Person schema; Search Console shows the sitemap accepted (may take days — don't block on it).
 
 ---
 
-## Phase 5 — Navigation active state & transitions
+## Phase 3 — Recruiter essentials (~1 day)
 
-**File:** `src/components/Header.js`
+- [ ] **Footer rebuild** ([src/components/Footer.js](../src/components/Footer.js)): quick-nav links (all routes), GitHub/LinkedIn/email, CV download, "Built with React · deployed on Vercel" line, back-to-top button. Match the dark editorial design system.
+- [ ] **CV prominence:** download link in Header (desktop) and footer, not just the hero. Use the refreshed PDF from Phase 0.
+- [ ] **Social links in Header** — GitHub + LinkedIn icons, visible without scrolling on every route.
+- [ ] **ChatWidget hint** — one-line teaser near the launcher ("Ask my AI about my experience"), dismissible, shown once per session.
+- [ ] **Availability badge** in Contact + Hero ("Open to opportunities" style). 🔴 **Confirm wording and whether you want it shown at all** (you're currently at RFA — saying "open to work" publicly is your call).
 
-Active link highlighting:
-- Import `useLocation` from `react-router-dom`
-- Compare `location.pathname` to each link's `to` prop
-- Add class `nav-link active` when matched; style it in `header.css` with `color: var(--primary-color)` and a 2px bottom border
-
-Page transition:
-- Add a CSS class `page-enter` on the `page-shell` root div that triggers a `fadeInUp` animation (opacity 0→1, translateY 20px→0, ~400ms ease-out)
-- This is purely CSS — no JS animation library needed
+**Acceptance:** from any route, a recruiter can reach GitHub, LinkedIn, CV, and contact in one click; Lighthouse a11y score doesn't regress.
 
 ---
 
-## Implementation order
+## Phase 4 — Social proof & case studies (content-gated, ~2 days once content exists)
 
-Execute phases strictly in order. Each phase must be fully working before starting the next:
+**This phase is blocked on your content. Code is the easy part.**
 
-1. Routing layer → test that clicking nav links changes the URL
-2. PageShell component → test it renders standalone with dummy content
-3. Individual page files → test each route renders the correct section
-4. Home rework → test the overview grid links navigate correctly
-5. Nav active state → test it highlights the correct link on each route
+- [ ] 🔴 **Testimonials:** collect 2–3 short quotes (manager/colleague/client), each with name, role, company, and their permission to publish. Send them to Claude as plain text.
+- [ ] Testimonials section on Home (and/or About) in the design system.
+- [ ] 🔴 **Case-study material** for 2 flagship projects (Reqlume + one other): the problem, your specific role, key technical decisions, and one or two honest outcome statements (metrics if you have them, "shipped to X users at Y" style otherwise). Claude drafts the page structure and copy from your bullet points — you approve every claim before it ships.
+- [ ] Case-study route per project (`/work/<slug>`), linked from the project cards. Screenshots optimized to WebP like everything else; a 30–60s demo GIF/clip per project if you can record one 🔴.
+- [ ] Update sitemap with new routes.
+
+**Acceptance:** project cards link to case studies; every factual claim user-approved; images pass the perf budget (no single asset > 300 KB).
 
 ---
 
-## Design consistency checklist
+## Phase 5 — Design consistency (~1–2 days)
 
-Before marking any phase done, verify:
-- [ ] Dark/light theme toggle still works on every new page
-- [ ] Mobile hamburger menu closes on navigation
-- [ ] `ChatWidget` is accessible from every page
-- [ ] No hardcoded color values — only CSS variables
-- [ ] `ScrollReveal` entrance animations still work inside section components
-- [ ] `PageShell` banner looks correct in both light and dark themes
+The site still has two visual languages (new: Skills/Companies; old: About, Experience, Contact, Languages).
+
+- [ ] Extract `<SectionHeader eyebrow title accent>` from the new sections — define the pattern once.
+- [ ] Migrate About → Experience → Languages → Contact to the new system, **one section per commit**, reusing existing content verbatim.
+- [ ] Consolidate spacing + type scale into CSS variables in `global.css`; remove per-component one-offs.
+- [ ] 🔴 **Review checkpoint per migrated section** — screenshot before/after; you approve each before the next starts (cheap to steer early, expensive to redo late).
+
+**Acceptance:** no old-design remnants; every section uses `SectionHeader`; dark mode still coherent on migrated sections.
+
+---
+
+## Phase 6 — Quality gates (~1 day)
+
+- [ ] **Tests:** route smoke tests (each page renders without crashing), Header nav test, `api/chat.js` validation unit tests (missing/oversized message, method rejection). Target: `npm test -- --watchAll=false` green with real assertions.
+- [ ] **CI:** minimal GitHub Action running lint + tests on PRs/pushes (Vercel only gates the build, not tests).
+- [ ] **Accessibility:** global `prefers-reduced-motion` handling — gate ScrollReveal, framer-motion transitions, and the hero parallax (currently only 2 CSS files honor it); visible `:focus-visible` rings site-wide; contrast audit on muted DM-Mono text; keyboard-walk the whole site.
+- [ ] **Lighthouse budget:** measure and record scores (perf/a11y/best-practices/SEO) in this file; fix anything under 90 that's cheap.
+
+**Acceptance:** CI green on a test PR; Lighthouse a11y ≥ 95; motion fully disabled under emulated `prefers-reduced-motion`.
+
+---
+
+## Phase 7 — Analytics & monitoring (~2 hours)
+
+- [ ] 🔴 **Pick the provider.** Recommendation: **Vercel Web Analytics** — free tier, privacy-friendly, no cookie banner needed, one dashboard toggle + one package. (Alternatives: Plausible = paid, Umami = self-hosting burden. Not worth it here.)
+- [ ] 🔴 Enable Web Analytics in the Vercel project dashboard.
+- [ ] Add `@vercel/analytics` and mount `<Analytics />` in `App.js`.
+- [ ] Optional: `@vercel/speed-insights` the same way.
+- [ ] Optional: 🔴 free uptime monitor (UptimeRobot) on `/` and `/api/health` — needs an account.
+
+**Acceptance:** page views appear in the Vercel dashboard within a day; no console errors; Lighthouse unaffected.
+
+---
+
+## Suggested order & effort
+
+| Phase | Effort | Blocked on you? |
+|---|---|---|
+| 0 — Protections | 10 min you + 1 h Claude | Mostly 🔴 |
+| 1 — Dark mode + 404 | ~half day | Dark-mode review 🔴 |
+| 2 — SEO | ~half day | Search Console 🔴 (non-blocking) |
+| 3 — Recruiter essentials | ~1 day | Availability wording 🔴 |
+| 4 — Proof & case studies | ~2 days | **Fully content-gated 🔴** |
+| 5 — Design consistency | 1–2 days | Per-section review 🔴 |
+| 6 — Quality gates | ~1 day | No |
+| 7 — Analytics | ~2 h | Provider + toggle 🔴 |
+
+Phases 1–3 are independent of your content and deliver the most recruiter-visible value — do them first. Start collecting Phase 4 quotes/outcomes in parallel; it has the longest lead time and the highest credibility payoff.
+
+To execute: tell Claude *"do phase N"* — it will follow the ground rules, hit the 🔴 checkpoints, and tick the boxes in this file as items land.

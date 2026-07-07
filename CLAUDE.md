@@ -43,6 +43,6 @@ Vercel's GitHub integration deploys every push to `main` — there is no GitHub 
 
 See [.env.example](.env.example) for all frontend vars. Copy to `.env.local` for local development — CRA only exposes vars prefixed with `REACT_APP_`.
 
-## Known gaps (see AUDIT.md)
+## Known gaps & roadmap
 
-Dark-mode toggle is unwired, there is no catch-all 404 route, no per-route SEO meta, and no automated tests.
+Dark-mode toggle is unwired, there is no catch-all 404 route, no per-route SEO meta, and no automated tests. The full phased plan to close these (with 🔴 markers for steps needing the owner) is in [.claude/instructions.md](.claude/instructions.md); background analysis in [AUDIT.md](AUDIT.md).
