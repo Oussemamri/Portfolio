@@ -86,6 +86,22 @@ section {
     background-color: var(--bg-color);
 }
 
+/* ── Focus ring ──
+   :focus-visible (not :focus) so it only shows for keyboard navigation,
+   not on mouse click — the reason many designs strip focus outlines
+   entirely is the "ugly ring on every click" complaint, which this avoids
+   by construction. One consistent, on-brand indicator for every
+   focusable element, working in both themes since it's token-based. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
 a {
     text-decoration: none;
     color: inherit;
@@ -177,7 +193,7 @@ img {
     border-radius: 9999px;
     background: rgba(46, 204, 113, 0.12);
     border: 1px solid rgba(46, 204, 113, 0.3);
-    color: #1e9e56;
+    color: #0f6b35;
     font-size: 0.8rem;
     font-weight: 600;
     letter-spacing: 0.01em;
@@ -202,4 +218,21 @@ body.dark .availability-badge {
     0%   { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.5); }
     70%  { box-shadow: 0 0 0 6px rgba(46, 204, 113, 0); }
     100% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); }
+}
+
+/* ── Respect prefers-reduced-motion ──
+   A stylesheet !important declaration overrides even inline styles set by
+   JS (e.g. ScrollReveal's inline `transition: ...`), so this one rule
+   catches every CSS animation/transition site-wide. Content still reaches
+   its final state instantly instead of easing/sliding/fading into place.
+   JS-driven motion (scroll-linked parallax, canvas particle loops,
+   framer-motion) is gated separately at the source since this can't reach
+   those. */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }

@@ -9,7 +9,13 @@ const usePageTransition = () => {
     if (typeof window === 'undefined' || typeof document === 'undefined') {
       return undefined;
     }
-    
+
+    // Scroll-linked parallax is exactly the kind of motion
+    // prefers-reduced-motion exists to suppress.
+    if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) {
+      return undefined;
+    }
+
     const handleScroll = () => {
       const heroSection = document.querySelector('.hero');
       const aboutSection = document.getElementById('about');

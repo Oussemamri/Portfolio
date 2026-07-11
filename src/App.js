@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { MotionConfig } from 'framer-motion';
 import { Toaster } from 'react-hot-toast';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -30,34 +31,36 @@ function App() {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <Router>
-      <div className="App">
-        <Header theme={theme} toggleTheme={toggleTheme} />
-        <Suspense fallback={<PageFallback />}>
-          <Routes>
-            <Route path="/"           element={<Home theme={theme} />} />
-            <Route path="/contact"    element={<Contact />} />
-            <Route path="/skills"     element={<SkillsPage />} />
-            <Route path="/services"   element={<ServicesPage />} />
-            <Route path="/experience" element={<ExperiencePage />} />
-            <Route path="/work"       element={<WorkPage />} />
-            <Route path="/about"      element={<AboutPage />} />
-            <Route path="/languages"  element={<LanguagesPage />} />
-            <Route path="*"           element={<NotFound />} />
-          </Routes>
-        </Suspense>
-        <Footer />
-        <Toaster
-          position="top-right"
-          toastOptions={{
-            duration: 5000,
-            style: { background: '#363636', color: '#fff' },
-            success: { style: { background: '#4caf50' } },
-            error:   { style: { background: '#f44336' } },
-          }}
-        />
-      </div>
-    </Router>
+    <MotionConfig reducedMotion="user">
+      <Router>
+        <div className="App">
+          <Header theme={theme} toggleTheme={toggleTheme} />
+          <Suspense fallback={<PageFallback />}>
+            <Routes>
+              <Route path="/"           element={<Home theme={theme} />} />
+              <Route path="/contact"    element={<Contact />} />
+              <Route path="/skills"     element={<SkillsPage />} />
+              <Route path="/services"   element={<ServicesPage />} />
+              <Route path="/experience" element={<ExperiencePage />} />
+              <Route path="/work"       element={<WorkPage />} />
+              <Route path="/about"      element={<AboutPage />} />
+              <Route path="/languages"  element={<LanguagesPage />} />
+              <Route path="*"           element={<NotFound />} />
+            </Routes>
+          </Suspense>
+          <Footer />
+          <Toaster
+            position="top-right"
+            toastOptions={{
+              duration: 5000,
+              style: { background: '#363636', color: '#fff' },
+              success: { style: { background: '#4caf50' } },
+              error:   { style: { background: '#f44336' } },
+            }}
+          />
+        </div>
+      </Router>
+    </MotionConfig>
   );
 }
 

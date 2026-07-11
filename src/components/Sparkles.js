@@ -8,6 +8,8 @@ export function Sparkles({ className, color = '#8350e8', density = 80, speed = 0
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
 
+    const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+
     let raf;
     let particles = [];
 
@@ -32,14 +34,16 @@ export function Sparkles({ className, color = '#8350e8', density = 80, speed = 0
     function draw() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       for (const p of particles) {
-        p.alpha += p.delta;
-        if (p.alpha <= 0 || p.alpha >= 1) p.delta *= -1;
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.x < 0) p.x = canvas.width;
-        if (p.x > canvas.width) p.x = 0;
-        if (p.y < 0) p.y = canvas.height;
-        if (p.y > canvas.height) p.y = 0;
+        if (!reduceMotion) {
+          p.alpha += p.delta;
+          if (p.alpha <= 0 || p.alpha >= 1) p.delta *= -1;
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < 0) p.x = canvas.width;
+          if (p.x > canvas.width) p.x = 0;
+          if (p.y < 0) p.y = canvas.height;
+          if (p.y > canvas.height) p.y = 0;
+        }
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
@@ -48,7 +52,8 @@ export function Sparkles({ className, color = '#8350e8', density = 80, speed = 0
         ctx.fill();
       }
       ctx.globalAlpha = 1;
-      raf = requestAnimationFrame(draw);
+      // Reduced motion: paint one static frame instead of looping forever.
+      if (!reduceMotion) raf = requestAnimationFrame(draw);
     }
 
     resize();
