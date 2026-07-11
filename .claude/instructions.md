@@ -37,7 +37,7 @@ The hook exists ([src/hooks/useTheme.js](../src/hooks/useTheme.js)) but nothing 
 - [x] Mount `useTheme` once in `App.js`; on first visit (no localStorage entry) respect `prefers-color-scheme`.
 - [x] Sun/moon toggle button in the Header (desktop + mobile), keyboard-accessible with `aria-label`.
 - [x] Sweep ALL component CSS for dark coverage — the new-design sections (Skills, Companies) have `body.dark` rules; older ones (About, Experience, Contact, Languages, footer, chat widget) need auditing. Fix contrast failures, don't just invert. Also caught and fixed three bugs beyond the obvious "add body.dark rules": the Hero's ink-reveal canvas mask was hardcoded white (fully hid the dark gradient until the mouse moved over it), Services/Languages had a separate `--maz-*` token block with no dark variant, and `<html>` never inherited `body.dark`'s `--bg-color` (CSS vars only inherit downward) which showed as a light strip below short pages.
-- [ ] 🔴 **Review checkpoint:** shipped and deployed (commit `1752d27`) after my own screenshot verification across all 8 routes × both themes — but you haven't personally looked at the live palette yet. Take a look at oussemaamri.com and toggle dark mode before considering this fully closed.
+- [x] 🔴 **Review checkpoint:** confirmed working live by Oussema.
 
 ### 1.2 Real 404 page
 - [x] `<Route path="*" element={<NotFound />} />` in `App.js` + a small branded NotFound page (big 404, one-liner, links to `/` and `/work`). Keep it consistent with the design system.
@@ -54,7 +54,7 @@ The hook exists ([src/hooks/useTheme.js](../src/hooks/useTheme.js)) but nothing 
 - [x] Small `<PageMeta title description path>` component; apply to all 8 routes with unique, recruiter-oriented copy (~155-char descriptions).
 - [x] Canonical URL per route. Also removed the static `<meta name="description">`/`<link rel="canonical">` from `index.html` — they were duplicating Helmet's per-route tags in the DOM (first-match querySelector/crawlers would see the stale static one, and Google explicitly warns against multiple canonical tags).
 - [x] Extend the existing JSON-LD `Person` schema in `index.html` (add `jobTitle`, `worksFor`, `sameAs` → GitHub/LinkedIn) — already done in an earlier session, verified present.
-- [ ] 🔴 **Google Search Console** — verify the domain (DNS TXT or HTML file — Claude prepares whichever you pick) and submit `sitemap.xml`. Needs your Google account.
+- [x] 🔴 **Google Search Console** — domain verified and sitemap submitted by Oussema.
 
 **Acceptance:** each route shows a unique tab title live; Google Rich Results test passes on the Person schema; Search Console shows the sitemap accepted (may take days — don't block on it).
 
