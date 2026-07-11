@@ -19,12 +19,12 @@ const SectionFallback = () => (
     </div>
 );
 
-const Home = () => {
+const Home = ({ theme }) => {
     usePageTransition();
 
     return (
         <main>
-            <Hero />
+            <Hero theme={theme} />
             <Suspense fallback={<SectionFallback />}>
                 <ScrollReveal animation="fade-up" duration={800}>
                     <Skills />

@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import '../assets/styles/components/hero.css';
 import InkReveal from './ui/InkReveal';
 
-const Hero = () => {
+const Hero = ({ theme }) => {
     const heroRef = useRef(null);
+    const maskColor = theme === 'dark' ? [23, 26, 31] : [255, 255, 255];
 
     const scrollToOverview = () => {
         const el = document.getElementById('skills');
@@ -16,7 +17,8 @@ const Hero = () => {
     return (
         <section className="hero" id="home" ref={heroRef}>
             <InkReveal
-                maskColor={[255, 255, 255]}
+                key={theme}
+                maskColor={maskColor}
                 brushSize={160}
                 lifetime={900}
                 stampStep={8}

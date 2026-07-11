@@ -21,6 +21,18 @@
     box-sizing: border-box;
 }
 
+body.dark .languages-section-standalone {
+    --maz-background-600: 220 10% 14%;
+    --maz-secondary: 220 10% 20%;
+    --maz-secondary-foreground: 0 0% 92%;
+    --maz-foreground: 210 15% 92%;
+    --maz-border: 220 10% 28%;
+}
+
+body.dark .lang-card {
+    background: hsl(220 10% 16%);
+}
+
 .languages-inner {
     max-width: 860px;
     margin: 0 auto;

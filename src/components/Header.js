@@ -3,7 +3,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
     FaHome, FaCode, FaBriefcase, FaHistory,
-    FaFolder, FaUser, FaEnvelope, FaRobot
+    FaFolder, FaUser, FaEnvelope, FaRobot,
+    FaSun, FaMoon
 } from 'react-icons/fa';
 import '../assets/styles/components/header.css';
 import ChatWidget from '../components/ChatWidget/ChatWidget';
@@ -22,7 +23,7 @@ const NAV_LINKS = [
 
 const SPRING = { type: 'spring', stiffness: 350, damping: 30 };
 
-const Header = () => {
+const Header = ({ theme, toggleTheme }) => {
     const location = useLocation();
     const scrollY = useScrollPosition();
     const scrolled = scrollY > 60;
@@ -61,8 +62,15 @@ const Header = () => {
                         })}
                     </nav>
 
-                    {/* AI Chat button — right column */}
+                    {/* Theme toggle + AI Chat button — right column */}
                     <div className="header-right">
+                        <button
+                            className="theme-toggle-btn"
+                            onClick={toggleTheme}
+                            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+                        >
+                            {theme === 'dark' ? <FaSun aria-hidden="true" /> : <FaMoon aria-hidden="true" />}
+                        </button>
                         <button
                             className="ai-chat-btn"
                             onClick={() => document.querySelector('.chat-toggle-button')?.click()}
@@ -102,6 +110,15 @@ const Header = () => {
                             </Link>
                         );
                     })}
+                    <button
+                        className="mobile-item mobile-theme-toggle"
+                        onClick={toggleTheme}
+                        aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+                    >
+                        <span className="mobile-icon">
+                            {theme === 'dark' ? <FaSun size={17} aria-hidden="true" /> : <FaMoon size={17} aria-hidden="true" />}
+                        </span>
+                    </button>
                 </div>
             </nav>
 

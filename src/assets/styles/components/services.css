@@ -20,6 +20,18 @@
     box-sizing: border-box;
 }
 
+body.dark .services-section {
+    --maz-background-600: 220 10% 14%;
+    --maz-secondary: 220 10% 20%;
+    --maz-secondary-foreground: 0 0% 92%;
+    --maz-foreground: 210 15% 92%;
+    --maz-border: 220 10% 28%;
+}
+
+body.dark .services-section .m-card-spotlight > .inner {
+    background-color: hsl(220 10% 16% / 0.95);
+}
+
 .services-inner {
     max-width: 1150px;
     margin: 0 auto;

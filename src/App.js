@@ -4,6 +4,7 @@ import { Toaster } from 'react-hot-toast';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
+import useTheme from './hooks/useTheme';
 
 const Contact      = React.lazy(() => import('./pages/Contact'));
 const SkillsPage   = React.lazy(() => import('./pages/SkillsPage'));
@@ -12,6 +13,7 @@ const ExperiencePage = React.lazy(() => import('./pages/ExperiencePage'));
 const WorkPage     = React.lazy(() => import('./pages/WorkPage'));
 const AboutPage    = React.lazy(() => import('./pages/AboutPage'));
 const LanguagesPage  = React.lazy(() => import('./pages/LanguagesPage'));
+const NotFound        = React.lazy(() => import('./pages/NotFound'));
 
 const PageFallback = () => (
   <div style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -25,13 +27,15 @@ const PageFallback = () => (
 );
 
 function App() {
+  const { theme, toggleTheme } = useTheme();
+
   return (
     <Router>
       <div className="App">
-        <Header />
+        <Header theme={theme} toggleTheme={toggleTheme} />
         <Suspense fallback={<PageFallback />}>
           <Routes>
-            <Route path="/"           element={<Home />} />
+            <Route path="/"           element={<Home theme={theme} />} />
             <Route path="/contact"    element={<Contact />} />
             <Route path="/skills"     element={<SkillsPage />} />
             <Route path="/services"   element={<ServicesPage />} />
@@ -39,6 +43,7 @@ function App() {
             <Route path="/work"       element={<WorkPage />} />
             <Route path="/about"      element={<AboutPage />} />
             <Route path="/languages"  element={<LanguagesPage />} />
+            <Route path="*"           element={<NotFound />} />
           </Routes>
         </Suspense>
         <Footer />

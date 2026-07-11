@@ -149,7 +149,7 @@ body.dark {
 
 .location-open {
     font-size: 0.68rem;
-    color: #777;
+    color: var(--text-muted);
     line-height: 1.4;
     margin: 0;
     letter-spacing: 0.03em;
