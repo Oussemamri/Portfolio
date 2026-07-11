@@ -1,4 +1,5 @@
 import React from 'react';
+import SectionHeader from './common/SectionHeader';
 import '../assets/styles/components/languages.css';
 
 const CEFR_LEVELS = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
@@ -22,7 +23,7 @@ const languages = [
 const Languages = () => (
     <section id="languages" className="languages-section-standalone">
         <div className="languages-inner">
-            <h2 className="languages-title">Languages</h2>
+            <SectionHeader eyebrow="// CEFR proficiency" title="Languages" accent="#FFD21E" />
             <div className="language-cards">
                 {languages.map((lang, idx) => {
                     const levelIdx = CEFR_LEVELS.indexOf(lang.level);

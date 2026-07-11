@@ -50,6 +50,7 @@
 
 /* Override global h2 styles for this section */
 .contact-section h2.contact-heading {
+    font-family: 'Syne', sans-serif;
     font-size: clamp(2.5rem, 5vw, 3.75rem);
     font-weight: 700;
     letter-spacing: -0.02em;
@@ -87,6 +88,7 @@
 
 /* Contact details block */
 .contact-details-title {
+    font-family: 'Syne', sans-serif;
     font-size: 1.375rem;
     font-weight: 600;
     color: var(--text-color);

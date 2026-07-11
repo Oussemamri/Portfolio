@@ -1,12 +1,13 @@
 import React from 'react';
+import SectionHeader from './common/SectionHeader';
 import '../assets/styles/components/experience.css';
 
 const Experience = () => {
     return (
         <section className="experience-section" id="experience">
             <div className="container">
-                <h2>Professional Experience</h2>
-                
+                <SectionHeader eyebrow="// role timeline" title="Professional Experience" accent="#E0234E" />
+
                 <div className="experience-timeline">
                     {/* Rocket Factory Augsburg (RFA) */}
                     <div className="experience-item">

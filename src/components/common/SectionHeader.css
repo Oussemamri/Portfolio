@@ -1,0 +1,49 @@
+/* ── SectionHeader — shared eyebrow + title + accent rule ─────────────
+   Matches the typography already established by Skills/Companies/Services:
+   Syne for the title, DM Mono for eyebrow/subtitle labels. */
+.section-header {
+    text-align: center;
+    margin: 0 auto 3rem;
+    max-width: 640px;
+}
+
+.section-header-eyebrow {
+    display: block;
+    font-family: 'DM Mono', 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    color: var(--section-accent);
+    opacity: 0.85;
+    margin-bottom: 0.75rem;
+}
+
+.section-header-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text-color);
+    margin: 0 0 0.5rem;
+}
+
+.section-header-title::after {
+    display: none;
+}
+
+.section-header-subtitle {
+    font-family: 'DM Mono', 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+    letter-spacing: 0.04em;
+    color: var(--text-color);
+    opacity: 0.5;
+    margin: 0;
+}
+
+.section-header-rule {
+    display: block;
+    width: 52px;
+    height: 3px;
+    margin: 1.25rem auto 0;
+    border-radius: 2px;
+    background: var(--section-accent);
+}
