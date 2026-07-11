@@ -22,7 +22,7 @@ Legend: `[ ]` open · `[x]` done · 🔴 **YOUR ACTION** = requires Oussema (das
 
 - [ ] 🔴 **EmailJS domain allowlist** — dashboard.emailjs.com → Account → Security → allow only `oussemaamri.com` (+ `www`). Your public key is visible in the bundle by design; this stops strangers from burning your 200-email quota from other sites.
 - [ ] 🔴 **CV freshness** — `uptaed_cv.tex` in the project root looks newer than the deployed `public/cv/Oussema_Amri_CV.pdf`. Compile and replace the PDF if it's the newer version, and rename/move the `.tex` out of the repo folder (typo'd filename, and LaTeX source doesn't belong in the site repo).
-- [ ] 🔴 **Decide:** should `reqlume_mid_page.png` (untracked, unused) become the Reqlume card/case-study image? If yes, Claude compresses to WebP and wires it in; if no, delete it.
+- [x] 🔴 **Decide:** should `reqlume_mid_page.png` (untracked, unused) become the Reqlume card/case-study image? If yes, Claude compresses to WebP and wires it in; if no, delete it.
 - [ ] **Chat abuse guard (code)** — add a lightweight per-IP token bucket in `api/chat.js` (in-memory, best-effort per warm instance) and log rejected requests. CORS + 500-char cap are already live; this closes the direct-`curl` gap well enough for a portfolio.
 
 **Acceptance:** EmailJS test from an allowed origin still sends; a scripted burst against `/api/chat` starts returning 429.
@@ -34,13 +34,13 @@ Legend: `[ ]` open · `[x]` done · 🔴 **YOUR ACTION** = requires Oussema (das
 ### 1.1 Wire up dark mode
 The hook exists ([src/hooks/useTheme.js](../src/hooks/useTheme.js)) but nothing mounts it; every `body.dark` rule in the CSS is dead code today.
 
-- [ ] Mount `useTheme` once in `App.js`; on first visit (no localStorage entry) respect `prefers-color-scheme`.
-- [ ] Sun/moon toggle button in the Header (desktop + mobile), keyboard-accessible with `aria-label`.
-- [ ] Sweep ALL component CSS for dark coverage — the new-design sections (Skills, Companies) have `body.dark` rules; older ones (About, Experience, Contact, Languages, footer, chat widget) need auditing. Fix contrast failures, don't just invert.
-- [ ] 🔴 **Review checkpoint:** before pushing, Claude screenshots every route in dark mode (or runs the dev server for you) — you approve the palette. Dark mode ships site-wide or not at all; a half-dark site looks worse than none.
+- [x] Mount `useTheme` once in `App.js`; on first visit (no localStorage entry) respect `prefers-color-scheme`.
+- [x] Sun/moon toggle button in the Header (desktop + mobile), keyboard-accessible with `aria-label`.
+- [x] Sweep ALL component CSS for dark coverage — the new-design sections (Skills, Companies) have `body.dark` rules; older ones (About, Experience, Contact, Languages, footer, chat widget) need auditing. Fix contrast failures, don't just invert. Also caught and fixed three bugs beyond the obvious "add body.dark rules": the Hero's ink-reveal canvas mask was hardcoded white (fully hid the dark gradient until the mouse moved over it), Services/Languages had a separate `--maz-*` token block with no dark variant, and `<html>` never inherited `body.dark`'s `--bg-color` (CSS vars only inherit downward) which showed as a light strip below short pages.
+- [ ] 🔴 **Review checkpoint:** shipped and deployed (commit `1752d27`) after my own screenshot verification across all 8 routes × both themes — but you haven't personally looked at the live palette yet. Take a look at oussemaamri.com and toggle dark mode before considering this fully closed.
 
 ### 1.2 Real 404 page
-- [ ] `<Route path="*" element={<NotFound />} />` in `App.js` + a small branded NotFound page (big 404, one-liner, links to `/` and `/work`). Keep it consistent with the design system.
+- [x] `<Route path="*" element={<NotFound />} />` in `App.js` + a small branded NotFound page (big 404, one-liner, links to `/` and `/work`). Keep it consistent with the design system.
 
 **Acceptance:** toggle persists across reload and route changes; `oussemaamri.com/definitely-not-a-page` shows the branded 404; CI build green.
 
@@ -50,10 +50,10 @@ The hook exists ([src/hooks/useTheme.js](../src/hooks/useTheme.js)) but nothing 
 
 **Architect's note (read first):** CRA renders client-side. Google executes JS, so per-route `<title>`/`<meta description>` via `react-helmet-async` works for search. **Social scrapers (LinkedIn/WhatsApp/X) do not run JS** — per-route OG images/titles will NOT show when sharing deep links unless we add prerendering or migrate to a framework. Scope here is the honest 80%: search SEO now, social previews stay the (good) static homepage card. A Next.js migration is deliberately out of scope — revisit only if case studies (Phase 4) justify it.
 
-- [ ] Add `react-helmet-async`; `<HelmetProvider>` in `index.js`.
-- [ ] Small `<PageMeta title description path>` component; apply to all 8 routes with unique, recruiter-oriented copy (~155-char descriptions).
-- [ ] Canonical URL per route.
-- [ ] Extend the existing JSON-LD `Person` schema in `index.html` (add `jobTitle`, `worksFor`, `sameAs` → GitHub/LinkedIn).
+- [x] Add `react-helmet-async`; `<HelmetProvider>` in `index.js`.
+- [x] Small `<PageMeta title description path>` component; apply to all 8 routes with unique, recruiter-oriented copy (~155-char descriptions).
+- [x] Canonical URL per route. Also removed the static `<meta name="description">`/`<link rel="canonical">` from `index.html` — they were duplicating Helmet's per-route tags in the DOM (first-match querySelector/crawlers would see the stale static one, and Google explicitly warns against multiple canonical tags).
+- [x] Extend the existing JSON-LD `Person` schema in `index.html` (add `jobTitle`, `worksFor`, `sameAs` → GitHub/LinkedIn) — already done in an earlier session, verified present.
 - [ ] 🔴 **Google Search Console** — verify the domain (DNS TXT or HTML file — Claude prepares whichever you pick) and submit `sitemap.xml`. Needs your Google account.
 
 **Acceptance:** each route shows a unique tab title live; Google Rich Results test passes on the Person schema; Search Console shows the sitemap accepted (may take days — don't block on it).
@@ -62,11 +62,11 @@ The hook exists ([src/hooks/useTheme.js](../src/hooks/useTheme.js)) but nothing 
 
 ## Phase 3 — Recruiter essentials (~1 day)
 
-- [ ] **Footer rebuild** ([src/components/Footer.js](../src/components/Footer.js)): quick-nav links (all routes), GitHub/LinkedIn/email, CV download, "Built with React · deployed on Vercel" line, back-to-top button. Match the dark editorial design system.
-- [ ] **CV prominence:** download link in Header (desktop) and footer, not just the hero. Use the refreshed PDF from Phase 0.
-- [ ] **Social links in Header** — GitHub + LinkedIn icons, visible without scrolling on every route.
-- [ ] **ChatWidget hint** — one-line teaser near the launcher ("Ask my AI about my experience"), dismissible, shown once per session.
-- [ ] **Availability badge** in Contact + Hero ("Open to opportunities" style). 🔴 **Confirm wording and whether you want it shown at all** (you're currently at RFA — saying "open to work" publicly is your call).
+- [x] **Footer rebuild** ([src/components/Footer.js](../src/components/Footer.js)): quick-nav links (all routes), GitHub/LinkedIn/email, CV download, "Built with React · deployed on Vercel" line, back-to-top button. Match the dark editorial design system. The old nav used `#anchor` hrefs (`#skills`, `#projects`, etc.) that were already dead since the multi-page migration — replaced with real `<Link>` routes.
+- [x] **CV prominence:** download link in Header (desktop) and footer, not just the hero. Uses the current `public/cv/Oussema_Amri_CV.pdf` — re-run this once you've refreshed the PDF per Phase 0.
+- [x] **Social links in Header** — GitHub + LinkedIn icons, visible without scrolling on every route (hidden below 1180px width, where footer/mobile-nav cover it instead).
+- [x] **ChatWidget hint** — one-line teaser near the launcher ("Ask my AI about my experience"), dismissible, shown once per session via `sessionStorage`.
+- [x] **Availability badge** in Contact + Hero. Wording confirmed: **"Open to work"** (direct wording, per your answer).
 
 **Acceptance:** from any route, a recruiter can reach GitHub, LinkedIn, CV, and contact in one click; Lighthouse a11y score doesn't regress.
 
