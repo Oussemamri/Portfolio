@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react';
 import Hero from '../components/Hero';
+import PageMeta from '../components/common/PageMeta';
 import ScrollReveal from '../components/common/ScrollReveal';
 import usePageTransition from '../hooks/usePageTransition';
 
@@ -24,6 +25,11 @@ const Home = ({ theme }) => {
 
     return (
         <main>
+            <PageMeta
+                title="Oussema Amri | Full-Stack Developer JS & TS"
+                description="Oussema Amri — Full-Stack Software Engineer based in Munich, Germany. Specializing in React, TypeScript, Python, FastAPI, and AWS. Currently at Rocket Factory Augsburg (RFA)."
+                path="/"
+            />
             <Hero theme={theme} />
             <Suspense fallback={<SectionFallback />}>
                 <ScrollReveal animation="fade-up" duration={800}>

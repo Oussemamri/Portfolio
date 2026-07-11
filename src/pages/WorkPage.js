@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PageShell from '../components/common/PageShell';
+import PageMeta from '../components/common/PageMeta';
 import { projectList, ProjectCard } from '../components/Projects';
 import '../assets/styles/components/projects.css';
 import '../assets/styles/pages/projectsPage.css';
@@ -24,6 +25,12 @@ const WorkPage = () => {
     : projectList.filter((p) => matchesFilter(p, activeFilter));
 
   return (
+    <>
+    <PageMeta
+      title="Work"
+      description="Projects by Oussema Amri: Reqlume aerospace SaaS, a full-stack portfolio, MindTrack quiz platform, DevOps automation, and more — with live links and repos."
+      path="/work"
+    />
     <PageShell
       title="Work"
       subtitle="// projects I've designed and shipped"
@@ -47,6 +54,7 @@ const WorkPage = () => {
         ))}
       </div>
     </PageShell>
+    </>
   );
 };
 

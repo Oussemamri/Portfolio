@@ -1,9 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PageShell from '../components/common/PageShell';
+import PageMeta from '../components/common/PageMeta';
 import '../assets/styles/pages/notFound.css';
 
 const NotFound = () => (
+  <>
+  <PageMeta title="404 — Page Not Found" description="This page doesn't exist." noindex />
   <PageShell
     title="404"
     subtitle="// this page doesn't exist"
@@ -19,6 +22,7 @@ const NotFound = () => (
       </div>
     </div>
   </PageShell>
+  </>
 );
 
 export default NotFound;

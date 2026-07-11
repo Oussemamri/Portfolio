@@ -5,14 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- ===== Primary SEO ===== -->
+    <!-- title / description / canonical are set per-route by PageMeta.js
+         (react-helmet-async) for Google's JS-executing crawler. This
+         static title is the pre-hydration fallback for the first paint. -->
     <title>Oussema Amri | Full-Stack Developer JS &amp; TS</title>
-    <meta name="description" content="Oussema Amri — Full-Stack Software Engineer based in Munich, Germany. Specializing in React, TypeScript, Python, FastAPI, and AWS. Currently at Rocket Factory Augsburg (RFA).">
     <meta name="keywords" content="Oussema Amri, Full-Stack Developer, React, TypeScript, Python, FastAPI, AWS, Munich, Software Engineer, Portfolio">
     <meta name="author" content="Oussema Amri">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://oussemaamri.com">
 
-    <!-- ===== Open Graph (Facebook / LinkedIn preview) ===== -->
+    <!-- ===== Open Graph (Facebook / LinkedIn preview) =====
+         Deliberately static and NOT per-route: social scrapers don't run
+         JS, so they'd never see a per-route Helmet override anyway. A
+         consistent homepage preview card for any shared URL beats an
+         inconsistent, half-updated one. ===== -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://oussemaamri.com">
     <meta property="og:title" content="Oussema Amri | Full-Stack Developer JS &amp; TS">
