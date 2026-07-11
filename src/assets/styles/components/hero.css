@@ -40,6 +40,11 @@
     z-index: 10;
 }
 
+.hero-text .availability-badge {
+    margin-bottom: 1rem;
+    animation: fadeInDown 1s ease-out;
+}
+
 .hero h1 {
     font-family: 'Manrope', sans-serif;
     font-size: 4rem;

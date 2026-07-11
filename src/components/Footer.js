@@ -1,21 +1,29 @@
 import React from 'react';
-import { FaGithub, FaLinkedin, FaEnvelope, FaCode } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { FaGithub, FaLinkedin, FaEnvelope, FaCode, FaDownload, FaArrowUp } from 'react-icons/fa';
 import { Boxes } from './common/BackgroundBoxes';
 import '../assets/styles/components/footer.css';
 
 const socialLinks = [
-    { icon: <FaGithub />,   href: 'https://github.com/Oussemamri',         label: 'GitHub'   },
-    { icon: <FaLinkedin />, href: 'https://linkedin.com/in/oussema-amri',   label: 'LinkedIn' },
-    { icon: <FaEnvelope />, href: '#contact',                                label: 'Email'    },
+    { icon: <FaGithub />,   href: 'https://github.com/Oussemamri',        label: 'GitHub'   },
+    { icon: <FaLinkedin />, href: 'https://linkedin.com/in/oussema-amri', label: 'LinkedIn' },
+    { icon: <FaEnvelope />, to: '/contact',                                label: 'Email'    },
 ];
 
 const navLinks = [
-    { label: 'Skills',      href: '#skills'      },
-    { label: 'Experience',  href: '#experience'  },
-    { label: 'Projects',    href: '#projects'    },
-    { label: 'About',       href: '#about'       },
-    { label: 'Contact',     href: '#contact'     },
+    { label: 'Home',       to: '/'           },
+    { label: 'Skills',     to: '/skills'     },
+    { label: 'Services',   to: '/services'   },
+    { label: 'Experience', to: '/experience' },
+    { label: 'Work',       to: '/work'       },
+    { label: 'About',      to: '/about'      },
+    { label: 'Languages',  to: '/languages'  },
+    { label: 'Contact',    to: '/contact'    },
 ];
+
+const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+};
 
 const Footer = () => {
     return (
@@ -39,30 +47,48 @@ const Footer = () => {
 
                         <div className="footer-socials">
                             {socialLinks.map((link) => (
-                                <a
-                                    key={link.label}
-                                    href={link.href}
-                                    className="footer-social-link"
-                                    target={link.href.startsWith('http') ? '_blank' : undefined}
-                                    rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                                    aria-label={link.label}
-                                >
-                                    {link.icon}
-                                </a>
+                                link.to ? (
+                                    <Link key={link.label} to={link.to} className="footer-social-link" aria-label={link.label}>
+                                        {link.icon}
+                                    </Link>
+                                ) : (
+                                    <a
+                                        key={link.label}
+                                        href={link.href}
+                                        className="footer-social-link"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label={link.label}
+                                    >
+                                        {link.icon}
+                                    </a>
+                                )
                             ))}
                         </div>
 
                         <nav className="footer-nav">
                             {navLinks.map((link) => (
-                                <a key={link.label} href={link.href} className="footer-nav-link">
+                                <Link key={link.label} to={link.to} className="footer-nav-link">
                                     {link.label}
-                                </a>
+                                </Link>
                             ))}
                         </nav>
+
+                        <a
+                            href={`${process.env.PUBLIC_URL}/cv/Oussema_Amri_CV.pdf`}
+                            className="footer-cv-link"
+                            download="Oussema_Amri_CV.pdf"
+                        >
+                            <FaDownload aria-hidden="true" /> Download CV
+                        </a>
                     </div>
 
                     <div className="footer-bottom">
+                        <button type="button" className="footer-back-to-top" onClick={scrollToTop} aria-label="Back to top">
+                            <FaArrowUp aria-hidden="true" />
+                        </button>
                         <p>&copy; {new Date().getFullYear()} Oussema Amri. All rights reserved.</p>
+                        <p className="footer-built-with">Built with React &middot; deployed on Vercel</p>
                     </div>
                 </div>
 

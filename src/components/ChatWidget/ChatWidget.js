@@ -5,9 +5,11 @@ import './ChatWidget.css';
 
 // Use environment variable for API URL
 const API_URL = process.env.REACT_APP_API_URL || '/api';
+const HINT_DISMISSED_KEY = 'chatHintDismissed';
 
 const ChatWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [showHint, setShowHint] = useState(false);
   const [messages, setMessages] = useState([
     {
       id: 1,
@@ -24,12 +26,25 @@ const ChatWidget = () => {
     scrollToBottom();
   }, [messages]);
 
+  // Show the hint once per session, a couple seconds after page load
+  useEffect(() => {
+    if (sessionStorage.getItem(HINT_DISMISSED_KEY)) return;
+    const timer = setTimeout(() => setShowHint(true), 2500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const dismissHint = () => {
+    setShowHint(false);
+    sessionStorage.setItem(HINT_DISMISSED_KEY, 'true');
+  };
+
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const toggleChat = () => {
     setIsOpen(!isOpen);
+    dismissHint();
   };
 
   const handleInputChange = (e) => {
@@ -145,6 +160,19 @@ const ChatWidget = () => {
               <FaPaperPlane />
             </button>
           </form>
+        </div>
+      )}
+
+      {showHint && !isOpen && (
+        <div className="chat-hint">
+          <span>Ask my AI about my experience</span>
+          <button
+            className="chat-hint-close"
+            onClick={dismissHint}
+            aria-label="Dismiss"
+          >
+            <FaTimes />
+          </button>
         </div>
       )}
 

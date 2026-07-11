@@ -41,6 +41,13 @@
     }
 }
 
+.contact-availability-badge {
+    display: flex;
+    width: fit-content;
+    justify-content: center;
+    margin: 0 auto 1rem;
+}
+
 /* Override global h2 styles for this section */
 .contact-section h2.contact-heading {
     font-size: clamp(2.5rem, 5vw, 3.75rem);

@@ -167,3 +167,39 @@ img {
         width: 95%;
     }
 }
+
+/* ── Availability badge — reused in Hero and Contact ── */
+.availability-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.9rem;
+    border-radius: 9999px;
+    background: rgba(46, 204, 113, 0.12);
+    border: 1px solid rgba(46, 204, 113, 0.3);
+    color: #1e9e56;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+}
+
+body.dark .availability-badge {
+    background: rgba(46, 204, 113, 0.14);
+    border-color: rgba(46, 204, 113, 0.35);
+    color: #4ade80;
+}
+
+.availability-badge-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #2ecc71;
+    box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.6);
+    animation: availability-pulse 2s infinite;
+}
+
+@keyframes availability-pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.5); }
+    70%  { box-shadow: 0 0 0 6px rgba(46, 204, 113, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); }
+}

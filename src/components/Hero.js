@@ -27,6 +27,10 @@ const Hero = ({ theme }) => {
             />
             <div className="hero-container">
                 <div className="hero-text">
+                    <span className="availability-badge">
+                        <span className="availability-badge-dot" aria-hidden="true" />
+                        Open to work
+                    </span>
                     <h1>Oussema Amri</h1>
                     <h2>Full-Stack Developer JS, TS &amp; Python</h2>
                     <p>Full-Stack Software Engineer open to frontend, backend, and full-stack opportunities. I build clean, scalable products that solve real business problems.</p>

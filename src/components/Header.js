@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import {
     FaHome, FaCode, FaBriefcase, FaHistory,
     FaFolder, FaUser, FaEnvelope, FaRobot,
-    FaSun, FaMoon
+    FaSun, FaMoon, FaGithub, FaLinkedin, FaDownload
 } from 'react-icons/fa';
 import '../assets/styles/components/header.css';
 import ChatWidget from '../components/ChatWidget/ChatWidget';
@@ -64,6 +64,34 @@ const Header = ({ theme, toggleTheme }) => {
 
                     {/* Theme toggle + AI Chat button — right column */}
                     <div className="header-right">
+                        <div className="header-quick-links">
+                            <a
+                                href="https://github.com/Oussemamri"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="header-icon-link"
+                                aria-label="GitHub"
+                            >
+                                <FaGithub aria-hidden="true" />
+                            </a>
+                            <a
+                                href="https://linkedin.com/in/oussema-amri"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="header-icon-link"
+                                aria-label="LinkedIn"
+                            >
+                                <FaLinkedin aria-hidden="true" />
+                            </a>
+                            <a
+                                href={`${process.env.PUBLIC_URL}/cv/Oussema_Amri_CV.pdf`}
+                                download="Oussema_Amri_CV.pdf"
+                                className="header-icon-link"
+                                aria-label="Download CV"
+                            >
+                                <FaDownload aria-hidden="true" />
+                            </a>
+                        </div>
                         <button
                             className="theme-toggle-btn"
                             onClick={toggleTheme}

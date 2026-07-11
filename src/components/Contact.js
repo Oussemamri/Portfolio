@@ -70,6 +70,10 @@ const Contact = () => {
                 {/* ── Left: heading + contact details ── */}
                 <div className="contact-info">
                     <div className="contact-intro">
+                        <span className="availability-badge contact-availability-badge">
+                            <span className="availability-badge-dot" aria-hidden="true" />
+                            Open to work
+                        </span>
                         <h2 className="contact-heading">Get In Touch</h2>
                         <p className="contact-description">
                             Feel free to reach out for opportunities, collaborations, or just to say hello.
