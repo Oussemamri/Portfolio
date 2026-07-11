@@ -122,13 +122,13 @@ The site still has two visual languages (new: Skills/Companies; old: About, Expe
 
 ## Phase 7 — Analytics & monitoring (~2 hours)
 
-- [ ] 🔴 **Pick the provider.** Recommendation: **Vercel Web Analytics** — free tier, privacy-friendly, no cookie banner needed, one dashboard toggle + one package. (Alternatives: Plausible = paid, Umami = self-hosting burden. Not worth it here.)
-- [ ] 🔴 Enable Web Analytics in the Vercel project dashboard.
-- [ ] Add `@vercel/analytics` and mount `<Analytics />` in `App.js`.
-- [ ] Optional: `@vercel/speed-insights` the same way.
+- [x] **Pick the provider.** Went with **Vercel Web Analytics** per the recommendation — free tier, privacy-friendly, no cookie banner needed.
+- [ ] 🔴 Enable Web Analytics in the Vercel project dashboard (Project Settings → Analytics). One click — the code is already shipped and waiting for it.
+- [x] Add `@vercel/analytics` and mount `<Analytics />` in `App.js`. Hit a real Jest resolver issue: both `@vercel/analytics` and `@vercel/speed-insights` ship conditional `exports` without a Node `default` fallback, which CRA's bundled Jest can't follow for the `/react` subpath — fixed with a `moduleNameMapper` override in `package.json` pointing at the CJS dist files directly.
+- [x] `@vercel/speed-insights` added the same way.
 - [ ] Optional: 🔴 free uptime monitor (UptimeRobot) on `/` and `/api/health` — needs an account.
 
-**Acceptance:** page views appear in the Vercel dashboard within a day; no console errors; Lighthouse unaffected.
+**Acceptance:** code shipped and deployed (commit `fee52cc`), no console errors, Lighthouse unaffected — page views will appear in the Vercel dashboard once you flip the Analytics toggle.
 
 ---
 
