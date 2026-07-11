@@ -2,6 +2,8 @@ import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { MotionConfig } from 'framer-motion';
 import { Toaster } from 'react-hot-toast';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -58,6 +60,8 @@ function App() {
               error:   { style: { background: '#f44336' } },
             }}
           />
+          <Analytics />
+          <SpeedInsights />
         </div>
       </Router>
     </MotionConfig>
