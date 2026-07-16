@@ -14,15 +14,15 @@ const Experience = () => {
                         <div className="experience-content">
                             <div className="experience-header">
                                 <h3>Rocket Factory Augsburg (RFA)</h3>
-                                <span className="experience-date">05/2025 - 04/2026</span>
+                                <span className="experience-date">06/2025 - 04/2026</span>
                             </div>
                             <h4 className="experience-title">Software Engineer — Working Student</h4>
                             <ul className="experience-description">
-                                <li>Independently led the full refactoring and extension of two mission-critical internal tools used daily by Systems Engineering, Propulsion, Avionics, Launch, and Operations teams (~42,000 lines across both codebases).</li>
-                                <li>Redesigned the Vehicle Parameters Database tool from a monolithic script into a layered <strong>FastAPI</strong> + <strong>PyQt5</strong> architecture with a 5-router REST API, JWT auth, and 4-tier role-based access control; shipped 10 production releases.</li>
-                                <li>Cut tool startup from ~90s to ~6–8s via batch Git tree loading and 3-layer caching; eliminated O(n²) loops with vectorized <strong>pandas</strong> for a 10–100× speedup on large schematics.</li>
-                                <li>Decomposed a 3,700-line legacy class into 6 single-responsibility Python packages; built Git integration (pygit2) with delta-store commits, an auto-update system, CI/CD pipelines, and Windows installers.</li>
-                                <li>Delivered an internal engineering document management system (<strong>FastAPI</strong>, <strong>React</strong>, <strong>PostgreSQL</strong>) with automated DOCX-to-PDF conversion, versioning, and approval workflows, deployed via <strong>Docker Compose</strong> and <strong>GitLab CI/CD</strong>.</li>
+                                <li>Sole engineer on two internal tools (~42,000 lines combined) used daily by Systems Engineering, Propulsion, Avionics, Launch, and Operations teams; rebuilt both from single-file legacy scripts into tested, layered applications and shipped 10 tagged releases over 10 months.</li>
+                                <li>Rebuilt the Vehicle Parameters Database tool (v1 to v2, 102 files) on a layered <strong>FastAPI</strong> + <strong>PyQt5</strong> architecture: a 5-router REST API with <strong>Pydantic</strong> v2 models, JWT sessions over GitLab PAT login, and 4-tier role-based access (Reporter to Owner) with automatic 401 retry.</li>
+                                <li>Cut VPD startup from roughly 90 seconds to under 10 by batching Git tree reads with <strong>pygit2</strong> and layering three caches; reduced commit size with a delta store that pushes only changed parameters instead of the full dictionary.</li>
+                                <li>Decomposed the P&amp;ID tag-management tool from three monolithic scripts (one god class, no tests) into six single-responsibility packages, and wrote an S-expression parser that recovers schematic components KiCad silently drops on XML export; vectorized the validation pipeline in <strong>pandas</strong> for a 10–100× speedup on large schematics.</li>
+                                <li>Built 17+ PyQt5 dialogs with 180 ms debounced real-time search and an 18-column lazy-loaded ParameterTreeModel; maintained a <strong>GitLab CI/CD</strong> pipeline across 4 branches, a Windows installer wizard (<strong>PyInstaller</strong>), and a self-update system.</li>
                             </ul>
                         </div>
                     </div>
@@ -32,7 +32,7 @@ const Experience = () => {
                         <div className="experience-content">
                             <div className="experience-header">
                                 <h3>Happy Nation Global</h3>
-                                <span className="experience-date">01/2025 - 05/2025</span>
+                                <span className="experience-date">06/2024 - 06/2025</span>
                             </div>
                             <h4 className="experience-title">Full-Stack Developer — Intern</h4>
                             <ul className="experience-description">
