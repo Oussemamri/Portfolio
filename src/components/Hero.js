@@ -57,20 +57,24 @@ const Hero = ({ theme }) => {
                 </div>
                 <div className="hero-visual">
                     <div className="hero-animated-element">
-                        <div className="hero-image-blob">
-                            <picture>
-                                <source
-                                    srcSet={`${process.env.PUBLIC_URL}/images/my_photo.webp`}
-                                    type="image/webp"
-                                />
-                                <img
-                                    src={`${process.env.PUBLIC_URL}/images/my_photo.png`}
-                                    alt="Oussema Amri — Full-Stack Software Engineer"
-                                    width="420"
-                                    height="420"
-                                    fetchpriority="high"
-                                />
-                            </picture>
+                        <div className="hero-photo-travel-x">
+                            <div className="hero-photo-travel-y">
+                                <div className="hero-image-blob">
+                                    <picture>
+                                        <source
+                                            srcSet={`${process.env.PUBLIC_URL}/images/my_photo.webp`}
+                                            type="image/webp"
+                                        />
+                                        <img
+                                            src={`${process.env.PUBLIC_URL}/images/my_photo.png`}
+                                            alt="Oussema Amri — Full-Stack Software Engineer"
+                                            width="420"
+                                            height="420"
+                                            fetchpriority="high"
+                                        />
+                                    </picture>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

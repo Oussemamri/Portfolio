@@ -195,6 +195,29 @@ body.dark .hero-buttons .btn.secondary:hover {
     transform: translateY(40px);
 }
 
+/* Independent, constant-speed axes reflect at the portrait area's edges. */
+.hero-photo-travel-x {
+    --photo-travel-x: clamp(10px, 2vw, 24px);
+    animation: photoTravelX 4s linear infinite alternate;
+    will-change: transform;
+}
+
+.hero-photo-travel-y {
+    --photo-travel-y: clamp(12px, 3vw, 32px);
+    animation: photoTravelY 5s linear infinite alternate;
+    will-change: transform;
+}
+
+@keyframes photoTravelX {
+    from { transform: translateX(calc(-1 * var(--photo-travel-x))); }
+    to { transform: translateX(var(--photo-travel-x)); }
+}
+
+@keyframes photoTravelY {
+    from { transform: translateY(calc(-1 * var(--photo-travel-y))); }
+    to { transform: translateY(var(--photo-travel-y)); }
+}
+
 /* Morphing blob container */
 .hero-image-blob {
     width: 420px;
@@ -228,18 +251,25 @@ body.dark .hero-image-blob {
     border-radius: 50%;
     margin: auto;
     position: absolute;
-    left: 50%;
-    animation: photoBounce 5s ease-in-out infinite;
+    inset: 0;
 }
 
-@keyframes photoBounce {
-    0%, 100% {
-        top: 50%;
-        transform: translate(-50%, -50%);
+/* Keep the portrait's ambient motion enabled independently of the global
+   reduced-motion rule; its positioning does not depend on either animation. */
+@media (prefers-reduced-motion: reduce) {
+    .hero-image-blob {
+        animation-duration: 8s !important;
+        animation-iteration-count: infinite !important;
     }
-    50% {
-        top: 50%;
-        transform: translate(-50%, -57%);
+
+    .hero-photo-travel-x {
+        animation-duration: 4s !important;
+        animation-iteration-count: infinite !important;
+    }
+
+    .hero-photo-travel-y {
+        animation-duration: 5s !important;
+        animation-iteration-count: infinite !important;
     }
 }
 
