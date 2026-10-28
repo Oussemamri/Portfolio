@@ -8,7 +8,7 @@ const ExperiencePage = () => (
   <>
     <PageMeta
       title="Experience"
-      description="Oussema Amri's professional experience: Rocket Factory Augsburg, Happy Nation Global, and Talan Tunisia — roles, companies, and impact as a full-stack engineer."
+      description="Oussema Amri's professional experience: Rocket Factory Augsburg, Bouygues Telecom, and Talan Tunisia — roles, companies, and impact as a full-stack engineer."
       path="/experience"
     />
     <PageShell

@@ -1,7 +1,8 @@
 import React from 'react';
 import '../assets/styles/components/companies.css';
 import rfaLogo      from '../assets/images/companies/rfa.png';
-import happyNationLogo from '../assets/images/companies/happy-nation.png';
+// Official asset: https://www.corporate.bouyguestelecom.fr/presse-et-actualites/mediatheque/
+import bouyguesTelecomLogo from '../assets/images/companies/bouygues-telecom.png';
 import talanLogo    from '../assets/images/companies/talan.png';
 
 const COMPANIES = [
@@ -18,14 +19,14 @@ const COMPANIES = [
     },
     {
         num:     '02',
-        name:    'Happy Nation Global',
-        short:   'Happy Nation',
-        role:    'Full-Stack Developer — Intern',
-        period:  '01 / 2025 — 05 / 2025',
-        sector:  ['Civic Tech', 'Berlin'],
+        name:    'Bouygues Telecom',
+        short:   'Bouygues Telecom',
+        role:    'Frontend Engineer Intern',
+        period:  '06 / 2024 — 05 / 2025',
+        sector:  ['Internship'],
         accent:  '#22C55E',
-        logo:    happyNationLogo,
-        website: 'https://citizen.happynation.global/home',
+        logo:    bouyguesTelecomLogo,
+        website: 'https://www.bouyguestelecom.fr/',
     },
     {
         num:     '03',
@@ -62,6 +63,7 @@ const Companies = () => (
                         target="_blank"
                         rel="noopener noreferrer"
                         className="co-entry"
+                        data-company={co.short}
                         aria-label={`Visit ${co.name}`}
                         style={{ '--co-accent': co.accent, '--co-delay': `${i * 90}ms` }}
                     >

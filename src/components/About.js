@@ -52,7 +52,7 @@ const About = () => {
                         PostgreSQL schemas, and Docker deployments.
                     </p>
                     <p>
-                        Previously built a civic platform at <strong>Happy Nation Global</strong>{' '}
+                        Previously developed and maintained internal business applications at <strong>Bouygues Telecom</strong>{' '}
                         and contributed to HR platform features at <strong>Talan Tunisia</strong>.
                         Comfortable taking features from requirements to production and keeping them running.
                     </p>

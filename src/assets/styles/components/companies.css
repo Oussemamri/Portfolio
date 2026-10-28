@@ -318,4 +318,9 @@ body.dark .co-texture {
 
 @media (max-width: 480px) {
     .co-name { font-size: 1rem; }
+
+    .co-entry[data-company='Bouygues Telecom'] .co-name,
+    .co-entry[data-company='Bouygues Telecom'] .co-role {
+        white-space: normal;
+    }
 }

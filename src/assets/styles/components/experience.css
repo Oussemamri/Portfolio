@@ -114,6 +114,11 @@
     font-weight: 600;
 }
 
+.experience-summary {
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
 .experience-description {
     padding-left: 20px;
     margin-top: 15px;

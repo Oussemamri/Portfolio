@@ -27,19 +27,22 @@ const Experience = () => {
                         </div>
                     </div>
 
-                    {/* Happy Nation */}
+                    {/* Bouygues Telecom */}
                     <div className="experience-item">
                         <div className="experience-content">
                             <div className="experience-header">
-                                <h3>Happy Nation Global</h3>
-                                <span className="experience-date">06/2024 - 06/2025</span>
+                                <h3>Bouygues Telecom</h3>
+                                <span className="experience-date">June 2024 to May 2025</span>
                             </div>
-                            <h4 className="experience-title">Full-Stack Developer — Intern</h4>
+                            <h4 className="experience-title">Frontend Engineer Intern</h4>
+                            <p className="experience-summary">Developed and maintained internal business applications at Bouygues Telecom, working with the frontend team on the Wholesale and CDP back-office tools.</p>
                             <ul className="experience-description">
-                                <li>Designed and deployed a full-stack civic platform on <strong>AWS</strong> using <strong>Django REST Framework</strong>, <strong>React</strong>, and <strong>PostgreSQL</strong>, with multi-step onboarding, ticket verification, and brute-force protection.</li>
-                                <li>Built a media pipeline with <strong>Pillow</strong> image compression and <strong>S3</strong> storage; integrated <strong>Brevo</strong> for transactional emails and reached a 95% Lighthouse SEO score.</li>
-                                <li>Configured <strong>GitHub Actions</strong> CI/CD to build Docker images, push to <strong>Amazon ECR</strong>, and deploy to <strong>EC2</strong> with zero manual steps; provisioned S3, IAM, CloudFront, Nginx, and Cloudflare Tunnel.</li>
+                                <li>Built <strong>React</strong> and <strong>TypeScript</strong> interfaces with reusable components and forms supporting business workflows.</li>
+                                <li>Maintained the CDP back-office, fixing defects and improving user journeys.</li>
+                                <li>Integrated <strong>Node.js</strong> APIs, including data validation, loading states and error handling.</li>
+                                <li>Contributed to <strong>Jest</strong> tests, <strong>Git</strong> code reviews and <strong>GitLab CI</strong> pipelines, with development tracked in <strong>Jira</strong>.</li>
                             </ul>
+                            <p className="experience-summary"><strong>Skills:</strong> React, TypeScript, JavaScript, REST APIs, Jest, Git, GitLab CI/CD and Jira.</p>
                         </div>
                     </div>
 

@@ -1,0 +1,138 @@
+%-------------------------
+% Oussema Amri - One-Page ATS-Optimized CV
+% Single column, parser-safe layout, photo header
+%-------------------------
+
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{charter}
+\usepackage[english]{babel}
+\usepackage{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{graphicx}
+
+\geometry{a4paper, left=1.3cm, right=1.3cm, top=0.8cm, bottom=0.6cm}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\renewcommand{\baselinestretch}{1.02}
+
+% Section formatting: simple rule, ATS reads the heading text directly
+\titleformat{\section}{\large\bfseries\scshape}{}{0em}{}[\vspace{1pt}\titlerule\vspace{1pt}]
+\titlespacing*{\section}{0pt}{6pt}{2pt}
+
+% Role header: company + location on one line, role + dates on next line
+\newcommand{\role}[4]{%
+\textbf{#1} \hfill \textit{#2}\\%
+\textit{#3} \hfill #4%
+\vspace{1pt}%
+}
+
+% Compact bullet list
+\newenvironment{bullets}{%
+\begin{itemize}[leftmargin=12pt, itemsep=1pt, topsep=2pt, parsep=0pt, label={--}]%
+}{%
+\end{itemize}%
+}
+
+\begin{document}
+
+% =============== HEADER: text left, photo right ===============
+\begin{minipage}[c]{0.76\textwidth}
+\begin{flushleft}
+{\LARGE \textbf{OUSSEMA AMRI}}\\[1mm]
+{\large Full-Stack Software Engineer}\\[2mm]
+Munich, Germany \,$|$\, \href{mailto:amriouseema@gmail.com}{amriouseema@gmail.com} \,$|$\, (+49) 15510 357723\\[1mm]
+\href{https://linkedin.com/in/oussema-amri}{linkedin.com/in/oussema-amri} \,$|$\,
+\href{https://github.com/Oussemamri}{github.com/Oussemamri} \,$|$\,
+\href{https://oussemaamri.com}{oussemaamri.com}
+\end{flushleft}
+\end{minipage}%
+\hfill
+\begin{minipage}[c]{0.19\textwidth}
+\begin{flushright}
+\begin{tikzpicture}
+\clip (0,0) circle (1.15cm);
+\node at (0,-0.3) {\includegraphics[width=2.3cm, keepaspectratio]{profile.jpg}};
+\end{tikzpicture}
+\end{flushright}
+\end{minipage}
+
+\vspace{-2pt}
+
+% =============== SUMMARY ===============
+\section*{Summary}
+Full-Stack Software Engineer with experience delivering production systems in aerospace and internal business applications. Independently owned and refactored mission-critical engineering tools at a commercial rocket company, and developed an aerospace requirements-traceability SaaS (DO-178C / ISO 26262). Strong across Python, React, and TypeScript with hands-on AWS cloud architecture. AWS Certified Cloud Practitioner (CLF-C02).
+
+% =============== EXPERIENCE ===============
+\section*{Professional Experience}
+
+\role{Rocket Factory Augsburg (RFA)}{Augsburg, Germany}{Software Engineer -- Working Student}{05/2025 -- 04/2026}
+\begin{bullets}
+\item Independently led the full refactoring and extension of two mission-critical internal tools used daily by Systems Engineering, Propulsion, Avionics, Launch, and Operations teams ($\sim$42,000 lines across both codebases).
+\item Redesigned the Vehicle Parameters Database tool from a monolithic script into a layered FastAPI + PyQt5 architecture with a 5-router REST API, JWT auth, and 4-tier role-based access control; shipped 10 production releases.
+\item Cut tool startup from $\sim$90s to $\sim$6--8s via batch Git tree loading and 3-layer caching; eliminated O($n^2$) loops with vectorized pandas for a 10--100$\times$ speedup on large schematics.
+\item Decomposed a 3,700-line legacy ``god class'' (zero tests) into 6 single-responsibility Python packages; built Git integration (pygit2) with delta-store commits, an auto-update system, CI/CD pipelines, and Windows installers.
+\item Also delivered an internal engineering document management system (FastAPI, React, PostgreSQL) with automated DOCX-to-PDF conversion, versioning, and approval workflows, deployed via Docker Compose and GitLab CI/CD.
+\end{bullets}
+
+\begingroup
+\fontsize{9}{10}\selectfont
+\role{Bouygues Telecom}{}{Frontend Engineer Intern -- Internship}{06/2024 -- 05/2025}
+\begin{bullets}
+\setlength{\itemsep}{0pt}
+\item Developed and maintained internal business applications at Bouygues Telecom, working with the frontend team on the Wholesale and CDP back-office tools.
+\item Built React and TypeScript interfaces with reusable components and forms supporting business workflows.
+\item Maintained the CDP back-office, fixing defects and improving user journeys.
+\item Integrated Node.js APIs, including data validation, loading states and error handling.
+\item Contributed to Jest tests, Git code reviews and GitLab CI pipelines, with development tracked in Jira.
+\item Skills: React, TypeScript, JavaScript, REST APIs, Jest, Git, GitLab CI/CD and Jira.
+\end{bullets}
+\endgroup
+
+\role{Talan Tunisia}{Tunis, Tunisia}{Software Engineering Intern -- Full-Stack}{Jun--Aug 2023 \& Jun--Aug 2024}
+\begin{bullets}
+\item Developed HR platform features (profile management, document workflows, leave tracking, dashboards) using NestJS, Vue.js, PostgreSQL, Docker, and Jenkins CI/CD.
+\end{bullets}
+
+% =============== PROJECTS ===============
+\section*{Personal Projects}
+
+\textbf{Reqlume -- Aerospace Requirements Traceability SaaS} \hfill \href{https://reqlume.com}{reqlume.com}\\
+\textit{\small Next.js 15, Django 5, PostgreSQL, Celery, Redis, TanStack Query, Playwright, Vercel, Railway}
+\begin{bullets}
+\item Built a B2B SaaS replacing IBM DOORS / Jama Connect for aerospace teams managing requirements and compliance (DO-178C / ISO 26262); shipped 30+ features including approvals, change control, FMEA/RPN auto-calculation, and WeasyPrint compliance PDF export.
+\item Implemented a Polarion data import pipeline (CSV/Excel/ReqIF) with two-pass Celery tasks, tree building via django-treebeard, traceability graph with BFS cycle detection, and SSE real-time progress streaming.
+\end{bullets}
+
+% =============== SKILLS ===============
+\section*{Technical Skills}
+\textbf{Languages:} Python, TypeScript, JavaScript, SQL\\
+\textbf{Frameworks:} React, Next.js, Node.js, Vue.js, FastAPI, Django, NestJS, PyQt5, Celery\\
+\textbf{Cloud \& DevOps:} AWS (EC2, S3, ECR, CloudFront, Lambda, IAM), Docker, Docker Compose, GitLab CI/CD, GitHub Actions, Jenkins, Portainer, Grafana, Loki, Cloudflare\\
+\textbf{Databases:} PostgreSQL, MySQL, Redis\\
+\textbf{AI \& Tooling:} OpenAI/Groq APIs, MCP Integration, Prompt Engineering, Claude Code, GitHub Copilot\\
+\textbf{Practices:} Microservices, Event-Driven Architecture, REST/GraphQL API Design, JWT/RBAC, TDD, Agile/Scrum
+
+% =============== EDUCATION ===============
+\section*{Education}
+\textbf{ESPRIT School of Engineering}, Tunis -- Dipl\^ome d'Ing\'enieur in Computer Science (equiv. M.Sc., Bac+5) \hfill 09/2020 -- 03/2026\\
+\textit{\small Academic exchange (3+ semesters, ongoing): Philipps-Universit\"at Marburg, Germany \,$|$\, 10/2024 -- 03/2026}
+
+% =============== CERTIFICATIONS & LANGUAGES ===============
+\section*{Certifications \& Languages}
+\textbf{AWS Certified Cloud Practitioner (CLF-C02)} -- Amazon Web Services\\
+\textbf{Languages:} English (C1) \,$|$\, French (C1) \,$|$\, Arabic (C2) \,$|$\, German (A2)
+
+\end{document}
