@@ -14,7 +14,7 @@ const Experience = () => {
                         <div className="experience-content">
                             <div className="experience-header">
                                 <h3>Rocket Factory Augsburg (RFA)</h3>
-                                <span className="experience-date">06/2025 - 04/2026</span>
+                                <span className="experience-date">06/2025 - Present</span>
                             </div>
                             <h4 className="experience-title">Software Engineer — Working Student</h4>
                             <ul className="experience-description">
@@ -43,20 +43,6 @@ const Experience = () => {
                                 <li>Contributed to <strong>Jest</strong> tests, <strong>Git</strong> code reviews and <strong>GitLab CI</strong> pipelines, with development tracked in <strong>Jira</strong>.</li>
                             </ul>
                             <p className="experience-summary"><strong>Skills:</strong> React, TypeScript, JavaScript, REST APIs, Jest, Git, GitLab CI/CD and Jira.</p>
-                        </div>
-                    </div>
-
-                    {/* Talan - 2024 internship */}
-                    <div className="experience-item">
-                        <div className="experience-content">
-                            <div className="experience-header">
-                                <h3>Talan Tunisia</h3>
-                                <span className="experience-date">06/2024 - 08/2024</span>
-                            </div>
-                            <h4 className="experience-title">Software Engineering Intern — Full-Stack Development</h4>
-                            <ul className="experience-description">
-                                <li>Extended HR platform features (profile management, document workflows, leave tracking, dashboards) using <strong>NestJS</strong>, <strong>Vue.js</strong>, <strong>PostgreSQL</strong>, <strong>Docker</strong>, and <strong>Jenkins</strong> CI/CD.</li>
-                            </ul>
                         </div>
                     </div>
 
