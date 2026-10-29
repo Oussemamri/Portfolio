@@ -51,7 +51,7 @@ const Experience = () => {
                         <div className="experience-content">
                             <div className="experience-header">
                                 <h3>Talan Tunisia</h3>
-                                <span className="experience-date">06/2023 - 08/2023</span>
+                                <span className="experience-date">06/2023 - 12/2023</span>
                             </div>
                             <h4 className="experience-title">Software Engineering Intern — Full-Stack Development</h4>
                             <ul className="experience-description">

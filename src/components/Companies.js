@@ -33,7 +33,7 @@ const COMPANIES = [
         name:    'Talan Tunisia',
         short:   'Talan',
         role:    'Software Engineering Intern',
-        period:  '2023',
+        period:  '06 / 2023 — 12 / 2023',
         sector:  ['Consulting', 'Tunisia'],
         accent:  '#F59E0B',
         logo:    talanLogo,
